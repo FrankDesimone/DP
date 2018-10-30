@@ -4,12 +4,12 @@
   <SourceModelProvider>
     <ProjectBasedModelProvider>
       <ProjectGuid>{2b10a91d-3eeb-4cd9-8a56-6696be62e7ba}</ProjectGuid>
-      <Name>DP</Name>
+      <Name>DPF</Name>
     </ProjectBasedModelProvider>
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=gennafrank.database.windows.net;Initial Catalog=DP;Persist Security Info=True;User ID=gennafrank;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
+      <ConnectionString>Data Source=gennafrank.database.windows.net;Initial Catalog=DPF;Persist Security Info=True;User ID=gennafrank;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
     </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
