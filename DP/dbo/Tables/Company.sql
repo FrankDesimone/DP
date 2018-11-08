@@ -7,7 +7,7 @@
     [BillingAddress2] NVARCHAR (50) NULL,
     [Active]          BIT          NOT NULL DEFAULT 1,
     [StateID]    INT     NOT NULL,
-    [ContactsID]       INT          NOT NULL,
+    [ContactsID]       INT          NULL,
     CONSTRAINT [PK_Company] PRIMARY KEY ([CompanyID]), 
     CONSTRAINT [FK_Company_State] FOREIGN KEY ([StateID]) REFERENCES [State]([StateID]), 
     CONSTRAINT [FK_Company_Contacts] FOREIGN KEY ([ContactsID]) REFERENCES [Contacts]([ContactsID]),
