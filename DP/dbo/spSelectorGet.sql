@@ -53,6 +53,22 @@ BEGIN TRY
 
 
 
+	IF @Selector = 'contacts' 
+	BEGIN
+
+		select Null as ContactsID
+			,'Please Select' as Contact
+			,0 as Sortkey
+		union all
+		select c.ContactsID
+			,c.FirstName + ' ' + c.LastName as Contact
+			,1 as SortKey
+		from [Contacts] as c
+		where c.CompanyID = try_cast(@Filter as int)
+		order by SortKey;
+
+		goto ExitProc;
+	END
 
 
 ExitProc:
