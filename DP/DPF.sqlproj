@@ -59,6 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="Excel" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\VehicleMake.sql" />
@@ -83,5 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DP.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Excel\DataEntry.xlsm" />
   </ItemGroup>
 </Project>
