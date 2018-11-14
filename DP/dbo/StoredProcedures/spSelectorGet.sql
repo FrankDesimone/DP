@@ -70,6 +70,22 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
+	
+	IF @Selector = 'state' 
+	BEGIN
+
+		select Null as StateID
+			,'Please Select' as StateName
+			,0 as Sortkey
+		union all
+		select s.StateID
+			,s.StateName
+			,1 as SortKey
+		from [State] as s
+		order by SortKey;
+
+		goto ExitProc;
+	END
 
 ExitProc:
 
