@@ -7,8 +7,8 @@
     [City] NVARCHAR (100)          NULL,
     [Zip] NVARCHAR (20)          NULL,
 	[StateID]	INT	NULL,
-    CONSTRAINT [PK_ServiceLocation] PRIMARY KEY (CompanyLocationsID), 
-    CONSTRAINT [FK_ServiceLocation_State] FOREIGN KEY ([StateID]) REFERENCES [State]([StateID]), 
-    CONSTRAINT [FK_ServiceLocation_Company] FOREIGN KEY ([CompanyID]) REFERENCES [Company]([CompanyID]) 
+    CONSTRAINT [PK_CompanyLocations] PRIMARY KEY (CompanyLocationsID), 
+    CONSTRAINT [FK_CompanyLocations_State] FOREIGN KEY ([StateID]) REFERENCES [State]([StateID]), 
+    CONSTRAINT [FK_CompanyLocations_Company] FOREIGN KEY ([CompanyID]) REFERENCES [Company]([CompanyID]) 
 );
 

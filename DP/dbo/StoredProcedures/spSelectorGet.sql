@@ -39,7 +39,7 @@ BEGIN TRY
 			,'Please Select' as [Location]
 			,0 as Sortkey
 		union all
-		select sl.CompanyLocationsID
+		select sl.CompanyLocationsID as ServiceLocationID
 			,sl.Location
 			,1 as SortKey
 		from CompanyLocations as sl
