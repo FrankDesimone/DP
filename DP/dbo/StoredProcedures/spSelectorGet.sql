@@ -32,7 +32,7 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
-	IF @Selector = 'servicelocation' 
+	IF @Selector = 'companylocations' 
 	BEGIN
 
 		select Null as [ServiceLocationID]
