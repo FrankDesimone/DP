@@ -42,4 +42,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ContactsID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="350ac805-21b6-4c36-a093-23d9a3110f79" ChangeDateTime="11/15/2018 09:10:57">
+    <Property Name="ElementName" Value="[dbo].[ServiceLocation]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="CompanyLocations" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e15656c9-79ac-4c65-af11-41329629565e" ChangeDateTime="11/15/2018 09:11:36">
+    <Property Name="ElementName" Value="[dbo].[CompanyLocations].[ServiceLocationID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CompanyLocations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyLocationsID" />
+  </Operation>
 </Operations>

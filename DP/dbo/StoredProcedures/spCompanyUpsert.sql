@@ -13,7 +13,6 @@
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
 SET NOCOUNT ON;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 BEGIN TRY
 	declare  @True as bit = 1
@@ -23,10 +22,20 @@ BEGIN TRY
 	set @ErrorMsg = ''
 	set @NewCompanyID = NULL;
 
+	UPDATE c
+	set c.CompanyName =@CompanyName
+        ,c.BillingAddress1 = @BillingAddress1
+        ,c.BillingCity =@BillingCity
+        ,c.BillingZip =@BillingZip
+        ,c.BillingAddress2 =@BillingAddress2
+        ,c.Active =@Active
+        ,c.StateID =@StateID
+        ,c.ContactsID = @ContactsID
+	from Company c
+	WHERE c.CompanyID = @CompanyID;
 
-	IF @CompanyID is null 
-	BEGIN
-
+	if @@ROWCOUNT = 0
+	begin
 		INSERT INTO [dbo].[Company]
            ([CompanyName]
            ,[BillingAddress1]
@@ -36,7 +45,7 @@ BEGIN TRY
            ,[Active]
            ,[StateID]
            ,[ContactsID])
-     VALUES
+	    VALUES
            (@CompanyName
            ,@BillingAddress1
            ,@BillingCity 
@@ -46,34 +55,24 @@ BEGIN TRY
            ,@StateID 
            ,@ContactsID);
 	
-	SET @NewCompanyID	=  SCOPE_IDENTITY();
-
-		goto ExitProc;
-	END
-	ELSE
-	BEGIN
-		set @NewCompanyID = @CompanyID; 
-
-		UPDATE c
-		set c.CompanyName =@CompanyName
-           ,c.BillingAddress1 = @BillingAddress1
-           ,c.BillingCity =@BillingCity
-           ,c.BillingZip =@BillingZip
-           ,c.BillingAddress2 =@BillingAddress2
-           ,c.Active =@Active
-           ,c.StateID =@StateID
-           ,c.ContactsID = @ContactsID
-		from Company c
-		WHERE c.CompanyID = @CompanyID;
-
-		goto ExitProc;
+		SET @CompanyID	=  SCOPE_IDENTITY();
 	END
 
-
-ExitProc:
+	set @NewCompanyID = @CompanyID;
 
 END TRY
 
 BEGIN CATCH
+	DECLARE @ReportingProcedure VARCHAR(250) = ERROR_PROCEDURE()
+	,@ErrorNumber INT = ERROR_NUMBER()
+	,@ErrorLine INT = ERROR_LINE()
+	,@ErrorMessage VARCHAR(500) = ERROR_MESSAGE()
+	,@ErrorNote VARCHAR(500) = ERROR_MESSAGE();
+		
+	SELECT @ErrorMessage = '[spCompanyUpsert] :: ' 
+			+ ERROR_PROCEDURE()
+			+ ' Line: ' + CAST(ERROR_LINE() as VARCHAR(20))
+			+  ' - ' + coalesce(@ErrorMessage , '') + ' Err #: ' + cast(ERROR_NUMBER() as varchar(8));
 
+	EXEC  [dbo].[spExceptionAdd]  @ReportingProcedure ,@ErrorNumber,@ErrorLine ,@ErrorMessage,@ErrorNote;
 END CATCH

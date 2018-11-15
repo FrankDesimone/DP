@@ -6,7 +6,6 @@
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
 SET NOCOUNT ON;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 BEGIN TRY
 	declare  @True as bit = 1
@@ -40,18 +39,15 @@ BEGIN TRY
 			,'Please Select' as [Location]
 			,0 as Sortkey
 		union all
-		select sl.ServiceLocationID
+		select sl.CompanyLocationsID
 			,sl.Location
 			,1 as SortKey
-		from [ServiceLocation] as sl
+		from CompanyLocations as sl
 		where sl.CompanyID = try_cast(@Filter as int)
 		order by SortKey;
 
 		goto ExitProc;
 	END
-
-
-
 
 	IF @Selector = 'contacts' 
 	BEGIN
@@ -69,7 +65,6 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
-
 	
 	IF @Selector = 'state' 
 	BEGIN
@@ -92,5 +87,16 @@ ExitProc:
 END TRY
 
 BEGIN CATCH
+	DECLARE @ReportingProcedure VARCHAR(250) = ERROR_PROCEDURE()
+	,@ErrorNumber INT = ERROR_NUMBER()
+	,@ErrorLine INT = ERROR_LINE()
+	,@ErrorMessage VARCHAR(500) = ERROR_MESSAGE()
+	,@ErrorNote VARCHAR(500) = ERROR_MESSAGE();
+		
+	SELECT @ErrorMessage = '[spSelectorsGet] :: ' 
+			+ ERROR_PROCEDURE()
+			+ ' Line: ' + CAST(ERROR_LINE() as VARCHAR(20))
+			+  ' - ' + coalesce(@ErrorMessage , '') + ' Err #: ' + cast(ERROR_NUMBER() as varchar(8));
 
+	EXEC  [dbo].[spExceptionAdd]  @ReportingProcedure ,@ErrorNumber,@ErrorLine ,@ErrorMessage,@ErrorNote;
 END CATCH
