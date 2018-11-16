@@ -35,11 +35,11 @@ BEGIN TRY
 	IF @Selector = 'companylocations' 
 	BEGIN
 
-		select Null as [ServiceLocationID]
+		select Null as CompanyLocationsID
 			,'Please Select' as [Location]
 			,0 as Sortkey
 		union all
-		select sl.CompanyLocationsID as ServiceLocationID
+		select sl.CompanyLocationsID 
 			,sl.Location
 			,1 as SortKey
 		from CompanyLocations as sl
@@ -78,6 +78,19 @@ BEGIN TRY
 			,1 as SortKey
 		from [State] as s
 		order by SortKey;
+
+		goto ExitProc;
+	END
+	
+	IF @Selector = 'manufacturer' 
+	BEGIN
+		select Null as [ManufacturerID]
+			,'Please Select' as [Manufacturer]
+			,0 as Sortkey
+		SELECT   m.[ManufacturerID]
+			,m.[Manufacturer]
+			,1 as SortKey
+		FROM [dbo].[Manufacturer] as m;
 
 		goto ExitProc;
 	END
