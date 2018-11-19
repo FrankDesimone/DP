@@ -64,16 +64,12 @@
     <Folder Include="dbo\Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\VehicleMake.sql" />
     <Build Include="dbo\Tables\Substrate.sql" />
     <Build Include="dbo\Tables\State.sql" />
     <Build Include="dbo\Tables\CompanyLocation.sql" />
-    <Build Include="dbo\Tables\PartNumber.sql" />
     <Build Include="dbo\Tables\Measurements.sql" />
     <Build Include="dbo\Tables\Manufacturer.sql" />
-    <Build Include="dbo\Tables\EngineManufacturer.sql" />
     <Build Include="dbo\Tables\Engine.sql" />
-    <Build Include="dbo\Tables\ECD_ID_VIN.sql" />
     <Build Include="dbo\Tables\ECD.sql" />
     <Build Include="dbo\Tables\DrivingType.sql" />
     <Build Include="dbo\Tables\DeviceType.sql" />
@@ -81,12 +77,15 @@
     <Build Include="dbo\Tables\Company.sql" />
     <Build Include="dbo\Tables\CleaningReason.sql" />
     <Build Include="dbo\Tables\WorkOrder.sql" />
-    <Build Include="dbo\Tables\WorkOrderState.sql" />
+    <Build Include="dbo\Tables\WorkOrderStatus.sql" />
     <Build Include="dbo\StoredProcedures\spSelectorGet.sql" />
     <Build Include="dbo\StoredProcedures\spCompanyUpsert.sql" />
     <Build Include="dbo\StoredProcedures\spCompanyGet.sql" />
     <Build Include="dbo\Tables\Exceptions.sql" />
     <Build Include="dbo\StoredProcedures\spExceptionAdd.sql" />
+    <Build Include="dbo\StoredProcedures\spCompanyLocationUpsert.sql" />
+    <Build Include="dbo\StoredProcedures\spCompanyLocationGet.sql" />
+    <Build Include="dbo\Tables\Vehicle.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DP.refactorlog" />

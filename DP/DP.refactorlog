@@ -63,4 +63,67 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CompanyLocationID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="36a21d68-e746-47ff-a8c4-f33aaba6eed8" ChangeDateTime="11/16/2018 17:32:12">
+    <Property Name="ElementName" Value="[dbo].[Engine].[VINID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Engine]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EngineYear" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="91ebebd9-55ad-4125-8165-dd5f963fbb0a" ChangeDateTime="11/16/2018 18:09:02">
+    <Property Name="ElementName" Value="[dbo].[Engine].[EngineSerialNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Engine]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SerialNumber]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2efd4b2f-8ae0-4d46-9703-9600c183759d" ChangeDateTime="11/16/2018 18:09:45">
+    <Property Name="ElementName" Value="[dbo].[Engine].[EngineModel]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Engine]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Model]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e429ed0a-bd71-4ef1-9292-39cd54536590" ChangeDateTime="11/16/2018 18:10:05">
+    <Property Name="ElementName" Value="[dbo].[Engine].[EngineYear]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Engine]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Year]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4d2fe746-2ea6-4676-813c-2fec06c79a60" ChangeDateTime="11/16/2018 18:10:41">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[VehicleModel]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Model]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ea1a5e1-67f9-4151-8236-57bc9b209805" ChangeDateTime="11/16/2018 18:10:58">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[VehicleYear]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Year]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1c552cab-0a20-4611-b43b-5ece10ef43bd" ChangeDateTime="11/16/2018 18:11:54">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderState]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[WorkOrderStatus]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e65b35cd-7b95-4b59-9aca-070c0024aeb4" ChangeDateTime="11/16/2018 18:12:15">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderStatus].[WorkOrderStateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrderStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[WorkOrderStatusID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa3d8182-d606-4134-b6c1-7e7a47309ecb" ChangeDateTime="11/16/2018 18:12:36">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderStatus].[WorkOrderState]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrderStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[WorkOrderStatus]" />
+  </Operation>
 </Operations>
