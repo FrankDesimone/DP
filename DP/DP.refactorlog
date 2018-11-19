@@ -63,4 +63,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CompanyLocationID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="682e2866-e30b-463e-aebb-aebfa13baa62" ChangeDateTime="11/19/2018 11:06:51">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderState]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="WorkOrderStatus" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="55e4f5a5-074c-451b-b4c9-cdc9d0251964" ChangeDateTime="11/19/2018 11:07:47">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderStatus].[WorkOrderStateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrderStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WorkOrderStatusID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b8db4844-566e-4b51-bf8a-70ddee93bf4f" ChangeDateTime="11/19/2018 11:08:12">
+    <Property Name="ElementName" Value="[dbo].[WorkOrderStatus].[WorkOrderState]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrderStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WorkOrderStatus" />
+  </Operation>
 </Operations>
