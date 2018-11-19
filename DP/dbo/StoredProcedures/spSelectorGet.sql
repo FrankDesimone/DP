@@ -81,16 +81,53 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
-	
+				  
 	IF @Selector = 'manufacturer' 
 	BEGIN
 		select Null as [ManufacturerID]
 			,'Please Select' as [Manufacturer]
 			,0 as Sortkey
+		union all
 		SELECT   m.[ManufacturerID]
 			,m.[Manufacturer]
 			,1 as SortKey
 		FROM [dbo].[Manufacturer] as m;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'vehicle' 
+	BEGIN
+
+		select Null as [VehicleID]
+			,'Please Select' as [Vehicle]
+			,0 as Sortkey
+		union all
+		SELECT  [VehicleID]
+			,v.[SerialNumber] + ' / ' + v.AssetNumber as Vehicle
+			,1 as SortKey
+		from [dbo].[Vehicle] as v
+		where v.CompanyID = try_cast(@Filter as int)
+		order by SortKey;
+
+		goto ExitProc;
+	END
+
+	
+
+	IF @Selector = 'engine' 
+	BEGIN
+
+		select Null as [EngineID]
+			,'Please Select' as Engine
+			,0 as Sortkey
+		union all
+		SELECT  EngineID
+			,e.SerialNumber + ' / ' + e.Model as Engine
+			,1 as SortKey
+		from [dbo].Engine as e
+		where e.CompanyID = try_cast(@Filter as int)
+		order by SortKey;
 
 		goto ExitProc;
 	END
