@@ -4,7 +4,7 @@
 	,@ManufacturerID INT
 	,@SerialNumber  NVARCHAR (100)       
     ,@Model         NVARCHAR (100) 
-	,@Year DATE 
+	,@Year INT 
 	,@NewEngineID      INT          = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT

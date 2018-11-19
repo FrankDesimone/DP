@@ -5,7 +5,7 @@
 	,@AssetNumber	NVARCHAR (100)  = NULL
 	,@ManufacturerID INT          
     ,@Model         NVARCHAR (100) 
-	,@Year DATE 
+	,@Year INT 
 	,@NewVehicleID      INT          = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
