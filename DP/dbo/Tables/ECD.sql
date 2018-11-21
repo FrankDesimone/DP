@@ -4,7 +4,7 @@
     [SubstrateTypeID]   INT          NOT NULL,
     [ManfacturerID] INT          NOT NULL,
     [DeviceTypeID]      INT          NOT NULL, 
-    [TimesCleaned]  INT          NOT NULL,
+    [TimesCleaned]  INT          NOT NULL DEFAULT 0,
     [PartNumber]	nvarchar(100)	NOT NULL,	
     [SerialNumber]  NVARCHAR (100) NOT NULL,
     [OtherNumber]   NVARCHAR (100) NULL,

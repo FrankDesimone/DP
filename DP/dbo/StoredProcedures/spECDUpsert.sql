@@ -3,8 +3,7 @@
 	,@ECDID	INT	         
     ,@SubstrateTypeID   INT         
     ,@ManfacturerID INT         
-    ,@DeviceTypeID      INT          
-    ,@TimesCleaned  INT         
+    ,@DeviceTypeID      INT                  
     ,@PartNumber	nvarchar(100)	
     ,@SerialNumber  NVARCHAR (100)
     ,@OtherNumber   NVARCHAR (100) 
@@ -32,7 +31,6 @@ BEGIN TRY
       ,ecd.[SubstrateTypeID]					 =@SubstrateTypeID
       ,ecd.[ManfacturerID]					 =@ManfacturerID
       ,ecd.[DeviceTypeID]					 =@DeviceTypeID
-      ,ecd.[TimesCleaned]					 =@TimesCleaned
       ,ecd.[PartNumber]						 =@PartNumber
       ,ecd.[SerialNumber]					 =@SerialNumber
       ,ecd.[OtherNumber]					 =@OtherNumber
@@ -53,7 +51,6 @@ BEGIN TRY
            ,[SubstrateTypeID]
            ,[ManfacturerID]
            ,[DeviceTypeID]
-           ,[TimesCleaned]
            ,[PartNumber]
            ,[SerialNumber]
            ,[OtherNumber]
@@ -66,7 +63,6 @@ BEGIN TRY
            ,@SubstrateTypeID
            ,@ManfacturerID
            ,@DeviceTypeID
-           ,@TimesCleaned
            ,@PartNumber
            ,@SerialNumber
            ,@OtherNumber
