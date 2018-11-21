@@ -132,6 +132,78 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
+	
+	IF @Selector = 'ecd' 
+	BEGIN
+
+		select Null as [ECDID]
+			,'Please Select' as ECD
+			,0 as Sortkey
+		union all
+		SELECT  [ECDID]
+			,ecd.SerialNumber + ' / ' + ecd.[PartNumber] as ECD
+			,1 as SortKey
+		from [dbo].[ECD] as  ecd
+		where ecd.CompanyID = try_cast(@Filter as int)
+		order by SortKey;
+
+		goto ExitProc;
+	END
+
+
+	IF @Selector = 'substratetype' 
+	BEGIN
+
+		select Null as SubstrateTypeID
+			,'Please Select' as SubstrateType
+			,0 as Sortkey
+		union all
+		SELECT  st.SubstrateTypeID
+			,st.SubstrateType
+			,1 as SortKey
+		from [dbo].SubstrateType as  st
+		
+		order by SortKey;
+
+		goto ExitProc;
+	END
+
+
+	IF @Selector = 'devicetype' 
+	BEGIN
+
+		select Null as DeviceTypeID
+			,'Please Select' as DeviceType
+			,0 as Sortkey
+		union all
+		SELECT  dt.DeviceTypeID 
+			,dt.DeviceType 
+			,1 as SortKey
+		from [dbo].DeviceType as  dt
+		
+		order by SortKey;
+
+		goto ExitProc;
+	END
+
+
+	
+	IF @Selector = 'drivingtype' 
+	BEGIN
+
+		select Null as DrivingTypeID
+			,'Please Select' as DrivingType
+			,0 as Sortkey
+		union all
+		SELECT  dt.DrivingTypeID 
+			,dt.DrivingType 
+			,1 as SortKey
+		from [dbo].DrivingType  as  dt
+		
+		order by SortKey;
+
+		goto ExitProc;
+	END
 ExitProc:
 
 END TRY

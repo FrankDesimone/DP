@@ -126,4 +126,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[WorkOrderStatus]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3844b081-c136-494c-9b1a-4366f12afd76" ChangeDateTime="11/21/2018 20:29:46">
+    <Property Name="ElementName" Value="[dbo].[Substrate]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[SubstrateType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f06f1dd4-967f-4b0c-a697-390873028c70" ChangeDateTime="11/21/2018 20:30:22">
+    <Property Name="ElementName" Value="[dbo].[SubstrateType].[SubstrateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SubstrateType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SubstrateTypeID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d34d5151-39d5-4b37-809d-11fce8ea9514" ChangeDateTime="11/21/2018 20:30:49">
+    <Property Name="ElementName" Value="[dbo].[SubstrateType].[Substrate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SubstrateType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SubstrateType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fbe747a6-45f7-48a7-a58f-342177f8c5a9" ChangeDateTime="11/21/2018 21:05:55">
+    <Property Name="ElementName" Value="[dbo].[ECD].[SubstrateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ECD]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SubstrateTypeID]" />
+  </Operation>
 </Operations>
