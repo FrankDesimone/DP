@@ -93,6 +93,8 @@
     <Build Include="dbo\StoredProcedures\spManufacturerUpsert.sql" />
     <Build Include="dbo\StoredProcedures\spECDGet.sql" />
     <Build Include="dbo\StoredProcedures\spECDUpsert.sql" />
+    <Build Include="dbo\StoredProcedures\spContactsGet.sql" />
+    <Build Include="dbo\StoredProcedures\spContactsUpsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DP.refactorlog" />
