@@ -6,6 +6,23 @@
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
 	[ECDID] INT NOT NULL,
+	
+	[PreventMaintAshCleanInter] bit NOT NULL DEFAULT 0 ,
+	[HighSootCEL]bit NOT NULL DEFAULT 0,
+	[EngineFailureFluidsInExhaust] bit NOT NULL DEFAULT 0,
+	[CleanReasonOther] INT,
+
+	[RoadHighway] bit NOT NULL DEFAULT 0 ,
+	[StartStop]bit NOT NULL DEFAULT 0,
+	[HighIdle]bit NOT NULL DEFAULT 0,
+	[DrivingTypeOther] INT,
+
+	
+	[FirstCleaning] bit NOT NULL DEFAULT 0 ,
+
+	[VehicleTotalMileage] INT ,
+	[VehicleTotalHours] INT  ,
+
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [PK_WorkOrder] PRIMARY KEY ([WorkOrderID]), 
     CONSTRAINT [FK_WorkOrder_CompanyLocation] FOREIGN KEY ([CompanyLocationID]) REFERENCES CompanyLocations(CompanyLocationsID), 
