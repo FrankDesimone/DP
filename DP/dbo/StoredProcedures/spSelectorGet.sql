@@ -14,7 +14,7 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
-	IF @Selector ='workorder' 
+	IF @Selector ='workorder'  
 	BEGIN
 
 		select Null as WorkOrderID
