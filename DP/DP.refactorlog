@@ -154,4 +154,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[SubstrateTypeID]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="7008c285-4c82-432e-92b8-3d042d1ccae4" ChangeDateTime="11/23/2018 15:14:28">
+    <Property Name="ElementName" Value="[dbo].[Contacts].[PhoneNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Phone]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ca76cc3b-85d4-4d3c-9780-2b8c7f20bce7" ChangeDateTime="11/23/2018 15:14:54">
+    <Property Name="ElementName" Value="[dbo].[Contacts].[EmailAddress]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Email]" />
+  </Operation>
 </Operations>
