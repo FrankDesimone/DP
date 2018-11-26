@@ -14,6 +14,20 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
+	IF @Selector ='workorder' 
+	BEGIN
+
+		select Null as WorkOrderID
+			,'Please Select' as WorkOrderID
+			,1 as Sortkey
+		union all
+		select w.WorkOrderID
+			,w.WorkOrderID
+			,1 as SortKey
+		from WorkOrder as w
+		
+		goto ExitProc;
+	END
 
 	IF @Selector ='company' 
 	BEGIN
@@ -27,7 +41,6 @@ BEGIN TRY
 			,1 as SortKey
 		from Company as c
 		where c.Active=1
-		
 
 		goto ExitProc;
 	END
@@ -204,6 +217,25 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
+
+
+	IF @Selector = 'cleaningreason' 
+	BEGIN
+
+		select Null as [CleaningReasonID]
+			,'Please Select' as [CleaningReason]
+			,0 as Sortkey
+		union all
+		SELECT  cr.CleaningReasonID 
+			,cr.CleaningReason 
+			,1 as SortKey
+		from [dbo].CleaningReason  as  cr
+		
+		order by SortKey;
+
+		goto ExitProc;
+	END
+
 ExitProc:
 
 END TRY

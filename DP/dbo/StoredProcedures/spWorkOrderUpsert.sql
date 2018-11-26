@@ -41,11 +41,11 @@ BEGIN TRY
 		,w.[PreventMaintAshCleanInter]		  = @PreventMaintAshCleanInter
 		,w.[HighSootCEL]					  = @HighSootCEL
 		,w.[EngineFailureFluidsInExhaust]	  = @EngineFailureFluidsInExhaust
-		,w.[CleanReasonOther]				  = @CleanReasonOther
+		,w.[CleaningReasonID]				  = @CleanReasonOther
 		,w.[RoadHighway]					  = @RoadHighway
 		,w.[StartStop]						  = @StartStop
 		,w.[HighIdle]						  = @HighIdle
-		,w.[DrivingTypeOther]				  = @DrivingTypeOther
+		,w.[DrivingTypeID]				  = @DrivingTypeOther
 		,w.[FirstCleaning]					  = @FirstCleaning
 		,w.[VehicleTotalMileage]			  = @VehicleTotalMileage
 		,w.[VehicleTotalHours]				  = @VehicleTotalHours
@@ -66,11 +66,11 @@ BEGIN TRY
 				   ,[PreventMaintAshCleanInter]
 				   ,[HighSootCEL]
 				   ,[EngineFailureFluidsInExhaust]
-				   ,[CleanReasonOther]
+				   ,[CleaningReasonID]
 				   ,[RoadHighway]
 				   ,[StartStop]
 				   ,[HighIdle]
-				   ,[DrivingTypeOther]
+				   ,[DrivingTypeID]
 				   ,[FirstCleaning]
 				   ,[VehicleTotalMileage]
 				   ,[VehicleTotalHours])

@@ -168,4 +168,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[Email]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="70376235-b9fd-4ec2-86fa-612aaef2eed4" ChangeDateTime="11/26/2018 21:51:32">
+    <Property Name="ElementName" Value="[dbo].[WorkOrder].[DrivingTypeOther]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrder]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DrivingTypeID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa74703e-306c-471f-8144-287795832c72" ChangeDateTime="11/26/2018 21:52:30">
+    <Property Name="ElementName" Value="[dbo].[WorkOrder].[CleanReasonOther]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrder]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CleaningReasonID]" />
+  </Operation>
 </Operations>

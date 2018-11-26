@@ -13,24 +13,26 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 SELECT  w.[WorkOrderID]
-      ,w.[CompanyLocationID]
-      ,w.[WorkOrderStatusID]
-      ,w.[VehicleID]
-      ,w.[EngineID]
-      ,w.[ECDID]
-      ,w.[PreventMaintAshCleanInter]
-      ,w.[HighSootCEL]
-      ,w.[EngineFailureFluidsInExhaust]
-      ,w.[CleanReasonOther]
-      ,w.[RoadHighway]
-      ,w.[StartStop]
-      ,w.[HighIdle]
-      ,w.[DrivingTypeOther]
-      ,w.[FirstCleaning]
-      ,w.[VehicleTotalMileage]
-      ,w.[VehicleTotalHours]
-      ,w.[DateAdded]
+		,cl.[CompanyID]
+		,w.[CompanyLocationID]
+		,w.[WorkOrderStatusID]
+		,w.[VehicleID]
+		,w.[EngineID]
+		,w.[ECDID]
+		,w.[PreventMaintAshCleanInter]
+		,w.[HighSootCEL]
+		,w.[EngineFailureFluidsInExhaust]
+		,w.[CleaningReasonID]
+		,w.[RoadHighway]
+		,w.[StartStop]
+		,w.[HighIdle]
+		,w.[DrivingTypeID]
+		,w.[FirstCleaning]
+		,w.[VehicleTotalMileage]
+		,w.[VehicleTotalHours]
+		,w.[DateAdded]
   FROM [dbo].[WorkOrder] as w
+	inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY
