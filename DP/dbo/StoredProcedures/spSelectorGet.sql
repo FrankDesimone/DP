@@ -40,7 +40,7 @@ BEGIN TRY
 			,c.CompanyName
 			,1 as SortKey
 		from Company as c
-		where c.Active=1
+		where c.Active=1;
 
 		goto ExitProc;
 	END
@@ -126,8 +126,6 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
-	
-
 	IF @Selector = 'engine' 
 	BEGIN
 
@@ -145,7 +143,6 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
-	
 	IF @Selector = 'ecd' 
 	BEGIN
 
