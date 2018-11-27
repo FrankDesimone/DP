@@ -20,7 +20,10 @@ SELECT  cl.[CompanyLocationsID]
       ,cl.[City]
       ,cl.[Zip]
       ,cl.[StateID]
+	  ,s.[State]
   FROM [dbo].[CompanyLocations] as cl
+    inner join [State] as s on cl.StateId = s.StateID
+
   where cl.CompanyLocationsID = @CompanyLocationsID;
 
 END TRY

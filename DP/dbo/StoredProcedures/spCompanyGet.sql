@@ -19,9 +19,11 @@ BEGIN TRY
 		,c.[BillingCity]
 		,c.[BillingZip]
 		,c.[StateID]
+		,s.[State]
 		,c.[ContactsID]
 		,c.[Active]     
   FROM [Company] as c
+  inner join [State] as s on c.StateId = s.StateID
   where c.CompanyID = @CompanyID;
 
 END TRY

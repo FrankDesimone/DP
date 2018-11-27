@@ -24,7 +24,9 @@ SELECT con.[ContactsID]
       ,con.[Email]
       ,con.[Active]
       ,con.[StateID]
+	  ,s.[State]
   FROM [dbo].[Contacts] as con
+  inner join [State] as s on con.StateId = s.StateID
   where con.ContactsID = @ContactsID;
 
 END TRY
