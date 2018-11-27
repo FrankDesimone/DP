@@ -18,11 +18,11 @@ BEGIN TRY
 	BEGIN
 
 		select Null as WorkOrderID
-			,'Please Select' as WorkOrderID
+			,'Please Select' as WorkOrder
 			,1 as Sortkey
 		union all
 		select w.WorkOrderID
-			,w.WorkOrderID
+			,convert(nvarchar(100),w.WorkOrderID) as WorkOrder
 			,1 as SortKey
 		from WorkOrder as w
 		
