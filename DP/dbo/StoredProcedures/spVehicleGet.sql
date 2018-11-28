@@ -18,9 +18,11 @@ SELECT
       ,v.[SerialNumber]
       ,v.[AssetNumber]
       ,v.[ManufacturerID]
+	  ,m.Manufacturer
       ,v.[Model]
       ,v.[Year]
   FROM [dbo].[Vehicle] as v
+  inner join [Manufacturer] as m on v.ManufacturerID = m.ManufacturerID
   where v.VehicleID = @VehicleID;
 
 END TRY

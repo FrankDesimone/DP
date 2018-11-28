@@ -17,10 +17,13 @@ SELECT
       e.[EngineID]
       ,e.[CompanyID]
       ,e.[ManufacturerID]
+      ,m.[Manufacturer]
 	  ,e.[SerialNumber]
       ,e.[Model]
       ,e.[Year]
   FROM [dbo].[Engine] as e
+  inner join [Manufacturer] as m on e.ManufacturerID = m.ManufacturerID
+
   where e.EngineID = @EngineID;
 
 END TRY

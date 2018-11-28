@@ -26,7 +26,7 @@ SELECT con.[ContactsID]
       ,con.[StateID]
 	  ,s.[State]
   FROM [dbo].[Contacts] as con
-  inner join [State] as s on con.StateId = s.StateID
+  inner join [State] as s on con.StateID = s.StateID
   where con.ContactsID = @ContactsID;
 
 END TRY

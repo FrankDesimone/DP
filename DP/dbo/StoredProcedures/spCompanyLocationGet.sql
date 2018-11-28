@@ -22,7 +22,7 @@ SELECT  cl.[CompanyLocationsID]
       ,cl.[StateID]
 	  ,s.[State]
   FROM [dbo].[CompanyLocations] as cl
-    inner join [State] as s on cl.StateId = s.StateID
+    inner join [State] as s on cl.StateID = s.StateID
 
   where cl.CompanyLocationsID = @CompanyLocationsID;
 

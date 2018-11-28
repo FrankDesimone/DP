@@ -15,8 +15,11 @@ BEGIN TRY
 SELECT  ecd.[ECDID]
       ,ecd.[CompanyID]
       ,ecd.[SubstrateTypeID]
+	  ,st.SubstrateType
       ,ecd.[ManfacturerID]
+	  ,m.Manufacturer
       ,ecd.[DeviceTypeID]
+	  ,dt.DeviceType
       ,ecd.[TimesCleaned]
       ,ecd.[PartNumber]
       ,ecd.[SerialNumber]
@@ -26,6 +29,9 @@ SELECT  ecd.[ECDID]
       ,ecd.[OuterLength]
       ,ecd.[SubstrateLength]
   FROM [dbo].[ECD] as ecd
+  inner join [Manufacturer] as m on ecd.ManfacturerID = m.ManufacturerID
+  inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
+  inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
   where ecd.ECDID = @ECDID;
 
 END TRY
