@@ -102,7 +102,6 @@
     <RefactorLog Include="DP.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Excel\DataEntry.xlsm" />
     <None Include="Excel\Admin.xlsm" />
     <None Include="dbo\Scripts\spExceptionLogNoTransaction.sql" />
     <None Include="dbo\Scripts\spExceptionLogTransaction.sql" />
