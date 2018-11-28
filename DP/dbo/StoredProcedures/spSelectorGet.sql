@@ -38,9 +38,10 @@ BEGIN TRY
 		union all
 		select c.CompanyID
 			,c.CompanyName
-			,1 as SortKey
+			,2 as SortKey
 		from Company as c
-		where c.Active=1;
+		where c.Active = @True
+		order by SortKey, CompanyName;
 
 		goto ExitProc;
 	END
@@ -227,7 +228,7 @@ BEGIN TRY
 			,cr.CleaningReason 
 			,1 as SortKey
 		from [dbo].CleaningReason  as  cr
-		
+
 		order by SortKey;
 
 		goto ExitProc;
