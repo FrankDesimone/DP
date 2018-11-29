@@ -15,6 +15,7 @@ BEGIN TRY
 SELECT  w.[WorkOrderID]
 		,cl.[CompanyID]
 		,w.[CompanyLocationID]
+		,W.ContactsID
 		,w.[WorkOrderStatusID]
 		,w.[VehicleID]
 		,w.[EngineID]

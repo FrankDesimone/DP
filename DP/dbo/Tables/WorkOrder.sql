@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [dbo].[WorkOrder]
 (
     [WorkOrderID] INT NOT NULL IDENTITY, 
-    [CompanyLocationID] INT NOT NULL, 
-	[WorkOrderStatusID] INT NOT NULL,
+ 	[WorkOrderStatusID] INT NOT NULL,
+	[CompanyLocationID] INT NOT NULL,
+	[ContactsID] INT NULL,
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
 	[ECDID] INT NOT NULL,	
@@ -30,7 +31,8 @@
     CONSTRAINT [FK_WorkOrder_Vehicle] FOREIGN KEY ([VehicleID]) REFERENCES [Vehicle]([VehicleID]), 
     CONSTRAINT [FK_WorkOrder_ECD] FOREIGN KEY ([ECDID]) REFERENCES [ECD]([ECDID]), 
     CONSTRAINT [FK_WorkOrder_CleaningReason] FOREIGN KEY ([CleaningReasonID]) REFERENCES [CleaningReason]([CleaningReasonID]), 
-    CONSTRAINT [FK_WorkOrder_DrivingType] FOREIGN KEY ([DrivingTypeID]) REFERENCES [DrivingType]([DrivingTypeID])
+    CONSTRAINT [FK_WorkOrder_DrivingType] FOREIGN KEY ([DrivingTypeID]) REFERENCES [DrivingType]([DrivingTypeID]), 
+    CONSTRAINT [FK_WorkOrder_Contacts] FOREIGN KEY (ContactsID) REFERENCES [Contacts]([ContactsID])
 )
 
 GO

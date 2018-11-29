@@ -1,8 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
 	@WorkOrderID      INT		 
-    ,@CompanyLocationID  INT 
+    ,@CompanyLocationID  INT
+	,@ContactsID INT = NULL
 	,@WorkOrderStatusID  INT 
-	,@VehicleID  INT NULL 
+	,@VehicleID  INT = NULL 
 	,@EngineID  INT = NULL 
 	,@ECDID  INT 
 	,@PreventMaintAshCleanInter  bit 
@@ -33,6 +34,7 @@ BEGIN TRY
 	UPDATE w
 	set 
 		w.[CompanyLocationID]				  = @CompanyLocationID
+		,w.[ContactsID]								= @ContactsID
 		,w.[WorkOrderStatusID]				  = @WorkOrderStatusID
 		,w.[VehicleID]						  = @VehicleID
 		,w.[EngineID]						  = @EngineID
@@ -57,6 +59,7 @@ BEGIN TRY
 
 		INSERT INTO [dbo].[WorkOrder]
 				   ([CompanyLocationID]
+				   ,[ContactsID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
 				   ,[EngineID]
@@ -74,6 +77,7 @@ BEGIN TRY
 				   ,[VehicleTotalHours])
 			 VALUES
 				   ( @CompanyLocationID
+				   ,@ContactsID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID
 				   ,@EngineID
