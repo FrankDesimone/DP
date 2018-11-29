@@ -13,3 +13,7 @@
     CONSTRAINT [FK_Company_Contacts] FOREIGN KEY ([ContactsID]) REFERENCES [Contacts]([ContactsID]),
 );
 
+
+GO
+
+CREATE UNIQUE INDEX [IX_Company_CompanyName] ON [dbo].[Company] ([CompanyName])
