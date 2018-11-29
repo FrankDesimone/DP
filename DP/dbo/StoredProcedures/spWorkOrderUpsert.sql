@@ -2,20 +2,20 @@
 	@WorkOrderID      INT		 
     ,@CompanyLocationID  INT 
 	,@WorkOrderStatusID  INT 
-	,@VehicleID  INT 
-	,@EngineID  INT 
+	,@VehicleID  INT NULL 
+	,@EngineID  INT = NULL 
 	,@ECDID  INT 
 	,@PreventMaintAshCleanInter  bit 
 	,@HighSootCEL bit 
 	,@EngineFailureFluidsInExhaust  bit
-	,@CleanReasonOther  INT
+	,@CleanReasonOther  INT = NULL
 	,@RoadHighway  bit 
 	,@StartStop bit 
 	,@HighIdle bit
-	,@DrivingTypeOther  INT
+	,@DrivingTypeOther  INT = NULL
 	,@FirstCleaning  bit 
-	,@VehicleTotalMileage  INT 
-	,@VehicleTotalHours  INT  	
+	,@VehicleTotalMileage  INT = NULL
+	,@VehicleTotalHours  INT  = NULL	
 	,@NewWorkOrderID      INT          = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -32,8 +32,7 @@ BEGIN TRY
 
 	UPDATE w
 	set 
-		w.[WorkOrderID] = @WorkOrderID					
-		,w.[CompanyLocationID]				  = @CompanyLocationID
+		w.[CompanyLocationID]				  = @CompanyLocationID
 		,w.[WorkOrderStatusID]				  = @WorkOrderStatusID
 		,w.[VehicleID]						  = @VehicleID
 		,w.[EngineID]						  = @EngineID
@@ -45,7 +44,7 @@ BEGIN TRY
 		,w.[RoadHighway]					  = @RoadHighway
 		,w.[StartStop]						  = @StartStop
 		,w.[HighIdle]						  = @HighIdle
-		,w.[DrivingTypeID]				  = @DrivingTypeOther
+		,w.[DrivingTypeID]						= @DrivingTypeOther
 		,w.[FirstCleaning]					  = @FirstCleaning
 		,w.[VehicleTotalMileage]			  = @VehicleTotalMileage
 		,w.[VehicleTotalHours]				  = @VehicleTotalHours
@@ -57,8 +56,7 @@ BEGIN TRY
 	begin
 
 		INSERT INTO [dbo].[WorkOrder]
-				   ([WorkOrderID]
-				   ,[CompanyLocationID]
+				   ([CompanyLocationID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
 				   ,[EngineID]
@@ -75,8 +73,7 @@ BEGIN TRY
 				   ,[VehicleTotalMileage]
 				   ,[VehicleTotalHours])
 			 VALUES
-				   ( @WorkOrderID
-				   ,@CompanyLocationID
+				   ( @CompanyLocationID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID
 				   ,@EngineID

@@ -1,12 +1,11 @@
 ﻿CREATE TABLE [dbo].[WorkOrder]
 (
-    [WorkOrderID] INT NOT NULL, 
+    [WorkOrderID] INT NOT NULL IDENTITY, 
     [CompanyLocationID] INT NOT NULL, 
 	[WorkOrderStatusID] INT NOT NULL,
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
-	[ECDID] INT NOT NULL,
-	
+	[ECDID] INT NOT NULL,	
 	[PreventMaintAshCleanInter] bit NOT NULL DEFAULT 0 ,
 	[HighSootCEL]bit NOT NULL DEFAULT 0,
 	[EngineFailureFluidsInExhaust] bit NOT NULL DEFAULT 0,
