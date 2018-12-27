@@ -182,4 +182,74 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[CleaningReasonID]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="421c2fce-4783-40d6-a5a5-24f6e54d2257" ChangeDateTime="12/27/2018 12:53:36">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[InletCell12]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InletCell03" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ae04cba4-b96a-4f6e-855f-0aa7957ab70a" ChangeDateTime="12/27/2018 12:53:41">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[InletCell12]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InletCell06" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0b6fa5d5-ad33-4caf-90fc-5f68011f3c82" ChangeDateTime="12/27/2018 12:53:45">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[InletCell12]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InletCell09" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="af594eb7-392f-4c1e-ab1d-55a4f33da054" ChangeDateTime="12/27/2018 12:53:50">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[InletCell12]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InletCellCenter" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="335e178e-d781-4661-8102-bf2a3485e270" ChangeDateTime="12/27/2018 12:55:07">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[AssOnFace]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AshOnFace" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fcddedb3-2f9f-40ed-a6fb-b1d9bf457717" ChangeDateTime="12/27/2018 12:56:51">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[SubstrateStructuralConditions]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Breach" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c59f5ed2-2170-405b-bdc0-399e5c48ff26" ChangeDateTime="12/27/2018 12:57:08">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[EvidenceOfContaminants]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Substrate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="85f651d1-71f5-4945-bf69-43622dbbf25d" ChangeDateTime="12/27/2018 12:59:01">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess].[Added]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateAdded" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2271e65d-bf93-4c1c-bfe1-1a98f8b1f6e7" ChangeDateTime="12/27/2018 12:59:06">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[Added]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateAdded" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9e103897-340c-4194-a221-29abf71022c0" ChangeDateTime="12/27/2018 13:04:03">
+    <Property Name="ElementName" Value="[dbo].[FlowTestProcess].[FlowTest]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FlowTestProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FlowTestID" />
+  </Operation>
 </Operations>
