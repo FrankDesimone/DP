@@ -2,8 +2,8 @@
 (
     [FlowTestProcessMeasureID] INT NOT NULL, 
     [FlowTestProcessID] INT NOT NULL, 
-	[BlowerHZ] REAL,
-	[PSI] REAL,
+	[BlowerHZ] REAL NOT NULL,
+	[PSI] REAL NOT NULL,
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [PK_FlowTestProcessMeasure] PRIMARY KEY ([FlowTestProcessMeasureID]), 
     CONSTRAINT [FK_FlowTestProcessMeasure_FlowTestProcess] FOREIGN KEY ([FlowTestProcessID]) REFERENCES [FlowTestProcess]([FlowTestProcessID])
