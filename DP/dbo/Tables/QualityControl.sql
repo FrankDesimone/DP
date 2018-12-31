@@ -4,6 +4,7 @@
 	[WorkOrderID] INT NOT NULL,
     [QASootOnFaceID] INT NOT NULL, 
     [QAAshOnFaceID] INT NOT NULL, 
+	[QAAshColorID] INT NOT NULL,
     [QABreachID] INT NOT NULL, 
     [QASubstrateID] INT NOT NULL, 
     [QACoolantID] INT NOT NULL, 
@@ -13,7 +14,8 @@
     CONSTRAINT [FK_QualityControl_QAAshOnFace] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAAshOnFace]([QAAshOnFaceID]),
     CONSTRAINT [FK_QualityControl_QABreach] FOREIGN KEY ([QABreachID]) REFERENCES [QABreach]([QABreachID]),
     CONSTRAINT [FK_QualityControl_QASootOnFace] FOREIGN KEY ([QASootOnFaceID]) REFERENCES [QASootOnFace]([QASootOnFaceID]),
-    CONSTRAINT [FK_QualityControl_QACoolant] FOREIGN KEY ([QACoolantID]) REFERENCES [QACoolant]([QACoolantID])
+    CONSTRAINT [FK_QualityControl_QACoolant] FOREIGN KEY ([QACoolantID]) REFERENCES [QACoolant]([QACoolantID]), 
+    CONSTRAINT [FK_QualityControl_QAAshColor] FOREIGN KEY ([QAAshColorID]) REFERENCES [QAAshColor]([QAAshColorID])
 )
 
 GO
