@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[QAAshOnFace]
+(
+    [QAAshOnFaceID] INT NOT NULL, 
+    [QAAshOnFace] NVARCHAR(250) NOT NULL, 
+    CONSTRAINT [PK_QAAshOnFace] PRIMARY KEY ([QAAshOnFaceID]) 
+)

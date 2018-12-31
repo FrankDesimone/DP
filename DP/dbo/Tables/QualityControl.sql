@@ -2,18 +2,18 @@
 (
     [QualityControlID] INT NOT NULL IDENTITY, 
 	[WorkOrderID] INT NOT NULL,
-    [SootOnFace] INT NOT NULL, 
-    [AshOnFace] INT NOT NULL, 
-    [Breach] INT NOT NULL, 
-    [Substrate] INT NOT NULL, 
-    [Coolant] INT NOT NULL, 
+    [QASootOnFaceID] INT NOT NULL, 
+    [QAAshOnFaceID] INT NOT NULL, 
+    [QABreachID] INT NOT NULL, 
+    [QASubstrateID] INT NOT NULL, 
+    [QACoolantID] INT NOT NULL, 
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [PK_QualityControl] PRIMARY KEY ([QualityControlID]), 
     CONSTRAINT [FK_QualityControl_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID]), 
-    CONSTRAINT [FK_QualityControl_AshOnFace] FOREIGN KEY ([AshOnFace]) REFERENCES [DropdownValues]([DropdownValuesID]),
-    CONSTRAINT [FK_QualityControl_Breach] FOREIGN KEY ([Breach]) REFERENCES [DropdownValues]([DropdownValuesID]),
-    CONSTRAINT [FK_QualityControl_SootOnFace] FOREIGN KEY ([SootOnFace]) REFERENCES [DropdownValues]([DropdownValuesID]),
-    CONSTRAINT [FK_QualityControl_Coolant] FOREIGN KEY ([Coolant]) REFERENCES [DropdownValues]([DropdownValuesID])
+    CONSTRAINT [FK_QualityControl_QAAshOnFace] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAAshOnFace]([QAAshOnFaceID]),
+    CONSTRAINT [FK_QualityControl_QABreach] FOREIGN KEY ([QABreachID]) REFERENCES [QABreach]([QABreachID]),
+    CONSTRAINT [FK_QualityControl_QASootOnFace] FOREIGN KEY ([QASootOnFaceID]) REFERENCES [QASootOnFace]([QASootOnFaceID]),
+    CONSTRAINT [FK_QualityControl_QACoolant] FOREIGN KEY ([QACoolantID]) REFERENCES [QACoolant]([QACoolantID])
 )
 
 GO

@@ -252,4 +252,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="FlowTestID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="66f28192-f586-4ee8-9897-18f32421edd1" ChangeDateTime="12/31/2018 12:26:35">
+    <Property Name="ElementName" Value="[dbo].[QACoolant].[QACoolant]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QACoolant]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QACoolantID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="932338ae-2064-49fa-bf2e-eacb6c7d2f64" ChangeDateTime="12/31/2018 12:29:22">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[QASootOnFace]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QASootOnFaceID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a52bdc84-b789-42dc-96b4-a58b71bf3533" ChangeDateTime="12/31/2018 12:29:27">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[QAAshOnFace]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAAshOnFaceID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="417e0f21-98b5-4e25-94f8-1901c11712f6" ChangeDateTime="12/31/2018 12:29:31">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[QABreach]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QABreachID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="282277e7-21fd-4079-ac85-bc8742815917" ChangeDateTime="12/31/2018 12:29:34">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[QASubstrate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QASubstrateID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fdc7fdb9-46d2-4996-8cc7-1ad58b3f5c22" ChangeDateTime="12/31/2018 12:29:38">
+    <Property Name="ElementName" Value="[dbo].[QualityControl].[QACoolant]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QACoolantID" />
+  </Operation>
 </Operations>
