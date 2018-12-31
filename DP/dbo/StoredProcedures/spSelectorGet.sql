@@ -16,7 +16,6 @@ BEGIN TRY
 
 	IF @Selector ='workorder'  
 	BEGIN
-
 		select Null as WorkOrderID
 			,'Please Select' as WorkOrder
 			,1 as Sortkey
@@ -31,7 +30,6 @@ BEGIN TRY
 
 	IF @Selector ='company' 
 	BEGIN
-
 		select Null as CompanyID
 			,'Please Select' as CompanyName
 			,1 as Sortkey
@@ -48,7 +46,6 @@ BEGIN TRY
 
 	IF @Selector = 'companylocations' 
 	BEGIN
-
 		select Null as CompanyLocationsID
 			,'Please Select' as [Location]
 			,0 as Sortkey
@@ -65,7 +62,6 @@ BEGIN TRY
 
 	IF @Selector = 'contacts' 
 	BEGIN
-
 		select Null as ContactsID
 			,'Please Select' as Contact
 			,0 as Sortkey
@@ -82,7 +78,6 @@ BEGIN TRY
 	
 	IF @Selector = 'state' 
 	BEGIN
-
 		select Null as StateID
 			,'Please Select' as StateName
 			,0 as Sortkey
@@ -112,7 +107,6 @@ BEGIN TRY
 
 	IF @Selector = 'vehicle' 
 	BEGIN
-
 		select Null as [VehicleID]
 			,'Please Select' as [Vehicle]
 			,0 as Sortkey
@@ -129,7 +123,6 @@ BEGIN TRY
 
 	IF @Selector = 'engine' 
 	BEGIN
-
 		select Null as [EngineID]
 			,'Please Select' as Engine
 			,0 as Sortkey
@@ -146,7 +139,6 @@ BEGIN TRY
 
 	IF @Selector = 'ecd' 
 	BEGIN
-
 		select Null as [ECDID]
 			,'Please Select' as ECD
 			,0 as Sortkey
@@ -164,7 +156,6 @@ BEGIN TRY
 
 	IF @Selector = 'substratetype' 
 	BEGIN
-
 		select Null as SubstrateTypeID
 			,'Please Select' as SubstrateType
 			,0 as Sortkey
@@ -173,7 +164,6 @@ BEGIN TRY
 			,st.SubstrateType
 			,1 as SortKey
 		from [dbo].SubstrateType as  st
-		
 		order by SortKey;
 
 		goto ExitProc;
@@ -182,7 +172,6 @@ BEGIN TRY
 
 	IF @Selector = 'devicetype' 
 	BEGIN
-
 		select Null as DeviceTypeID
 			,'Please Select' as DeviceType
 			,0 as Sortkey
@@ -191,17 +180,13 @@ BEGIN TRY
 			,dt.DeviceType 
 			,1 as SortKey
 		from [dbo].DeviceType as  dt
-		
 		order by SortKey;
 
 		goto ExitProc;
 	END
 
-
-	
 	IF @Selector = 'drivingtype' 
 	BEGIN
-
 		select Null as DrivingTypeID
 			,'Please Select' as DrivingType
 			,0 as Sortkey
@@ -210,16 +195,13 @@ BEGIN TRY
 			,dt.DrivingType 
 			,1 as SortKey
 		from [dbo].DrivingType  as  dt
-		
 		order by SortKey;
 
 		goto ExitProc;
 	END
 
-
 	IF @Selector = 'cleaningreason' 
 	BEGIN
-
 		select Null as [CleaningReasonID]
 			,'Please Select' as [CleaningReason]
 			,0 as Sortkey
@@ -228,8 +210,82 @@ BEGIN TRY
 			,cr.CleaningReason 
 			,1 as SortKey
 		from [dbo].CleaningReason  as  cr
-
 		order by SortKey;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'qasootonface' 
+	BEGIN
+		select Null as QASootOnFaceID
+			,'Please Select' as QASootOnFace
+			,0 as Sortkey
+		union all
+		SELECT  qa.QASootOnFaceID
+			,qa.QASootOnFace
+			,1 as SortKey
+		from QASootOnFace as qa
+		order by SortKey, QASootOnFaceID;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'qaashonface' 
+	BEGIN
+		select Null as QAAshOnFaceID
+			,'Please Select' as QAAshOnFace
+			,0 as Sortkey
+		union all
+		SELECT  qa.QAAshOnFaceID
+			,qa.QAAshOnFace
+			,1 as SortKey
+		from QAAshOnFace as qa
+		order by SortKey, QAAshOnFaceID;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'qaashcolor' 
+	BEGIN
+		select Null as QAAshColorID
+			,'Please Select' as QAAshColor
+			,0 as Sortkey
+		union all
+		SELECT  qa.QAAshColorID
+			,qa.QAAshColor
+			,1 as SortKey
+		from QAAshColor as qa
+		order by SortKey, QAAshColorID;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'qasubstrate' 
+	BEGIN
+		select Null as QASubstrateID
+			,'Please Select' as QASubstrate
+			,0 as Sortkey
+		union all
+		SELECT  qa.QASubstrateID
+			,qa.QASubstrate
+			,1 as SortKey
+		from QASubstrate as qa
+		order by SortKey, QASubstrateID;
+
+		goto ExitProc;
+	END
+
+	IF @Selector = 'qacoolant' 
+	BEGIN
+		select Null as QACoolantID
+			,'Please Select' as QACoolant
+			,0 as Sortkey
+		union all
+		SELECT  qa.QACoolantID
+			,qa.QACoolant
+			,1 as SortKey
+		from QACoolant as qa
+		order by SortKey, QACoolantID;
 
 		goto ExitProc;
 	END
