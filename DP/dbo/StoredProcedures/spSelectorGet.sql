@@ -274,6 +274,22 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
+	IF @Selector = 'qasubstratecraking' 
+	BEGIN
+		select Null as QASubstrateCrakingID
+			,'Please Select' as QASubstrateCraking
+			,0 as Sortkey
+		union all
+		SELECT  qa.QASubstrateCrakingID
+			,qa.QASubstrateCraking
+			,1 as SortKey
+		from QASubstrateCraking as qa
+		order by SortKey, QASubstrateCrakingID;
+
+		goto ExitProc;
+	END
+
+	
 
 	IF @Selector = 'qacoolant' 
 	BEGIN

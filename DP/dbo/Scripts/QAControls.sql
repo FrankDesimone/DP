@@ -25,3 +25,8 @@ values (0, 'None')
 	,(3, '25-50')
 	,(4, '50-100')
 	,(5, '>100');
+
+insert into QASubstrateCraking (QASubstrateCrakingID, QASubstrateCraking)
+values (0, 'None')
+	,(1, 'Surface Crack(s)')
+	,(2, 'Catastrophic');
