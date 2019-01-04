@@ -18,4 +18,4 @@
 
 GO
 
-CREATE INDEX [IX_QualityControl_WorkOrderID] ON [dbo].[QualityControl] ([WorkOrderID])
+CREATE UNIQUE INDEX [IX_QualityControl_WorkOrderID] ON [dbo].[QualityControl] ([WorkOrderID])
