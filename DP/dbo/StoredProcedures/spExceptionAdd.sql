@@ -10,12 +10,15 @@ SET NOCOUNT ON;
 
 BEGIN
 
-	insert Exceptions (ReportingProcedure, ErrorNumber, ErrorLine, ErrorMessage, ErrorNote)
-	values (
-		coalesce(@ReportingProcedure,SYSTEM_USER)
-		,coalesce(@ErrorNumber, -99)
-		,coalesce(@ErrorLine, -99)
-		,coalesce(@ErrorMessage, 'N/A')
-		,coalesce(@ErrorNote, 'N/A')
-		);
+	if (select count(e.ExceptionsID) from Exceptions as e) < 1000000
+	begin	
+		insert Exceptions (ReportingProcedure, ErrorNumber, ErrorLine, ErrorMessage, ErrorNote)
+		values (
+			coalesce(@ReportingProcedure,SYSTEM_USER)
+			,coalesce(@ErrorNumber, -99)
+			,coalesce(@ErrorLine, -99)
+			,coalesce(@ErrorMessage, 'N/A')
+			,coalesce(@ErrorNote, 'N/A')
+			);
+	end
 end
