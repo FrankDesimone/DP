@@ -22,12 +22,20 @@ BEGIN TRY
 		,qa.QASubstrateID
 		,qa.QACoolantID
 		,p.Process
-	    ,qap.ECDMass
-		,qap.InletCell12 
-		,qap.InletCell03 
-		,qap.InletCell06 
-		,qap.InletCell09 
-		,qap.InletCellCenter 
+		,0 as CleanChannels
+	    ,qap.ECDMass as P0ECDMass
+	    ,qap.ECDMass as P1ECDMass
+	    ,qap.ECDMass as P2ECDMass
+		,qap.InletCell12		as P0InletCell12 
+		,qap.InletCell03		as P0InletCell03 
+		,qap.InletCell06		as P0InletCell06 
+		,qap.InletCell09		as P0InletCell09 
+		,qap.InletCellCenter	as P0InletCellCenter
+		,qap.InletCell12		as P1InletCell12 
+		,qap.InletCell03		as P1InletCell03 
+		,qap.InletCell06		as P1InletCell06 
+		,qap.InletCell09		as P1InletCell09 
+		,qap.InletCellCenter	as P1InletCellCenter
 		,(case when coalesce(qap.ProcessID, 0) = 0 then null else (qap0.ECDMass - qap.ECDMass) end) as WeightLoss 
 	from QualityControl as qa
 		left outer join QualityControlProcess as qap on qa.QualityControlID = qap.QualityControlID
