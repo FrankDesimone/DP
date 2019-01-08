@@ -4,22 +4,23 @@
     ,@QAAshOnFaceID as int = null
 	,@QAAshColorID as int = null
     ,@QASubstrateID as int = null
-    ,@QACoolantID as int = null
-    ,@ProcessID_0 as int = null
+    ,@Coolant  as  BIT =0
+    ,@RedAsh as BIT = 0
+    ,@USignalReceived as BIT = 0 
+    ,@ECDPinDropDepth as BIT = 0
+    ,@CleanChannels as  REAL  = null
     ,@ECDMass_0 as real = null
     ,@InletCell12_0 as real = null
     ,@InletCell03_0 as real = null
     ,@InletCell06_0 as real = null
     ,@InletCell09_0 as real = null
     ,@InletCellCenter_0 as real = null
-    ,@ProcessID_1 as int = null
     ,@ECDMass_1 as real = null
     ,@InletCell12_1 as real = null
     ,@InletCell03_1 as real = null
     ,@InletCell06_1 as real = null
     ,@InletCell09_1 as real = null
     ,@InletCellCenter_1 as real = null
-	,@ProcessID_2 as int = null
     ,@ECDMass_2 as real = null
     ,@InletCell12_2 as real = null
     ,@InletCell03_2 as real = null
@@ -42,14 +43,13 @@ BEGIN TRAN
 		,@QAAshOnFaceID = @QAAshOnFaceID
 		,@QAAshColorID = @QAAshColorID
 		,@QASubstrateID = @QASubstrateID
-		,@QACoolantID = @QACoolantID
 	from QualityControl as qa
 	where qa.WorkOrderID = @WorkOrderID;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QualityControl (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, QACoolantID)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @QACoolantID);
+		insert into QualityControl (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID);
 	end
 
 	select @QualityControlID = qc.QualityControlID
@@ -58,7 +58,7 @@ BEGIN TRAN
 
 	exec spQAProcessSave
 		@QualityControlID = @QualityControlID
-		,@ProcessID = @ProcessID_0
+		,@ProcessID = 0
 		,@ECDMass = @ECDMass_0
 		,@InletCell12 = @InletCell12_0
 		,@InletCell03 = @InletCell03_0
@@ -68,7 +68,7 @@ BEGIN TRAN
 
 	exec spQAProcessSave
 		@QualityControlID = @QualityControlID
-		,@ProcessID = @ProcessID_1
+		,@ProcessID = 1
 		,@ECDMass = @ECDMass_1
 		,@InletCell12 = @InletCell12_1
 		,@InletCell03 = @InletCell03_1
@@ -78,7 +78,7 @@ BEGIN TRAN
 
 	exec spQAProcessSave
 		@QualityControlID = @QualityControlID
-		,@ProcessID = @ProcessID_2
+		,@ProcessID = 2
 		,@ECDMass = @ECDMass_2
 		,@InletCell12 = @InletCell12_2
 		,@InletCell03 = @InletCell03_2
