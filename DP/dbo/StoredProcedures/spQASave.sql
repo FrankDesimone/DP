@@ -4,7 +4,7 @@
     ,@QAAshOnFaceID as int = null
 	,@QAAshColorID as int = null
     ,@QASubstrateID as int = null
-    ,@Coolant  as  BIT =0
+    ,@Coolant as  BIT = 0
     ,@RedAsh as BIT = 0
     ,@USignalReceived as BIT = 0 
     ,@ECDPinDropDepth as BIT = 0
@@ -34,22 +34,35 @@ SET NOCOUNT ON;
 
 BEGIN TRY
 BEGIN TRAN
+	declare @True as bit = 1
+		,@False as bit = 0;
+
 	declare @QualityControlID as int = null;
 
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
-	update qa set @QASootOnFaceID = @QASootOnFaceID
-		,@QAAshOnFaceID = @QAAshOnFaceID
-		,@QAAshColorID = @QAAshColorID
-		,@QASubstrateID = @QASubstrateID
+	set @Coolant = coalesce(@Coolant, @False);
+	set @RedAsh = coalesce(@RedAsh, @False);
+	set @USignalReceived = coalesce(@USignalReceived, @False);
+	set @ECDPinDropDepth = coalesce(@ECDPinDropDepth, @False);
+
+	update qa set qa.QASootOnFaceID = @QASootOnFaceID
+		,qa.QAAshOnFaceID = @QAAshOnFaceID
+		,qa.QAAshColorID = @QAAshColorID
+		,qa.QASubstrateID = @QASubstrateID
+		,qa.Coolant = @Coolant
+		,qa.RedAsh = @RedAsh
+		,qa.USignalReceived = @USignalReceived
+		,qa.ECDPinDropDepth = @ECDPinDropDepth
+		,qa.CleanChannels = @CleanChannels
 	from QualityControl as qa
 	where qa.WorkOrderID = @WorkOrderID;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QualityControl (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID);
+		insert into QualityControl (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels);
 	end
 
 	select @QualityControlID = qc.QualityControlID

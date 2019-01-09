@@ -20,9 +20,12 @@ BEGIN TRY
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
 		,qa.QASubstrateID
-		,qa.QACoolantID
+		,qa.Coolant
+		,qa.RedAsh
+		,qa.USignalReceived
+		,qa.ECDPinDropDepth
+		,qa.CleanChannels
 		,p.Process
-		,0 as CleanChannels
 	    ,qap.ECDMass as P0ECDMass
 	    ,qap.ECDMass as P1ECDMass
 	    ,qap.ECDMass as P2ECDMass

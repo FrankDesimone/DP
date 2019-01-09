@@ -289,22 +289,6 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
-	
-
-	IF @Selector = 'qacoolant' 
-	BEGIN
-		select Null as QACoolantID
-			,'Please Select' as QACoolant
-			,0 as Sortkey
-		union all
-		SELECT  qa.QACoolantID
-			,qa.QACoolant
-			,1 as SortKey
-		from QACoolant as qa
-		order by SortKey, QACoolantID;
-
-		goto ExitProc;
-	END
 
 ExitProc:
 

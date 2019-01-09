@@ -106,7 +106,6 @@
     <Build Include="dbo\Tables\QASootOnFace.sql" />
     <Build Include="dbo\Tables\QAAshOnFace.sql" />
     <Build Include="dbo\Tables\QASubstrate.sql" />
-    <Build Include="dbo\Tables\QACoolant.sql" />
     <Build Include="dbo\Tables\QAAshColor.sql" />
     <Build Include="dbo\Tables\QASubstrateCraking.sql" />
     <Build Include="dbo\StoredProcedures\spQAGet.sql" />
