@@ -7,7 +7,6 @@
 	[QAAshColorID] INT NULL,
     [QASubstrateID] INT NULL, 
     [QACoolantID] INT NULL, 
-
     [Coolant] BIT NOT NULL DEFAULT 0, 
     [RedAsh] BIT NOT NULL DEFAULT 0, 
     [USignalReceived] BIT NOT NULL DEFAULT 0, 
