@@ -1,12 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[spVehicleUpsert]
-	@CompanyID      INT		
+	@CompanyID INT		
 	,@VehicleID INT = NULL 	
-    ,@SerialNumber  NVARCHAR (100) 
-	,@AssetNumber	NVARCHAR (100)  = NULL
+    ,@SerialNumber NVARCHAR (100) 
+	,@AssetNumber NVARCHAR (100)  = NULL
 	,@ManufacturerID INT          
-    ,@Model         NVARCHAR (100) 
+    ,@Model  NVARCHAR (100) 
 	,@Year INT 
-	,@NewVehicleID      INT          = NULL OUTPUT
+	,@NewVehicleID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS

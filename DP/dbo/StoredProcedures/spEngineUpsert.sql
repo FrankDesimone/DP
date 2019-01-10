@@ -1,11 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[spEngineUpsert]
-	@CompanyID      INT		
+	@CompanyID INT		
 	,@EngineID INT = NULL 	
 	,@ManufacturerID INT
-	,@SerialNumber  NVARCHAR (100)       
-    ,@Model         NVARCHAR (100) 
+	,@Engine as nvarchar(100)
+	,@SerialNumber NVARCHAR (100)       
+    ,@Model NVARCHAR (100) 
 	,@Year INT 
-	,@NewEngineID      INT          = NULL OUTPUT
+	,@NewEngineID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -36,14 +37,12 @@ BEGIN TRY
 	INSERT INTO [dbo].[Engine]
            ([CompanyID]
 		   ,[SerialNumber]
-
            ,[ManufacturerID]
            ,[Model]
            ,[Year])
      VALUES
            	(@CompanyID
 			,@SerialNumber
-
            ,@ManufacturerID
            ,@Model
            ,@Year);
