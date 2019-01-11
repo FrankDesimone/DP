@@ -11,7 +11,7 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 	select
-		@WorkOrderID     as WorkOrderID
+		w.WorkOrderID
 		,@ProcessID  as ProcessID
         ,0 as MaxSpaceVelocity
         ,0 as MaxHertz
@@ -45,10 +45,10 @@ BEGIN TRY
 		,0 as SV9		
 		,0 as SV10        
 		,0 as SV11
-	from QualityControl as qa
-		left  join  WorkOrder as w on qa.WorkorderID = w.WorkOrderID
-		left  join ECD as ecd on w.ECDID = ecd.ECDID
-	where qa.WorkOrderID = @WorkOrderID;
+	from WorkOrder as w
+		left outer join QualityControl as qa on w.WorkOrderID = qa.WorkOrderID
+		left outer join ECD as ecd on w.ECDID = ecd.ECDID
+	where w.WorkOrderID = @WorkOrderID;
 	
 END TRY
 
