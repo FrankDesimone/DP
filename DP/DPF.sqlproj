@@ -111,6 +111,8 @@
     <Build Include="dbo\StoredProcedures\spQAGet.sql" />
     <Build Include="dbo\StoredProcedures\spQASave.sql" />
     <Build Include="dbo\StoredProcedures\spQAProcessSave.sql" />
+    <Build Include="dbo\StoredProcedures\spQAFlowProcessGet.sql" />
+    <Build Include="dbo\StoredProcedures\spQAFlowProcessSave.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DP.refactorlog" />

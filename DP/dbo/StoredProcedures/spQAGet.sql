@@ -34,6 +34,11 @@ BEGIN TRY
 		,qap.InletCell06		as P0InletCell06 
 		,qap.InletCell09		as P0InletCell09 
 		,qap.InletCellCenter	as P0InletCellCenter
+		,qap.InletCell12		as P1InletCell12 
+		,qap.InletCell03		as P1InletCell03 
+		,qap.InletCell06		as P1InletCell06 
+		,qap.InletCell09		as P1InletCell09 
+		,qap.InletCellCenter	as P1InletCellCenter
 		,(case when coalesce(qap.ProcessID, 0) = 0 then null else (qap0.ECDMass - qap.ECDMass) end) as WeightLoss 
 	from QualityControl as qa
 		left outer join QualityControlProcess as qap on qa.QualityControlID = qap.QualityControlID
