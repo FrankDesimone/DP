@@ -315,4 +315,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="QAFlowResultsID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8f46da7e-6322-4cd5-b02e-9f3e4a42fb90" ChangeDateTime="01/16/2019 12:50:43">
+    <Property Name="ElementName" Value="[dbo].[QualityControlProcess]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[QAProcess]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9fe10c52-d17a-49f0-8943-a863ca0688f9" ChangeDateTime="01/16/2019 12:51:02">
+    <Property Name="ElementName" Value="[dbo].[QAProcess].[QualityControlProcessID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[QAProcessID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a811a6ca-9054-4d56-9ff6-bf997e49e29d" ChangeDateTime="01/16/2019 12:52:42">
+    <Property Name="ElementName" Value="[dbo].[QualityControl]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="QA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0783eb4a-e79b-4e42-a927-c46e5a116c1f" ChangeDateTime="01/16/2019 12:53:01">
+    <Property Name="ElementName" Value="[dbo].[QA].[QualityControlID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAlID" />
+  </Operation>
 </Operations>

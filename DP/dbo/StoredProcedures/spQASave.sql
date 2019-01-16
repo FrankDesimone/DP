@@ -56,17 +56,17 @@ BEGIN TRAN
 		,qa.USignalReceived = @USignalReceived
 		,qa.ECDPinDropDepth = @ECDPinDropDepth
 		,qa.CleanChannels = @CleanChannels
-	from QualityControl as qa
+	from QA as qa
 	where qa.WorkOrderID = @WorkOrderID;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QualityControl (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels)
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels)
 		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels);
 	end
 
-	select @QualityControlID = qc.QualityControlID
-	from QualityControl as qc
+	select @QualityControlID = qc.QAlID
+	from QA as qc
 	where qc.WorkOrderID = @WorkOrderID;
 
 	exec spQAProcessSave

@@ -99,7 +99,7 @@
     <Build Include="dbo\StoredProcedures\spWorkOrderUpsert.sql" />
     <Build Include="dbo\Tables\Process.sql" />
     <Build Include="dbo\Tables\QualityControl.sql" />
-    <Build Include="dbo\Tables\QualityControlProcess.sql" />
+    <Build Include="dbo\Tables\QAProcess.sql" />
     <Build Include="dbo\Tables\FlowTest.sql" />
     <Build Include="dbo\Tables\FlowTestProcess.sql" />
     <Build Include="dbo\Tables\FlowTestProcessMeasure.sql" />

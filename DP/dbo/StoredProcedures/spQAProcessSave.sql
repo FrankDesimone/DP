@@ -24,13 +24,13 @@ BEGIN TRAN
 		,qap.InletCell03 = @InletCell03
 		,qap.InletCell06 = @InletCell06
 		,qap.InletCell09 = @InletCell09
-	from QualityControlProcess as qap
-	where qap.QualityControlID = qap.QualityControlID
+	from QAProcess as qap
+	where qap.QAID = qap.QAID
 		and qap.ProcessID = @ProcessID;
 
 	if SCOPE_IDENTITY() = 0
 	begin
-		insert into QualityControlProcess (QualityControlID, ProcessID, ECDMass, InletCell12, InletCell03, InletCell06, InletCell09, InletCellCenter)
+		insert into QAProcess (QAID, ProcessID, ECDMass, InletCell12, InletCell03, InletCell06, InletCell09, InletCellCenter)
 		values (@QualityControlID, @ProcessID, @ECDMass, @InletCell12, @InletCell03, @InletCell06, @InletCell09, @InletCellCenter);
 	end
 	

@@ -46,7 +46,7 @@ BEGIN TRY
 		,0 as SV10        
 		,0 as SV11
 	from WorkOrder as w
-		left outer join QualityControl as qa on w.WorkOrderID = qa.WorkOrderID
+		left outer join QA as qa on w.WorkOrderID = qa.WorkOrderID
 		left outer join ECD as ecd on w.ECDID = ecd.ECDID
 	where w.WorkOrderID = @WorkOrderID;
 	

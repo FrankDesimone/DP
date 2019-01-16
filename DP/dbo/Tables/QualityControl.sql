@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[QualityControl]
+﻿CREATE TABLE [dbo].[QA]
 (
-    [QualityControlID] INT NOT NULL IDENTITY, 
+    [QAlID] INT NOT NULL IDENTITY, 
 	[WorkOrderID] INT NOT NULL,
     [QASootOnFaceID] INT NULL, 
     [QAAshOnFaceID] INT NULL, 
@@ -12,13 +12,13 @@
     [ECDPinDropDepth] BIT NOT NULL DEFAULT 0, 
     [CleanChannels] REAL NULL, 
 	[DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
-    CONSTRAINT [PK_QualityControl] PRIMARY KEY ([QualityControlID]), 
-    CONSTRAINT [FK_QualityControl_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID]), 
-    CONSTRAINT [FK_QualityControl_QAAshOnFace] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAAshOnFace]([QAAshOnFaceID]),
-    CONSTRAINT [FK_QualityControl_QASootOnFace] FOREIGN KEY ([QASootOnFaceID]) REFERENCES [QASootOnFace]([QASootOnFaceID]),
-    CONSTRAINT [FK_QualityControl_QAAshColor] FOREIGN KEY ([QAAshColorID]) REFERENCES [QAAshColor]([QAAshColorID])
+    CONSTRAINT [FK_QA_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID]), 
+    CONSTRAINT [FK_QA_QAAshOnFace] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAAshOnFace]([QAAshOnFaceID]),
+    CONSTRAINT [FK_QA_QASootOnFace] FOREIGN KEY ([QASootOnFaceID]) REFERENCES [QASootOnFace]([QASootOnFaceID]),
+    CONSTRAINT [FK_QA_QAAshColor] FOREIGN KEY ([QAAshColorID]) REFERENCES [QAAshColor]([QAAshColorID]), 
+    CONSTRAINT [PK_QA] PRIMARY KEY ([QAlID])
 )
 
 GO
 
-CREATE UNIQUE INDEX [IX_QualityControl_WorkOrderID] ON [dbo].[QualityControl] ([WorkOrderID])
+CREATE UNIQUE INDEX [IX_QA_WorkOrderID] ON [dbo].QA ([WorkOrderID])

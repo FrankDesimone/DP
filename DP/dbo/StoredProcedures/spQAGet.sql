@@ -11,9 +11,9 @@ BEGIN TRY
 
 	;with qap0 as
 	(
-		select qap.QualityControlID
+		select qap.QAID
 			,qap.ECDMass
-		from QualityControlProcess as qap
+		from QAProcess as qap
 		where qap.ProcessID = 0
 	)
 	select qa.QASootOnFaceID
@@ -40,10 +40,10 @@ BEGIN TRY
 		,qap.InletCell09		as P1InletCell09 
 		,qap.InletCellCenter	as P1InletCellCenter
 		,(case when coalesce(qap.ProcessID, 0) = 0 then null else (qap0.ECDMass - qap.ECDMass) end) as WeightLoss 
-	from QualityControl as qa
-		left outer join QualityControlProcess as qap on qa.QualityControlID = qap.QualityControlID
+	from QA as qa
+		left outer join QAProcess as qap on qa.QAlID = qap.QAID
 		left outer join Process as p on qap.ProcessID = p.ProcessID
-		left outer join qap0 on qa.QualityControlID = qap0.QualityControlID
+		left outer join qap0 on qa.QAlID = qap0.QAID
 	where qa.WorkOrderID = @WorkOrderID;
 	
 END TRY
