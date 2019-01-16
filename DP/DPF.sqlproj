@@ -114,7 +114,7 @@
     <Build Include="dbo\StoredProcedures\spQAFlowProcessGet.sql" />
     <Build Include="dbo\StoredProcedures\spQAFlowProcessSave.sql" />
     <Build Include="dbo\Tables\QAFlow.sql" />
-    <Build Include="dbo\Tables\QAFlowResults.sql" />
+    <Build Include="dbo\Tables\QAProcessData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DP.refactorlog" />
