@@ -10,6 +10,7 @@
     [InletCell09] FLOAT NULL, 
     [InletCellCenter] FLOAT NULL, 
 	[TargetVelocity] FLOAT,
+	[MaxSpaceVelocity] FLOAT,
 	[MaxHertz] FLOAT,
 	[AirTemp] FLOAT,
 	[BarometricPressure] FLOAT,

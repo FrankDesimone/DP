@@ -357,4 +357,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="QAProcessDataID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="894a9071-e13e-41ea-b442-d10f29ad0860" ChangeDateTime="01/17/2019 12:38:30">
+    <Property Name="ElementName" Value="[dbo].[spQAFlowProcessGet]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="spQAProcessGet" />
+  </Operation>
 </Operations>
