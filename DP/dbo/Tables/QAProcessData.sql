@@ -1,14 +1,17 @@
-﻿CREATE TABLE [dbo].[QAFlowResults]
+﻿CREATE TABLE [dbo].[QAProcessData]
 (
-	[QAFlowResultsID] INT NOT NULL IDENTITY,
-	[QAFlowID] INT NOT NULL, 
-    [PSI] REAL NULL, 
+	[QAProcessDataID] INT NOT NULL IDENTITY,
+	[QAProcessID] INT NOT NULL,
+	[TestLine] INT NOT NULL,
+    [PSI] FLOAT NULL, 
     [SpaceVelocity] FLOAT NULL, 
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
-    CONSTRAINT [PK_QAFlowResults] PRIMARY KEY ([QAFlowResultsID]), 
-    CONSTRAINT [FK_QAFlowResults_QAFlow] FOREIGN KEY ([QAFlowID]) REFERENCES [QAFlow]([QAFlowID])
+    CONSTRAINT [PK_QAProcessData] PRIMARY KEY ([QAProcessDataID]), 
+    CONSTRAINT [FK_QAProcessData_QAProcess] FOREIGN KEY ([QAProcessID]) REFERENCES [QAProcess]([QAProcessID])
 )
 
 GO
 
-CREATE INDEX [IX_QAFlowDtl_QAFlowResults] ON [dbo].[QAFlowResults] ([QAFlowID])
+
+
+CREATE INDEX [IX_QAProcessData_QAProcessID] ON [dbo].[QAProcessData] ([QAProcessID])
