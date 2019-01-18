@@ -84,7 +84,7 @@ BEGIN TRY
         ,qapd.SV12
 	from WorkOrder as w
 		left outer join QA as qa on w.WorkOrderID = qa.WorkOrderID
-		left outer join QAProcess as qap on qa.QAlID = qap.QAID
+		left outer join QAProcess as qap on qa.QAID = qap.QAID
 		left outer join qapd on qap.QAProcessID = qapd.QAProcessID
 		left outer join ECD as ecd on w.ECDID = ecd.ECDID
 	where w.WorkOrderID = @WorkOrderID;

@@ -65,12 +65,12 @@ BEGIN TRAN
 		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels);
 	end
 
-	select @QualityControlID = qc.QAlID
+	select @QualityControlID = qc.QAID
 	from QA as qc
 	where qc.WorkOrderID = @WorkOrderID;
 
 	exec spQAProcessSave
-		@QualityControlID = @QualityControlID
+		@QAID = @QualityControlID
 		,@ProcessID = 0
 		,@ECDMass = @ECDMass_0
 		,@InletCell12 = @InletCell12_0
@@ -80,7 +80,7 @@ BEGIN TRAN
 		,@InletCellCenter = @InletCellCenter_0;
 
 	exec spQAProcessSave
-		@QualityControlID = @QualityControlID
+		@QAID = @QualityControlID
 		,@ProcessID = 1
 		,@ECDMass = @ECDMass_1
 		,@InletCell12 = @InletCell12_1

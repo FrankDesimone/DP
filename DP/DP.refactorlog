@@ -364,4 +364,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="spQAProcessGet" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="7faa9f62-5679-48d5-9d93-f0551bf13bb7" ChangeDateTime="01/18/2019 13:14:26">
+    <Property Name="ElementName" Value="[dbo].[QA].[QAlID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAID" />
+  </Operation>
 </Operations>

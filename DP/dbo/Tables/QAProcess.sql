@@ -19,7 +19,7 @@
 	[Coefficient_b] FLOAT,
 	[Coefficient_c] FLOAT,
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
-    CONSTRAINT [FK_QAProcess_QA] FOREIGN KEY ([QAID]) REFERENCES QA(QAlID), 
+    CONSTRAINT [FK_QAProcess_QA] FOREIGN KEY ([QAID]) REFERENCES QA(QAID), 
     CONSTRAINT [FK_QAProcess_Process] FOREIGN KEY ([ProcessID]) REFERENCES [Process]([ProcessID]), 
     CONSTRAINT [PK_QAProcess] PRIMARY KEY ([QAProcessID])
 )

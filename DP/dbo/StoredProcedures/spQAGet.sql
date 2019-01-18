@@ -41,9 +41,9 @@ BEGIN TRY
 		,qap.InletCellCenter	as P1InletCellCenter
 		,(case when coalesce(qap.ProcessID, 0) = 0 then null else (qap0.ECDMass - qap.ECDMass) end) as WeightLoss 
 	from QA as qa
-		left outer join QAProcess as qap on qa.QAlID = qap.QAID
+		left outer join QAProcess as qap on qa.QAID = qap.QAID
 		left outer join Process as p on qap.ProcessID = p.ProcessID
-		left outer join qap0 on qa.QAlID = qap0.QAID
+		left outer join qap0 on qa.QAID = qap0.QAID
 	where qa.WorkOrderID = @WorkOrderID;
 	
 END TRY
