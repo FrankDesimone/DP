@@ -16,7 +16,7 @@
 	,@Coefficient_a as FLOAT = null
 	,@Coefficient_b as FLOAT = null
 	,@Coefficient_c as FLOAT = null
-    ,@PSI1 as FLOAT = null
+	,@PSI1 as FLOAT = null
     ,@PSI2 as FLOAT = null
     ,@PSI3 as FLOAT = null
     ,@PSI4 as FLOAT = null
@@ -48,7 +48,14 @@ SET NOCOUNT ON;
 BEGIN TRY
 BEGIN TRAN
 	declare @QAID as int = null
-		,@QAProcessID as int = null;
+		,@QAProcessID as int = null
+		,@PSI as float
+		,@SpaceVelocity as float
+		,@TestLine as int = 0;
+
+	declare @d as table (TestLine int
+		,PSI float
+		,SpaceVelocity float);
 
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
@@ -123,6 +130,43 @@ BEGIN TRAN
 
 		set @QAProcessID = SCOPE_IDENTITY();
 	end
+
+	insert into @d (TestLine, PSI, SpaceVelocity)
+	values (1, @PSI1, @SV1)
+		,(2, @PSI2, @SV2)
+		,(3, @PSI3, @SV3)
+		,(4, @PSI4, @SV4)
+		,(5, @PSI5, @SV5)
+		,(6, @PSI6, @SV6)
+		,(7, @PSI7, @SV7)
+		,(8, @PSI8, @SV8)
+		,(9, @PSI9, @SV9)
+		,(10, @PSI10, @SV10)
+		,(11, @PSI11, @SV11)
+		,(12, @PSI12, @SV12);
+
+	Declare d Cursor FAST_FORWARD FOR 
+		select d.TestLine
+			,d.PSI
+			,d.SpaceVelocity
+		from @d;
+
+	Open d;
+	Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
+		
+	WHILE @@FETCH_STATUS = 0 
+	BEGIN
+		exec QAProcessDataSave
+			@QAProcessID = @QAProcessID
+			,@TestLine = @TestLine
+			,@PSI = @PSI
+			,@SpaceVelocity = @SpaceVelocity;
+
+		Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
+	end
+
+	CLOSE wo;
+	DEALLOCATE wo;
 	
 ExitProc:
 
