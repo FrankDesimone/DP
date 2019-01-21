@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[QAProcessDataSave]
+﻿CREATE PROCEDURE [dbo].[spQAProcessDataSave]
 	@QAProcessID as int
 	,@TestLine as int
     ,@PSI as float
@@ -38,7 +38,7 @@ BEGIN CATCH
 	,@ErrorMessage VARCHAR(500) = ERROR_MESSAGE()
 	,@ErrorNote VARCHAR(500) = ERROR_MESSAGE();
 		
-	SELECT @ErrorMessage = 'spQAGet:: ' 
+	SELECT @ErrorMessage = '[spQAProcessDataSave]:: ' 
 			+ ERROR_PROCEDURE()
 			+ ' Line: ' + CAST(ERROR_LINE() as VARCHAR(20))
 			+  ' - ' + coalesce(@ErrorMessage , '') + ' Err #: ' + cast(ERROR_NUMBER() as varchar(8));

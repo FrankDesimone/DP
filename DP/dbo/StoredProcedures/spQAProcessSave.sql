@@ -156,7 +156,7 @@ BEGIN TRAN
 		
 	WHILE @@FETCH_STATUS = 0 
 	BEGIN
-		exec QAProcessDataSave
+		exec spQAProcessDataSave
 			@QAProcessID = @QAProcessID
 			,@TestLine = @TestLine
 			,@PSI = @PSI
