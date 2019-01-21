@@ -149,7 +149,7 @@ BEGIN TRAN
 		select d.TestLine
 			,d.PSI
 			,d.SpaceVelocity
-		from @d;
+		from @d as d;
 
 	Open d;
 	Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
