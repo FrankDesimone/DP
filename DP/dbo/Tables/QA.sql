@@ -11,6 +11,8 @@
     [USignalReceived] BIT NOT NULL DEFAULT 0, 
     [ECDPinDropDepth] BIT NOT NULL DEFAULT 0, 
     [CleanChannels] REAL NULL, 
+	[TargetMaxSpaceVelocity] FLOAT,
+	[MaxHertz] FLOAT,
 	[DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [FK_QA_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID]), 
     CONSTRAINT [FK_QA_QAAshOnFace] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAAshOnFace]([QAAshOnFaceID]),

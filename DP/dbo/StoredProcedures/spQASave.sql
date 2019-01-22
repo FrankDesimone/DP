@@ -9,6 +9,8 @@
     ,@USignalReceived as BIT = 0 
     ,@ECDPinDropDepth as BIT = 0
     ,@CleanChannels as  FLOAT  = null
+	,@TargetMaxSpaceVelocity as FLOAT = null
+	,@MaxHertz as FLOAT = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -38,13 +40,15 @@ BEGIN TRAN
 		,qa.USignalReceived = @USignalReceived
 		,qa.ECDPinDropDepth = @ECDPinDropDepth
 		,qa.CleanChannels = @CleanChannels
+		,qa.TargetMaxSpaceVelocity = @TargetMaxSpaceVelocity
+		,qa.MaxHertz = @MaxHertz
 	from QA as qa
 	where qa.WorkOrderID = @WorkOrderID;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels);
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
 	end
 
 	select @QualityControlID = qc.QAID

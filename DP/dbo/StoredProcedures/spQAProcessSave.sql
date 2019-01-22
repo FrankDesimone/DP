@@ -7,9 +7,6 @@
     ,@InletCell06 as FLOAT = NULL
     ,@InletCell09 as FLOAT = NULL
     ,@InletCellCenter as FLOAT = NULL
-	,@TargetVelocity as FLOAT = null
-	,@MaxSpaceVelocity as FLOAT = null
-	,@MaxHertz as FLOAT = null
 	,@AirTemp as FLOAT = null
 	,@BarometricPressure as FLOAT = null
 	,@BackPressure as FLOAT = null
@@ -27,7 +24,6 @@
     ,@PSI9 as FLOAT = null
     ,@PSI10 as FLOAT = null
     ,@PSI11 as FLOAT = null
-    ,@PSI12 as FLOAT = null
     ,@SV1 as FLOAT = null
     ,@SV2 as FLOAT = null
     ,@SV3 as FLOAT = null
@@ -39,7 +35,6 @@
     ,@SV9 as FLOAT = null
     ,@SV10 as FLOAT = null
     ,@SV11 as FLOAT = null
-    ,@SV12 as FLOAT = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -75,9 +70,6 @@ BEGIN TRAN
 		,qap.InletCell06 = @InletCell06
 		,qap.InletCell09 = @InletCell09
 		,qap.InletCellCenter = @InletCellCenter
-		,qap.TargetVelocity = @TargetVelocity
-		,qap.MaxSpaceVelocity = @MaxSpaceVelocity
-		,qap.MaxHertz = @MaxHertz
 		,qap.AirTemp = @AirTemp
 		,qap.BarometricPressure = @BarometricPressure
 		,qap.BackPressure = @BackPressure
@@ -98,9 +90,6 @@ BEGIN TRAN
 			,InletCell06
 			,InletCell09
 			,InletCellCenter
-			,TargetVelocity
-			,MaxSpaceVelocity
-			,MaxHertz
 			,AirTemp
 			,BarometricPressure
 			,BackPressure
@@ -117,9 +106,6 @@ BEGIN TRAN
 			,@InletCell06
 			,@InletCell09
 			,@InletCellCenter
-			,@TargetVelocity
-			,@MaxSpaceVelocity
-			,@MaxHertz
 			,@AirTemp
 			,@BarometricPressure
 			,@BackPressure
@@ -142,8 +128,7 @@ BEGIN TRAN
 		,(8, @PSI8, @SV8)
 		,(9, @PSI9, @SV9)
 		,(10, @PSI10, @SV10)
-		,(11, @PSI11, @SV11)
-		,(12, @PSI12, @SV12);
+		,(11, @PSI11, @SV11);
 
 	Declare d Cursor FAST_FORWARD FOR 
 		select d.TestLine

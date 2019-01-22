@@ -371,4 +371,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="QAID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ed8ca96e-57c7-4972-8254-70227f048fab" ChangeDateTime="01/22/2019 20:54:32">
+    <Property Name="ElementName" Value="[dbo].[QAProcess].[MaxSpaceVelocity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAProcess]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[TargetMaxSpaceVelocity]" />
+  </Operation>
 </Operations>

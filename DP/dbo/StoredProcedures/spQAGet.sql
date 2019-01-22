@@ -9,13 +9,7 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
-	;with qap0 as
-	(
-		select qap.QAID
-			,qap.ECDMass
-		from QAProcess as qap
-		where qap.ProcessID = 0
-	)
+
 	select qa.QASootOnFaceID
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
@@ -25,25 +19,13 @@ BEGIN TRY
 		,qa.USignalReceived
 		,qa.ECDPinDropDepth
 		,qa.CleanChannels
-		,p.Process
-	    ,qap.ECDMass as P0ECDMass
-	    ,qap.ECDMass as P1ECDMass
-	    ,qap.ECDMass as P2ECDMass
-		,qap.InletCell12		as P0InletCell12 
-		,qap.InletCell03		as P0InletCell03 
-		,qap.InletCell06		as P0InletCell06 
-		,qap.InletCell09		as P0InletCell09 
-		,qap.InletCellCenter	as P0InletCellCenter
-		,qap.InletCell12		as P1InletCell12 
-		,qap.InletCell03		as P1InletCell03 
-		,qap.InletCell06		as P1InletCell06 
-		,qap.InletCell09		as P1InletCell09 
-		,qap.InletCellCenter	as P1InletCellCenter
-		,(case when coalesce(qap.ProcessID, 0) = 0 then null else (qap0.ECDMass - qap.ECDMass) end) as WeightLoss 
+		,qa.TargetMaxSpaceVelocity
+        ,qa.MaxHertz
+		,e.SubstrateDiameter
+		,e.SubstrateLength
 	from QA as qa
-		left outer join QAProcess as qap on qa.QAID = qap.QAID
-		left outer join Process as p on qap.ProcessID = p.ProcessID
-		left outer join qap0 on qa.QAID = qap0.QAID
+	inner join WorkOrder as w on  qa.WorkOrderID = w.WorkOrderID
+	inner join ECD as e on w.ECDID = e.ECDID
 	where qa.WorkOrderID = @WorkOrderID;
 	
 END TRY

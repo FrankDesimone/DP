@@ -24,7 +24,6 @@ BEGIN TRY
 			,sum(case when qapd.TestLine = 9 then qapd.PSI else 0 end) as PSI9
 			,sum(case when qapd.TestLine = 10 then qapd.PSI else 0 end) as PSI10
 			,sum(case when qapd.TestLine = 11 then qapd.PSI else 0 end) as PSI11
-			,sum(case when qapd.TestLine = 12 then qapd.PSI else 0 end) as PSI12
 			,sum(case when qapd.TestLine = 1 then qapd.SpaceVelocity else 0 end) as SV1
 			,sum(case when qapd.TestLine = 2 then qapd.SpaceVelocity else 0 end) as SV2
 			,sum(case when qapd.TestLine = 3 then qapd.SpaceVelocity else 0 end) as SV3
@@ -36,28 +35,24 @@ BEGIN TRY
 			,sum(case when qapd.TestLine = 9 then qapd.SpaceVelocity else 0 end) as SV9
 			,sum(case when qapd.TestLine = 10 then qapd.SpaceVelocity else 0 end) as SV10
 			,sum(case when qapd.TestLine = 11 then qapd.SpaceVelocity else 0 end) as SV11
-			,sum(case when qapd.TestLine = 12 then qapd.SpaceVelocity else 0 end) as SV12
 		from QAProcessData as qapd
 		group by qapd.QAProcessID
 	)
 	select
 		w.WorkOrderID
 		,@ProcessID as ProcessID
-        ,qap.MaxSpaceVelocity
-        ,qap.MaxHertz
-        ,ecd.SubstrateDiameter as Diameter
-        ,ecd.SubstrateLength as [Length]
         ,qap.AirTemp 
-        ,qap.BarometricPressure as BaroPress
-        ,qap.BackPressure as BackPress
+        ,qap.BarometricPressure 
+        ,qap.BackPressure
+		,qap.ECDMass
         ,qap.InletCell03
 		,qap.InletCell06
 		,qap.InletCell09
 		,qap.InletCell12
 		,qap.InletCellCenter
-		,qap.Coefficient_a as a
-        ,qap.Coefficient_b as b
-        ,qap.Coefficient_c as c
+		,qap.Coefficient_a 
+        ,qap.Coefficient_b 
+        ,qap.Coefficient_c 
         ,qapd.PSI1
         ,qapd.PSI2
         ,qapd.PSI3
@@ -68,8 +63,7 @@ BEGIN TRY
         ,qapd.PSI8
         ,qapd.PSI9
         ,qapd.PSI10
-        ,qapd.SV11
-        ,qapd.SV12
+        ,qapd.PSI11
         ,qapd.SV1
         ,qapd.SV2
         ,qapd.SV3
@@ -81,13 +75,12 @@ BEGIN TRY
         ,qapd.SV9
         ,qapd.SV10
         ,qapd.SV11
-        ,qapd.SV12
 	from WorkOrder as w
 		left outer join QA as qa on w.WorkOrderID = qa.WorkOrderID
 		left outer join QAProcess as qap on qa.QAID = qap.QAID
 		left outer join qapd on qap.QAProcessID = qapd.QAProcessID
-		left outer join ECD as ecd on w.ECDID = ecd.ECDID
-	where w.WorkOrderID = @WorkOrderID;
+	where w.WorkOrderID = @WorkOrderID
+		and qap.ProcessID = @ProcessID;
 	
 END TRY
 
