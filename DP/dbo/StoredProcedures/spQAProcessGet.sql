@@ -41,43 +41,43 @@ BEGIN TRY
 	select
 		w.WorkOrderID
 		,@ProcessID as ProcessID
-        ,qap.AirTemp 
-        ,qap.BarometricPressure 
-        ,qap.BackPressure
+		,qap.AirTemp 
+		,qap.BarometricPressure 
+		,qap.BackPressure
 		,qap.ECDMass
-        ,qap.InletCell03
+		,qap.InletCell03
 		,qap.InletCell06
 		,qap.InletCell09
 		,qap.InletCell12
 		,qap.InletCellCenter
 		,qap.Coefficient_a 
-        ,qap.Coefficient_b 
-        ,qap.Coefficient_c 
-        ,qapd.PSI1
-        ,qapd.PSI2
-        ,qapd.PSI3
-        ,qapd.PSI4
-        ,qapd.PSI5
-        ,qapd.PSI6
-        ,qapd.PSI7
-        ,qapd.PSI8
-        ,qapd.PSI9
-        ,qapd.PSI10
-        ,qapd.PSI11
-        ,qapd.SV1
-        ,qapd.SV2
-        ,qapd.SV3
-        ,qapd.SV4
-        ,qapd.SV5
-        ,qapd.SV6
-        ,qapd.SV7
-        ,qapd.SV8
-        ,qapd.SV9
-        ,qapd.SV10
-        ,qapd.SV11
+		,qap.Coefficient_b 
+		,qap.Coefficient_c 
+		,qapd.PSI1
+		,qapd.PSI2
+		,qapd.PSI3
+		,qapd.PSI4
+		,qapd.PSI5
+		,qapd.PSI6
+		,qapd.PSI7
+		,qapd.PSI8
+		,qapd.PSI9
+		,qapd.PSI10
+		,qapd.PSI11
+		,qapd.SV1
+		,qapd.SV2
+		,qapd.SV3
+		,qapd.SV4
+		,qapd.SV5
+		,qapd.SV6
+		,qapd.SV7
+		,qapd.SV8
+		,qapd.SV9
+		,qapd.SV10
+		,qapd.SV11
 	from WorkOrder as w
-		left outer join QA as qa on w.WorkOrderID = qa.WorkOrderID
-		left outer join QAProcess as qap on qa.QAID = qap.QAID
+		inner join QA as qa on w.WorkOrderID = qa.WorkOrderID
+		inner join QAProcess as qap on qa.QAID = qap.QAID
 		left outer join qapd on qap.QAProcessID = qapd.QAProcessID
 	where w.WorkOrderID = @WorkOrderID
 		and qap.ProcessID = @ProcessID;
