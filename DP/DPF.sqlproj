@@ -120,5 +120,6 @@
     <None Include="dbo\Scripts\spExceptionLogNoTransaction.sql" />
     <None Include="dbo\Scripts\spExceptionLogTransaction.sql" />
     <None Include="dbo\Scripts\QAControls.sql" />
+    <None Include="Excel\Report.xlsm" />
   </ItemGroup>
 </Project>
