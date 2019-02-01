@@ -16,7 +16,6 @@ BEGIN TRY
 		w.[WorkOrderID]
 		,W.ContactsID
 		,w.[WorkOrderStatusID]
-
 		,w.[PreventMaintAshCleanInter]
 		,w.[HighSootCEL]
 		,w.[EngineFailureFluidsInExhaust]
@@ -29,7 +28,6 @@ BEGIN TRY
 		,w.[VehicleTotalMileage]
 		,w.[VehicleTotalHours]
 		,w.[DateAdded]
-		
 		, c.[CompanyID]
 		,c.[CompanyName]
 		,c.[BillingAddress1]
@@ -40,7 +38,6 @@ BEGIN TRY
 		,cs.[State]
 		,c.[ContactsID]
 		,c.[Active]
-		
 		,cl.[CompanyLocationsID]
 		,cl.[Location]
 		,cl.[Address1]
@@ -49,7 +46,6 @@ BEGIN TRY
 		,cl.[Zip]
 		,cl.[StateID]
 		,s.[State]
-
 		, v.[VehicleID]
 		,v.[CompanyID]
 		,v.[SerialNumber]
@@ -58,9 +54,6 @@ BEGIN TRY
 		,vm.Manufacturer
 		,v.[Model]
 		,v.[Year]
-
-
-
 		,e.[EngineID]
 		,e.[CompanyID]
 		,e.[ManufacturerID]
@@ -68,8 +61,6 @@ BEGIN TRY
 		,e.[SerialNumber]
 		,e.[Model]
 		,e.[Year]
-
-
 		, ecd.[ECDID]
 		,ecd.[CompanyID]
 		,ecd.[SubstrateTypeID]
@@ -86,8 +77,6 @@ BEGIN TRY
 		,ecd.[SubstrateDiameter]
 		,ecd.[OuterLength]
 		,ecd.[SubstrateLength]
-
-
 	FROM [dbo].[WorkOrder] as w
 		inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
 		inner join [State] as s on cl.StateID = s.StateID
@@ -95,15 +84,12 @@ BEGIN TRY
 		inner join [State] as cs on c.StateID = cs.StateID
 		inner join [dbo].[Vehicle] as v on w.VehicleID = v.VehicleID
 		inner join [Manufacturer] as vm on v.ManufacturerID = vm.ManufacturerID
-		left join [dbo].[Engine] as e on w.EngineID = e.EngineID
-		left join [Manufacturer] as em on e.ManufacturerID = em.ManufacturerID
-		inner join [dbo].[ECD] as ecd on w.ECDID	= ecd.ECDID
+		inner join [dbo].[ECD] as ecd on w.ECDID = ecd.ECDID
 		inner join [Manufacturer] as ecdm on ecd.ManfacturerID = ecdm.ManufacturerID
 		inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
-
-
-
+		left join [dbo].[Engine] as e on w.EngineID = e.EngineID
+		left join [Manufacturer] as em on e.ManufacturerID = em.ManufacturerID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY
