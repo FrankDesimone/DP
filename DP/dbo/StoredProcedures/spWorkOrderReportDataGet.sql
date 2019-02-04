@@ -77,6 +77,17 @@ BEGIN TRY
 		,ecd.[SubstrateDiameter]
 		,ecd.[OuterLength]
 		,ecd.[SubstrateLength]
+		,qa.QASootOnFaceID
+		,qa.QAAshOnFaceID
+		,qa.QAAshColorID
+		,qa.QASubstrateID
+		,qa.Coolant
+		,qa.RedAsh
+		,qa.USignalReceived
+		,qa.ECDPinDropDepth
+		,qa.CleanChannels
+		,qa.TargetMaxSpaceVelocity
+        ,qa.MaxHertz
 	FROM [dbo].[WorkOrder] as w
 		inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
 		inner join [State] as s on cl.StateID = s.StateID
@@ -90,6 +101,7 @@ BEGIN TRY
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
 		left join [dbo].[Engine] as e on w.EngineID = e.EngineID
 		left join [Manufacturer] as em on e.ManufacturerID = em.ManufacturerID
+		left join [QA] as  qa on   w.WorkOrderID = qa.WorkOrderID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY
