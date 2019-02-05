@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo as.[spQAProcessSave]
+﻿CREATE PROCEDURE [dbo].[spQAProcessSave]
 	@WorkOrderID as int
     ,@ProcessID as int 
     ,@ECDMass as FLOAT = NULL

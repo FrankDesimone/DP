@@ -10,7 +10,10 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 
-	select qa.QASootOnFaceID
+	select 
+		e.[ECDID]
+		,e.SerialNumber + ' / ' + e.[PartNumber] as ECD	
+		,qa.QASootOnFaceID
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
 		,qa.QASubstrateID
@@ -23,10 +26,10 @@ BEGIN TRY
         ,qa.MaxHertz
 		,e.SubstrateDiameter
 		,e.SubstrateLength
-	from QA as qa
-	inner join WorkOrder as w on  qa.WorkOrderID = w.WorkOrderID
-	inner join ECD as e on w.ECDID = e.ECDID
-	where qa.WorkOrderID = @WorkOrderID;
+	from WorkOrder as w
+		inner join ECD as e on w.ECDID = e.ECDID
+		left join QA as qa on  w.WorkOrderID = qa.WorkOrderID	
+	where w.WorkOrderID = @WorkOrderID;
 	
 END TRY
 
