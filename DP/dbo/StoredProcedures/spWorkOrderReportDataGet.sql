@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderReportDataGet]
-	@WorkOrderID     INT  
+	@WorkOrderID as  INT  
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -87,7 +87,7 @@ BEGIN TRY
 		,qa.ECDPinDropDepth
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
-        ,qa.MaxHertz
+		,qa.MaxHertz
 	FROM [dbo].[WorkOrder] as w
 		inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
 		inner join [State] as s on cl.StateID = s.StateID
