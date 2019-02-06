@@ -1,12 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[spQAProcessSave]
 	@WorkOrderID as int
-    ,@ProcessID as int 
-    ,@ECDMass as FLOAT = NULL
-    ,@InletCell12 as FLOAT = NULL
-    ,@InletCell03 as FLOAT = NULL
-    ,@InletCell06 as FLOAT = NULL
-    ,@InletCell09 as FLOAT = NULL
-    ,@InletCellCenter as FLOAT = NULL
+	,@ProcessID as int 
+	,@ECDMass as FLOAT = NULL
+	,@InletCell12 as FLOAT = NULL
+	,@InletCell03 as FLOAT = NULL
+	,@InletCell06 as FLOAT = NULL
+	,@InletCell09 as FLOAT = NULL
+	,@InletCellCenter as FLOAT = NULL
 	,@AirTemp as FLOAT = null
 	,@BarometricPressure as FLOAT = null
 	,@BackPressure as FLOAT = null
@@ -14,27 +14,27 @@
 	,@Coefficient_b as FLOAT = null
 	,@Coefficient_c as FLOAT = null
 	,@PSI1 as FLOAT = null
-    ,@PSI2 as FLOAT = null
-    ,@PSI3 as FLOAT = null
-    ,@PSI4 as FLOAT = null
-    ,@PSI5 as FLOAT = null
-    ,@PSI6 as FLOAT = null
-    ,@PSI7 as FLOAT = null
-    ,@PSI8 as FLOAT = null
-    ,@PSI9 as FLOAT = null
-    ,@PSI10 as FLOAT = null
-    ,@PSI11 as FLOAT = null
-    ,@SV1 as FLOAT = null
-    ,@SV2 as FLOAT = null
-    ,@SV3 as FLOAT = null
-    ,@SV4 as FLOAT = null
-    ,@SV5 as FLOAT = null
-    ,@SV6 as FLOAT = null
-    ,@SV7 as FLOAT = null
-    ,@SV8 as FLOAT = null
-    ,@SV9 as FLOAT = null
-    ,@SV10 as FLOAT = null
-    ,@SV11 as FLOAT = null
+	,@PSI2 as FLOAT = null
+	,@PSI3 as FLOAT = null
+	,@PSI4 as FLOAT = null
+	,@PSI5 as FLOAT = null
+	,@PSI6 as FLOAT = null
+	,@PSI7 as FLOAT = null
+	,@PSI8 as FLOAT = null
+	,@PSI9 as FLOAT = null
+	,@PSI10 as FLOAT = null
+	,@PSI11 as FLOAT = null
+	,@SV1 as FLOAT = null
+	,@SV2 as FLOAT = null
+	,@SV3 as FLOAT = null
+	,@SV4 as FLOAT = null
+	,@SV5 as FLOAT = null
+	,@SV6 as FLOAT = null
+	,@SV7 as FLOAT = null
+	,@SV8 as FLOAT = null
+	,@SV9 as FLOAT = null
+	,@SV10 as FLOAT = null
+	,@SV11 as FLOAT = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -150,8 +150,8 @@ BEGIN TRAN
 		Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
 	end
 
-	CLOSE wo;
-	DEALLOCATE wo;
+	CLOSE d;
+	DEALLOCATE d;
 	
 ExitProc:
 
