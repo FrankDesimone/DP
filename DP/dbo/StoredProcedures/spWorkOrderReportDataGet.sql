@@ -13,70 +13,66 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 	SELECT  
-		w.[WorkOrderID]
-		,W.ContactsID
-		,w.[WorkOrderStatusID]
-		,w.[PreventMaintAshCleanInter]
-		,w.[HighSootCEL]
-		,w.[EngineFailureFluidsInExhaust]
-		,w.[CleaningReasonID]
-		,w.[RoadHighway]
-		,w.[StartStop]
-		,w.[HighIdle]
-		,w.[DrivingTypeID]
-		,w.[FirstCleaning]
-		,w.[VehicleTotalMileage]
-		,w.[VehicleTotalHours]
-		,w.[DateAdded]
-		, c.[CompanyID]
-		,c.[CompanyName]
-		,c.[BillingAddress1]
-		,c.[BillingAddress2]
-		,c.[BillingCity]
-		,c.[BillingZip]
-		,c.[StateID]
+		w.WorkOrderID
+		,(con.Firstname + ' ' + con.lastName) as Contact
+		,ws.WorkOrderStatus
+		,w.PreventMaintAshCleanInter
+		,w.HighSootCEL
+		,w.EngineFailureFluidsInExhaust
+		,clean.CleaningReason
+		,w.RoadHighway
+		,w.StartStop
+		,w.HighIdle
+		,drive.DrivingType
+		,w.FirstCleaning
+		,w.VehicleTotalMileage
+		,w.VehicleTotalHours
+		,w.DateAdded
+		,c.CompanyName
+		,c.BillingAddress1
+		,c.BillingAddress2
+		,c.BillingCity
+		,c.BillingZip
+		,c.StateID
 		,cs.[State]
-		,c.[ContactsID]
-		,c.[Active]
-		,cl.[CompanyLocationsID]
 		,cl.[Location]
-		,cl.[Address1]
-		,cl.[Address2]
-		,cl.[City]
-		,cl.[Zip]
-		,cl.[StateID]
+		,cl.Address1
+		,cl.Address2
+		,cl.City
+		,cl.Zip
+		,cl.StateID
 		,s.[State]
-		, v.[VehicleID]
-		,v.[CompanyID]
-		,v.[SerialNumber]
-		,v.[AssetNumber]
-		,v.[ManufacturerID]
+		, v.VehicleID
+		,v.CompanyID
+		,v.SerialNumber
+		,v.AssetNumber
+		,v.ManufacturerID
 		,vm.Manufacturer
-		,v.[Model]
+		,v.Model
 		,v.[Year]
-		,e.[EngineID]
-		,e.[CompanyID]
-		,e.[ManufacturerID]
-		,em.[Manufacturer]
-		,e.[SerialNumber]
-		,e.[Model]
-		,e.[Year]
-		, ecd.[ECDID]
-		,ecd.[CompanyID]
-		,ecd.[SubstrateTypeID]
+		,e.EngineID
+		,e.CompanyID
+		,e.ManufacturerID
+		,em.Manufacturer
+		,e.SerialNumber
+		,e.Model
+		,e.Year
+		, ecd.ECDID
+		,ecd.CompanyID
+		,ecd.SubstrateTypeID
 		,st.SubstrateType
-		,ecd.[ManfacturerID]
+		,ecd.ManfacturerID
 		,ecdm.Manufacturer
-		,ecd.[DeviceTypeID]
+		,ecd.DeviceTypeID
 		,dt.DeviceType
-		,ecd.[TimesCleaned]
-		,ecd.[PartNumber]
-		,ecd.[SerialNumber]
-		,ecd.[OtherNumber]
-		,ecd.[OuterDiameter]
-		,ecd.[SubstrateDiameter]
-		,ecd.[OuterLength]
-		,ecd.[SubstrateLength]
+		,ecd.TimesCleaned
+		,ecd.PartNumber
+		,ecd.SerialNumber
+		,ecd.OtherNumber
+		,ecd.OuterDiameter
+		,ecd.SubstrateDiameter
+		,ecd.OuterLength
+		,ecd.SubstrateLength
 		,qa.QASootOnFaceID
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
@@ -88,20 +84,24 @@ BEGIN TRY
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
-	FROM [dbo].[WorkOrder] as w
-		inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
+	FROM WorkOrder as w
+		inner join CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
 		inner join [State] as s on cl.StateID = s.StateID
-		inner join [Company] as c on cl.CompanyID = c.CompanyID
+		inner join Company as c on cl.CompanyID = c.CompanyID
 		inner join [State] as cs on c.StateID = cs.StateID
-		inner join [dbo].[Vehicle] as v on w.VehicleID = v.VehicleID
-		inner join [Manufacturer] as vm on v.ManufacturerID = vm.ManufacturerID
-		inner join [dbo].[ECD] as ecd on w.ECDID = ecd.ECDID
-		inner join [Manufacturer] as ecdm on ecd.ManfacturerID = ecdm.ManufacturerID
+		inner join Vehicle as v on w.VehicleID = v.VehicleID
+		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
+		inner join ECD as ecd on w.ECDID = ecd.ECDID
+		inner join Manufacturer as ecdm on ecd.ManfacturerID = ecdm.ManufacturerID
 		inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
-		left join [dbo].[Engine] as e on w.EngineID = e.EngineID
-		left join [Manufacturer] as em on e.ManufacturerID = em.ManufacturerID
-		left join [QA] as  qa on   w.WorkOrderID = qa.WorkOrderID
+		inner join WorkOrderStatus as ws on w.WorkOrderStatusID = ws.WorkOrderStatusID
+		left join Engine as e on w.EngineID = e.EngineID
+		left join Manufacturer as em on e.ManufacturerID = em.ManufacturerID
+		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID
+		left outer join Contacts as con on w.ContactsID = Con.ContactsID
+		left outer join CleaningReason as clean on w.CleaningReasonID = clean.CleaningReasonID
+		left outer join DrivingType as drive on w.DrivingTypeID = drive.DrivingTypeID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY
