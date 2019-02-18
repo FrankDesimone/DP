@@ -28,11 +28,18 @@ BEGIN TRY
 		,w.VehicleTotalMileage
 		,w.VehicleTotalHours
 		,w.DateAdded
+		,bc.CompanyName as BillingCompanyName
+		,bc.BillingAddress1
+		,bc.BillingAddress2
+		,bc.BillingCity
+		,bc.BillingZip
+		,bc.StateID as BillingStateID
+		,bcs.[State] as BillingState
 		,c.CompanyName
-		,c.BillingAddress1
-		,c.BillingAddress2
-		,c.BillingCity
-		,c.BillingZip
+		,c.BillingAddress1 as Address1
+		,c.BillingAddress2 as Address2
+		,c.BillingCity	as City
+		,c.BillingZip as Zip
 		,c.StateID
 		,cs.[State]
 		,cl.[Location]
@@ -89,6 +96,8 @@ BEGIN TRY
 		inner join [State] as s on cl.StateID = s.StateID
 		inner join Company as c on cl.CompanyID = c.CompanyID
 		inner join [State] as cs on c.StateID = cs.StateID
+		inner join Company as bc on w.BillingCompanyID = bc.CompanyID
+		inner join [State] as bcs on bc.StateID = bcs.StateID
 		inner join Vehicle as v on w.VehicleID = v.VehicleID
 		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
 		inner join ECD as ecd on w.ECDID = ecd.ECDID

@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
 	@WorkOrderID      INT		 
     ,@CompanyLocationID  INT
+	,@BillingCompanyID  INT =NULL
 	,@ContactsID INT = NULL
 	,@WorkOrderStatusID  INT 
 	,@VehicleID  INT = NULL 
@@ -31,9 +32,16 @@ BEGIN TRY
 	set @ErrorMsg = ''
 	set @NewWorkOrderID = NULL;
 
+	IF @BillingCompanyID IS NULL
+	BEGIN
+		SET	 	@BillingCompanyID = ( select cl.CompanyID FROM CompanyLocations as cl where cl.CompanyLocationsID = @CompanyLocationID);
+	END
+
+
 	UPDATE w
 	set 
 		w.[CompanyLocationID]				  = @CompanyLocationID
+		,w.[BillingCompanyID]				=@BillingCompanyID
 		,w.[ContactsID]								= @ContactsID
 		,w.[WorkOrderStatusID]				  = @WorkOrderStatusID
 		,w.[VehicleID]						  = @VehicleID
@@ -59,6 +67,7 @@ BEGIN TRY
 
 		INSERT INTO [dbo].[WorkOrder]
 				   ([CompanyLocationID]
+				   ,[BillingCompanyID]
 				   ,[ContactsID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
@@ -77,6 +86,7 @@ BEGIN TRY
 				   ,[VehicleTotalHours])
 			 VALUES
 				   ( @CompanyLocationID
+				   ,@BillingCompanyID
 				   ,@ContactsID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID

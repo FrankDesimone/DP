@@ -14,6 +14,7 @@ BEGIN TRY
 
 SELECT  w.[WorkOrderID]
 		,cl.[CompanyID]
+		,w.[BillingCompanyID]
 		,w.[CompanyLocationID]
 		,W.ContactsID
 		,w.[WorkOrderStatusID]

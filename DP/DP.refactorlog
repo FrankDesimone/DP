@@ -378,4 +378,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[TargetMaxSpaceVelocity]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="2420f769-5fe8-41dc-bfd5-c1ba4d7905be" ChangeDateTime="02/18/2019 19:52:37">
+    <Property Name="ElementName" Value="[dbo].[Company].[BContactsID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Company]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BillingContactsID" />
+  </Operation>
 </Operations>
