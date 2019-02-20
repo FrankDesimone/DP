@@ -1,12 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[spCompanyUpsert]
 	@CompanyID      INT          = NULL 
-    ,@CompanyName     NVARCHAR (50) 
-    ,@BillingAddress1 NVARCHAR (50) 
-    ,@BillingAddress2 NVARCHAR (50)
+	,@CompanyName     NVARCHAR (50) 
+	,@BillingAddress1 NVARCHAR (50) 
+	,@BillingAddress2 NVARCHAR (50)
 	,@BillingCity     NVARCHAR (50) 
-    ,@BillingZip     NVARCHAR (10) 
+	,@BillingZip     NVARCHAR (10) 
 	,@StateID		INT
-    ,@Active         BIT          = 1 
+	,@Active         BIT          = 1 
 	,@ContactsID	INT= NULL
 	,@NewCompanyID      INT          = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
@@ -21,39 +21,40 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = ''
 	set @NewCompanyID = NULL;
+	set @ContactsID = (case when @ContactsID = 0 then null else @ContactsID end);
 
 	UPDATE c
 	set c.CompanyName =@CompanyName
-        ,c.BillingAddress1 = @BillingAddress1
-        ,c.BillingCity =@BillingCity
-        ,c.BillingZip =@BillingZip
-        ,c.BillingAddress2 =@BillingAddress2
-        ,c.Active =@Active
-        ,c.StateID =@StateID
-        ,c.ContactsID = @ContactsID
+		,c.BillingAddress1 = @BillingAddress1
+		,c.BillingCity =@BillingCity
+		,c.BillingZip =@BillingZip
+		,c.BillingAddress2 =@BillingAddress2
+		,c.Active =@Active
+		,c.StateID =@StateID
+		,c.ContactsID = @ContactsID
 	from Company c
 	WHERE c.CompanyID = @CompanyID;
 
 	if @@ROWCOUNT = 0
 	begin
 		INSERT INTO [dbo].[Company]
-           ([CompanyName]
-           ,[BillingAddress1]
-           ,[BillingCity]
-           ,[BillingZip]
-           ,[BillingAddress2]
-           ,[Active]
-           ,[StateID]
-           ,[ContactsID])
-	    VALUES
-           (@CompanyName
-           ,@BillingAddress1
-           ,@BillingCity 
-           ,@BillingZip 
-           ,@BillingAddress2 
-           ,@Active 
-           ,@StateID 
-           ,@ContactsID);
+		   ([CompanyName]
+		   ,[BillingAddress1]
+		   ,[BillingCity]
+		   ,[BillingZip]
+		   ,[BillingAddress2]
+		   ,[Active]
+		   ,[StateID]
+		   ,[ContactsID])
+		VALUES
+		   (@CompanyName
+		   ,@BillingAddress1
+		   ,@BillingCity 
+		   ,@BillingZip 
+		   ,@BillingAddress2 
+		   ,@Active 
+		   ,@StateID 
+		   ,@ContactsID);
 	
 		SET @CompanyID	=  SCOPE_IDENTITY();
 	END
