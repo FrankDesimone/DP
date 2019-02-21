@@ -21,8 +21,7 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = ''
 	set @NewCompanyID = NULL;
-	set @ContactsID = (case when @ContactsID = 0 then null else @ContactsID end);
-
+	
 	UPDATE c
 	set c.CompanyName =@CompanyName
 		,c.BillingAddress1 = @BillingAddress1
