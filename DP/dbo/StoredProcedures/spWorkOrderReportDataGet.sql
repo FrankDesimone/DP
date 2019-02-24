@@ -27,7 +27,7 @@ BEGIN TRY
 		,w.FirstCleaning
 		,w.VehicleTotalMileage
 		,w.VehicleTotalHours
-		,w.DateAdded
+		,w.DateAdded as WODate
 		,bc.CompanyName as BillingCompanyName
 		,bc.BillingAddress1
 		,bc.BillingAddress2
@@ -53,19 +53,15 @@ BEGIN TRY
 		,v.CompanyID
 		,v.SerialNumber
 		,v.AssetNumber
-		,v.ManufacturerID
 		,vm.Manufacturer
 		,v.Model
 		,v.[Year]
-		,e.EngineID
 		,e.CompanyID
-		,e.ManufacturerID
 		,em.Manufacturer
 		,e.SerialNumber
 		,e.Model
 		,e.Year
 		, ecd.ECDID
-		,ecd.CompanyID
 		,ecd.SubstrateTypeID
 		,st.SubstrateType
 		,ecd.ManfacturerID
