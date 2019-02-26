@@ -48,7 +48,7 @@ BEGIN TRY
 		,cl.City
 		,cl.Zip
 		,cl.StateID
-		,s.[State]
+		,st.[State]
 		, v.VehicleID
 		,v.CompanyID
 		,v.SerialNumber
@@ -88,11 +88,12 @@ BEGIN TRY
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
 	FROM WorkOrder as w
+		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
-		inner join [State] as s on cl.StateID = s.StateID
+		inner join [State] as st on cl.StateID = st.StateID
 		inner join Company as c on cl.CompanyID = c.CompanyID
 		inner join [State] as cs on c.StateID = cs.StateID
-		inner join Company as bc on w.BillingCompanyID = bc.CompanyID
+		inner join Company as bc on s.BillingCompanyID = bc.CompanyID
 		inner join [State] as bcs on bc.StateID = bcs.StateID
 		inner join Vehicle as v on w.VehicleID = v.VehicleID
 		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
