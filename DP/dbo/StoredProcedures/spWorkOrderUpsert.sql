@@ -67,7 +67,6 @@ BEGIN TRY
 
 		INSERT INTO [dbo].[WorkOrder]
 				   ([CompanyLocationID]
-				   --,[BillingCompanyID]
 				   ,[ContactsID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
@@ -86,7 +85,6 @@ BEGIN TRY
 				   ,[VehicleTotalHours])
 			 VALUES
 				   ( @CompanyLocationID
-				   ,@BillingCompanyID
 				   ,@ContactsID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID
