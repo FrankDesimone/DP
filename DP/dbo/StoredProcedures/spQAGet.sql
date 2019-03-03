@@ -17,10 +17,15 @@ BEGIN TRY
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
 		,qa.QASubstrateID
+		,qa.QASubstrateOveralConditionID
 		,qa.Coolant
 		,qa.RedAsh
 		,qa.USignalReceived
 		,qa.ECDPinDropDepth
+		,qa.EngineEGRCoolant
+		,qa.WearCorrosion
+		,qa.FuelOil
+		,qa.ContaminantsOther
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
         ,qa.MaxHertz

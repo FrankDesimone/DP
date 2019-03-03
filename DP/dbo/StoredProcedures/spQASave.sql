@@ -4,10 +4,15 @@
     ,@QAAshOnFaceID as int = null
 	,@QAAshColorID as int = null
     ,@QASubstrateID as int = null
+	,@QASubstrateOveralConditionID as INT = NULL
     ,@Coolant as  BIT = 0
     ,@RedAsh as BIT = 0
     ,@USignalReceived as BIT = 0 
     ,@ECDPinDropDepth as BIT = 0
+    ,@EngineEGRCoolant as BIT = 0
+    ,@WearCorrosion as BIT = 0 
+    ,@FuelOil as BIT = 0 
+    ,@ContaminantsOther as NVARCHAR (255)  =NULL
     ,@CleanChannels as  FLOAT  = null
 	,@TargetMaxSpaceVelocity as FLOAT = null
 	,@MaxHertz as FLOAT = null
@@ -35,10 +40,19 @@ BEGIN TRAN
 		,qa.QAAshOnFaceID = @QAAshOnFaceID
 		,qa.QAAshColorID = @QAAshColorID
 		,qa.QASubstrateID = @QASubstrateID
+		,qa.QASubstrateOveralConditionID =@QASubstrateOveralConditionID
 		,qa.Coolant = @Coolant
 		,qa.RedAsh = @RedAsh
 		,qa.USignalReceived = @USignalReceived
 		,qa.ECDPinDropDepth = @ECDPinDropDepth
+
+		,qa.EngineEGRCoolant = @EngineEGRCoolant
+		,qa.WearCorrosion = @WearCorrosion 
+		,qa.FuelOil = @FuelOil 
+		,qa.ContaminantsOther = @ContaminantsOther 
+
+
+
 		,qa.CleanChannels = @CleanChannels
 		,qa.TargetMaxSpaceVelocity = @TargetMaxSpaceVelocity
 		,qa.MaxHertz = @MaxHertz
@@ -47,11 +61,10 @@ BEGIN TRAN
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth, CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth, @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
-	end
-
-	select @QualityControlID = qc.QAID
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID,QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth,  EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID,@QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth,@EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
+	end																																			   
+	select @QualityControlID = qc.QAID																												
 	from QA as qc
 	where qc.WorkOrderID = @WorkOrderID;
 

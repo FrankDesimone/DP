@@ -288,7 +288,20 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
+	IF @Selector = 'qasubstrateoveralcondition' 
+	BEGIN
+		select Null as QASubstrateOveralConditionID
+			,'Please Select' as QASubstrateOveralCondition
+			,0 as Sortkey
+		union all
+		SELECT  qa.QASubstrateOveralConditionID
+			,qa.QASubstrateOveralCondition
+			,1 as SortKey
+		from QASubstrateOveralCondition as qa
+		order by SortKey, QASubstrateOveralConditionID;
 
+		goto ExitProc;
+	END
 
 ExitProc:
 
