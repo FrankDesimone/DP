@@ -63,6 +63,8 @@
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Functions" />
+    <Folder Include="Excel\Templates" />
+    <Folder Include="Excel\Reports" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\SubstrateType.sql" />
@@ -125,6 +127,6 @@
     <None Include="dbo\Scripts\spExceptionLogNoTransaction.sql" />
     <None Include="dbo\Scripts\spExceptionLogTransaction.sql" />
     <None Include="dbo\Scripts\QAControls.sql" />
-    <None Include="Excel\Report.xlsm" />
+    <None Include="Excel\Templates\Report.xlsm" />
   </ItemGroup>
 </Project>
