@@ -116,7 +116,6 @@
     <Build Include="dbo\StoredProcedures\spQAProcessDataSave.sql" />
     <Build Include="dbo\StoredProcedures\spWorkOrderReportDataGet.sql" />
     <Build Include="dbo\Tables\Sales.sql" />
-    <Build Include="dbo\Functions\fnSalesNo.sql" />
     <Build Include="dbo\Tables\QASubstrateOveralCondition.sql" />
   </ItemGroup>
   <ItemGroup>

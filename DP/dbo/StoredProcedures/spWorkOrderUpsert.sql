@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
-	@WorkOrderID      INT		 
+	@WorkOrderID      INT	
+	,@SalesID int
 	,@CompanyLocationID  INT
 	,@BillingCompanyID  INT =NULL
 	,@ContactsID INT = NULL
@@ -41,7 +42,6 @@ BEGIN TRY
 	UPDATE w
 	set 
 		w.[CompanyLocationID]				  = @CompanyLocationID
---		,w.[BillingCompanyID]				= @BillingCompanyID
 		,w.[ContactsID]								= @ContactsID
 		,w.[WorkOrderStatusID]				  = @WorkOrderStatusID
 		,w.[VehicleID]						  = @VehicleID
@@ -64,9 +64,24 @@ BEGIN TRY
 
 	if @@ROWCOUNT = 0
 	begin
+		if @SalesID is null
+		begin
+			insert into Sales (SalesNo,BillingCompanyID)
+			select cast(getdate() as nvarchar)
+				,@BillingCompanyID;
+
+			set @SalesID = SCOPE_IDENTITY();
+
+			update s set s.SalesNo = c.CompanyInitials + '-' + cast(s.SalesID as nvarchar)
+			from Sales as s
+				inner join Company as c on s.BillingCompanyID = c.CompanyID
+			where s.SalesID = @SalesID;
+		end
+
 
 		INSERT INTO [dbo].[WorkOrder]
 				   ([CompanyLocationID]
+					,[SalesID]
 				   ,[ContactsID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
@@ -85,6 +100,7 @@ BEGIN TRY
 				   ,[VehicleTotalHours])
 			 VALUES
 				   ( @CompanyLocationID
+				   ,@SalesID
 				   ,@ContactsID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID

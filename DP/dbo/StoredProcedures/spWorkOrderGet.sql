@@ -13,6 +13,8 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 SELECT  w.[WorkOrderID]
+		,w.[SalesID]
+		,s.[SalesNo]
 		,cl.[CompanyID]
 		,s.BillingCompanyID
 		,w.[CompanyLocationID]

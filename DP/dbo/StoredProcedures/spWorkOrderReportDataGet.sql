@@ -14,6 +14,7 @@ BEGIN TRY
 
 	SELECT  
 		w.WorkOrderID
+		,s.SalesNo
 		,(con.FirstName + ' ' + con.LastName) as Contact
 		,ws.WorkOrderStatus
 		,w.PreventMaintAshCleanInter

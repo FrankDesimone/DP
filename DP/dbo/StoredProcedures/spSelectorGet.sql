@@ -24,6 +24,26 @@ BEGIN TRY
 			,convert(nvarchar(100),w.WorkOrderID) as WorkOrder
 			,1 as SortKey
 		from WorkOrder as w
+		where w.SalesID = try_cast(@Filter as int);
+		
+		goto ExitProc;
+	END
+
+	IF @Selector ='salesno'  
+	BEGIN
+		select Null as SalesID
+			,'Please Select' as SalesNo
+			,0 as Sortkey
+			,getdate() as DateAdded
+		union all
+		select s.SalesID
+			,s.SalesNo
+			,1 as SortKey
+			,s.DateAdded
+		from Sales as s
+		where s.BillingCompanyID = try_cast(@Filter as int)
+			or @Filter is null
+		order by Sortkey, DateAdded;
 		
 		goto ExitProc;
 	END
