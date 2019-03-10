@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spCompanyUpsert]
 	@CompanyID      INT          = NULL 
-	,@CompanyName     NVARCHAR (50) 
+	,@CompanyName     NVARCHAR (50)
+	,@CompanyInitials	NVARCHAR(10)
 	,@BillingAddress1 NVARCHAR (50) 
 	,@BillingAddress2 NVARCHAR (50)
 	,@BillingCity     NVARCHAR (50) 
@@ -24,6 +25,7 @@ BEGIN TRY
 	
 	UPDATE c
 	set c.CompanyName =@CompanyName
+		,c.CompanyInitials =@CompanyInitials
 		,c.BillingAddress1 = @BillingAddress1
 		,c.BillingCity =@BillingCity
 		,c.BillingZip =@BillingZip
@@ -38,6 +40,7 @@ BEGIN TRY
 	begin
 		INSERT INTO [dbo].[Company]
 		   ([CompanyName]
+		   ,[CompanyInitials]
 		   ,[BillingAddress1]
 		   ,[BillingCity]
 		   ,[BillingZip]
@@ -47,6 +50,7 @@ BEGIN TRY
 		   ,[ContactsID])
 		VALUES
 		   (@CompanyName
+		   ,@CompanyInitials
 		   ,@BillingAddress1
 		   ,@BillingCity 
 		   ,@BillingZip 

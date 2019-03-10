@@ -30,6 +30,7 @@ BEGIN TRY
 		,w.VehicleTotalHours
 		,w.DateAdded as WODate
 		,bc.CompanyName as BillingCompanyName
+		,bc.CompanyInitials
 		,bc.BillingAddress1
 		,bc.BillingAddress2
 		,bc.BillingCity
@@ -37,6 +38,7 @@ BEGIN TRY
 		,bc.StateID as BillingStateID
 		,bcs.[State] as BillingState
 		,c.CompanyName
+		,c.CompanyInitials
 		,c.BillingAddress1 as Address1
 		,c.BillingAddress2 as Address2
 		,c.BillingCity	as City
