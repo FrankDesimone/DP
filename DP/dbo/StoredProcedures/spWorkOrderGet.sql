@@ -17,8 +17,8 @@ SELECT  w.[WorkOrderID]
 		,s.[SalesNo]
 		,cl.[CompanyID]
 		,s.BillingCompanyID
-		,w.[CompanyLocationID]
-		,W.ContactsID
+		,s.[CompanyLocationID]
+		,s.ContactsID
 		,w.[WorkOrderStatusID]
 		,w.[VehicleID]
 		,w.[EngineID]
@@ -36,8 +36,8 @@ SELECT  w.[WorkOrderID]
 		,w.[VehicleTotalHours]
 		,w.[DateAdded]
   FROM [dbo].[WorkOrder] as w
-	inner join dbo.CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
-	inner join Sales as s on w.SalesID = s.SalesID
+		inner join Sales as s on w.SalesID = s.SalesID
+		inner join dbo.CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY

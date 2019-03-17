@@ -53,12 +53,49 @@ BEGIN TRY
 		select Null as CompanyID
 			,'Please Select' as CompanyName
 			,1 as Sortkey
-		union all
+		where @Filter is null
+		union
 		select c.CompanyID
 			,c.CompanyName
 			,2 as SortKey
 		from Company as c
 		where c.Active = @True
+			and @Filter is null
+		union
+		select cl.CompanyID
+			,c.CompanyName
+			,3 as SortKey
+		from WorkOrder as w
+			inner join Sales as s on w.SalesID = s.SalesID
+			inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
+			inner join Company as c on cl.CompanyID = c.CompanyID
+		where w.SalesID = try_cast(@Filter as int)
+		order by SortKey, CompanyName;
+
+		goto ExitProc;
+	END
+
+	IF @Selector ='billingcompany' 
+	BEGIN
+		select Null as CompanyID
+			,'Please Select' as CompanyName
+			,1 as Sortkey
+		where @Filter is null
+		union
+		select c.CompanyID
+			,c.CompanyName
+			,2 as SortKey
+		from Company as c
+		where c.Active = @True
+			and @Filter is null
+		union
+		select c.CompanyID
+			,c.CompanyName
+			,3 as SortKey
+		from WorkOrder as w
+			inner join Sales as s on w.SalesID = s.SalesID
+			inner join Company as c on s.BillingCompanyID = c.CompanyID
+		where w.SalesID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
 
 		goto ExitProc;
@@ -70,11 +107,11 @@ BEGIN TRY
 			,'Please Select' as [Location]
 			,0 as Sortkey
 		union all
-		select sl.CompanyLocationsID 
-			,sl.Location
+		select cl.CompanyLocationsID 
+			,cl.Location
 			,1 as SortKey
-		from CompanyLocations as sl
-		where sl.CompanyID = try_cast(@Filter as int)
+		from CompanyLocations as cl
+		where cl.CompanyID = try_cast(@Filter as int)
 		order by SortKey;
 
 		goto ExitProc;

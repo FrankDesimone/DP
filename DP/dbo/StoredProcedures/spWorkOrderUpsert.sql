@@ -41,9 +41,7 @@ BEGIN TRY
 
 	UPDATE w
 	set 
-		w.[CompanyLocationID]				  = @CompanyLocationID
-		,w.[ContactsID]								= @ContactsID
-		,w.[WorkOrderStatusID]				  = @WorkOrderStatusID
+		w.[WorkOrderStatusID]				  = @WorkOrderStatusID
 		,w.[VehicleID]						  = @VehicleID
 		,w.[EngineID]						  = @EngineID
 		,w.[ECDID]							  = @ECDID
@@ -66,9 +64,11 @@ BEGIN TRY
 	begin
 		if @SalesID is null
 		begin
-			insert into Sales (SalesNo,BillingCompanyID)
+			insert into Sales (SalesNo,BillingCompanyID,CompanyLocationID,ContactsID)
 			select cast(getdate() as nvarchar)
-				,@BillingCompanyID;
+				,@BillingCompanyID
+				,@CompanyLocationID
+				,@ContactsID;
 
 			set @SalesID = SCOPE_IDENTITY();
 
@@ -80,9 +80,7 @@ BEGIN TRY
 
 
 		INSERT INTO [dbo].[WorkOrder]
-				   ([CompanyLocationID]
-					,[SalesID]
-				   ,[ContactsID]
+					([SalesID]
 				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
 				   ,[EngineID]
@@ -99,9 +97,7 @@ BEGIN TRY
 				   ,[VehicleTotalMileage]
 				   ,[VehicleTotalHours])
 			 VALUES
-				   ( @CompanyLocationID
-				   ,@SalesID
-				   ,@ContactsID
+				   ( @SalesID
 				   ,@WorkOrderStatusID
 				   ,@VehicleID
 				   ,@EngineID

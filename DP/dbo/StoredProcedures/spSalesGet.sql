@@ -18,19 +18,32 @@ BEGIN TRY
 		,s.[SalesNo]
 		,s.[DateAdded]
 		,s.[BillingCompanyID] 
-		,c.[CompanyName]
-		,c.[CompanyInitials]
-		,c.[BillingAddress1]
-		,c.[BillingAddress2]
-		,c.[BillingCity]
-		,c.[BillingZip]
-		,c.[StateID]
+		,cb.[CompanyName]
+		,cb.[CompanyInitials]
+		,cb.[BillingAddress1]
+		,cb.[BillingAddress2]
+		,cb.[BillingCity]
+		,cb.[BillingZip]
+		,cb.[StateID]
 		,st.[State]
-		,c.[ContactsID]
-		,c.[Active]
+		,cb.[ContactsID]
+		,cb.[Active]
+		,cl.CompanyID
+		,cl.CompanyLocationsID
+		,cl.Location
+		,cl.Address1
+		,cl.Address2
+		,cl.City
+		,sto.State
+		,cl.Zip
+		,co.[ContactsID]
 	FROM [dbo].[Sales] as s
-	inner join [Company] as c on c.CompanyID = s.[BillingCompanyID]
-	inner join [State] as st on c.StateID = st.StateID
+		inner join [Company] as cb on cb.CompanyID = s.[BillingCompanyID]
+		inner join [State] as st on cb.StateID = st.StateID
+		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
+		inner join Company as co on cl.CompanyID = co.CompanyID
+		inner join [State] as sto on cl.StateID = sto.StateID
+		left outer join Contacts as con on co.ContactsID = con.ContactsID
 	where s.[SalesID] = @SalesID;
 
 END TRY

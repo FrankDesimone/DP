@@ -97,7 +97,7 @@ BEGIN TRY
 		,qa.MaxHertz
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
-		inner join CompanyLocations as cl on w.CompanyLocationID = cl.CompanyLocationsID
+		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
 		inner join [State] as st on cl.StateID = st.StateID
 		inner join Company as c on cl.CompanyID = c.CompanyID
 		inner join [State] as cs on c.StateID = cs.StateID
@@ -113,7 +113,7 @@ BEGIN TRY
 		left join Engine as e on w.EngineID = e.EngineID
 		left join Manufacturer as em on e.ManufacturerID = em.ManufacturerID
 		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID
-		left outer join Contacts as con on w.ContactsID = Con.ContactsID
+		left outer join Contacts as con on s.ContactsID = Con.ContactsID
 		left outer join CleaningReason as clean on w.CleaningReasonID = clean.CleaningReasonID
 		left outer join DrivingType as drive on w.DrivingTypeID = drive.DrivingTypeID
   where w.WorkOrderID = @WorkOrderID;
