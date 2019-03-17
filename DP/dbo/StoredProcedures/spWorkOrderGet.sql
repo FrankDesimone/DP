@@ -31,9 +31,8 @@ SELECT  w.[WorkOrderID]
 		,w.[StartStop]
 		,w.[HighIdle]
 		,w.[DrivingTypeID]
-		,w.[FirstCleaning]
-		,w.[VehicleTotalMileage]
-		,w.[VehicleTotalHours]
+		,w.[VehicleMileage] 
+		,w.VehicleHours
 		,w.[DateAdded]
   FROM [dbo].[WorkOrder] as w
 		inner join Sales as s on w.SalesID = s.SalesID

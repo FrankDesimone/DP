@@ -16,9 +16,8 @@
 	,@StartStop bit 
 	,@HighIdle bit
 	,@DrivingTypeOther  INT = NULL
-	,@FirstCleaning  bit 
-	,@VehicleTotalMileage  INT = NULL
-	,@VehicleTotalHours  INT  = NULL	
+	,@VehicleMileage  INT = NULL
+	,@VehicleHours  INT  = NULL	
 	,@NewWorkOrderID      INT          = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -53,9 +52,8 @@ BEGIN TRY
 		,w.[StartStop]						  = @StartStop
 		,w.[HighIdle]						  = @HighIdle
 		,w.[DrivingTypeID]						= @DrivingTypeOther
-		,w.[FirstCleaning]					  = @FirstCleaning
-		,w.[VehicleTotalMileage]			  = @VehicleTotalMileage
-		,w.[VehicleTotalHours]				  = @VehicleTotalHours
+		,w.[VehicleMileage]						= @VehicleMileage
+		,w.[VehicleHours]						= @VehicleHours
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
@@ -93,9 +91,8 @@ BEGIN TRY
 				   ,[StartStop]
 				   ,[HighIdle]
 				   ,[DrivingTypeID]
-				   ,[FirstCleaning]
-				   ,[VehicleTotalMileage]
-				   ,[VehicleTotalHours])
+				   ,[VehicleMileage]
+				   ,[VehicleHours])
 			 VALUES
 				   ( @SalesID
 				   ,@WorkOrderStatusID
@@ -110,9 +107,8 @@ BEGIN TRY
 				   ,@StartStop
 				   ,@HighIdle
 				   ,@DrivingTypeOther
-				   ,@FirstCleaning
-				   ,@VehicleTotalMileage
-				   ,@VehicleTotalHours)
+				   ,@VehicleMileage
+				   ,@VehicleHours)
 	
 		SET @WorkOrderID	=  SCOPE_IDENTITY();
 	END

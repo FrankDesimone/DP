@@ -385,4 +385,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BillingContactsID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d24d23ae-5930-4e48-b4b9-13befc6f1ed4" ChangeDateTime="03/17/2019 19:20:52">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[MileageLastCleaning]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[MileageInitialCleaning]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="109070a3-06ad-4a11-9f69-125a425ba850" ChangeDateTime="03/17/2019 19:21:36">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[HoursLastCleaning]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[HoursInitialCleaning]" />
+  </Operation>
 </Operations>

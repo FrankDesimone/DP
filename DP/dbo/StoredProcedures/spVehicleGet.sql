@@ -21,6 +21,8 @@ SELECT
 	  ,m.Manufacturer
       ,v.[Model]
       ,v.[Year]
+	  ,v.[MileageInitialCleaning]
+	  ,v.[HoursInitialCleaning]
   FROM [dbo].[Vehicle] as v
   inner join [Manufacturer] as m on v.ManufacturerID = m.ManufacturerID
   where v.VehicleID = @VehicleID;

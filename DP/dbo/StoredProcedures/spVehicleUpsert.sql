@@ -6,6 +6,8 @@
 	,@ManufacturerID INT          
     ,@Model  NVARCHAR (100) 
 	,@Year INT 
+	,@MileageInitialCleaning INT =NULL 
+	,@HoursInitialCleaning INT = NULL 
 	,@NewVehicleID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -28,7 +30,9 @@ BEGIN TRY
       ,v.[ManufacturerID] = @ManufacturerID
       ,v.[Model] = @Model
       ,v.[Year]	= @Year
-	from Vehicle  v
+	,v.[MileageInitialCleaning] =  @MileageInitialCleaning
+	,v.[HoursInitialCleaning] = @HoursInitialCleaning 
+from Vehicle  v
 	WHERE v.VehicleID = @VehicleID;
 
 	if @@ROWCOUNT = 0
@@ -41,14 +45,18 @@ BEGIN TRY
            ,[AssetNumber]
            ,[ManufacturerID]
            ,[Model]
-           ,[Year])
+           ,[Year]
+		   ,[MileageInitialCleaning] 
+		   ,[HoursInitialCleaning] )
      VALUES
            	(@CompanyID
 			,@SerialNumber
            ,@AssetNumber
            ,@ManufacturerID
            ,@Model
-           ,@Year);
+           ,@Year
+	       ,@MileageInitialCleaning
+		   ,@HoursInitialCleaning		   );
 	
 		SET @VehicleID	=  SCOPE_IDENTITY();
 	END

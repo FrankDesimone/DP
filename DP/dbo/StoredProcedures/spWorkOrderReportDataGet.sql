@@ -25,9 +25,8 @@ BEGIN TRY
 		,w.StartStop
 		,w.HighIdle
 		,drive.DrivingType
-		,w.FirstCleaning
-		,w.VehicleTotalMileage
-		,w.VehicleTotalHours
+		,w.VehicleMileage
+		,w.VehicleHours
 		,w.DateAdded as WODate
 		,bc.CompanyName as BillingCompanyName
 		,bc.CompanyInitials
@@ -59,6 +58,8 @@ BEGIN TRY
 		,vm.Manufacturer
 		,v.Model
 		,v.[Year]
+		,v.[MileageInitialCleaning] 
+		,v.[HoursInitialCleaning]
 		,e.CompanyID
 		,em.Manufacturer
 		,e.SerialNumber
