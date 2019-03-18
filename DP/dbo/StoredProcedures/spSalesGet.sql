@@ -36,14 +36,14 @@ BEGIN TRY
 		,cl.City
 		,sto.State
 		,cl.Zip
-		,co.[ContactsID]
+		,co.[ContactsID] as LocationsContact
 	FROM [dbo].[Sales] as s
 		inner join [Company] as cb on cb.CompanyID = s.[BillingCompanyID]
 		inner join [State] as st on cb.StateID = st.StateID
 		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
 		inner join Company as co on cl.CompanyID = co.CompanyID
 		inner join [State] as sto on cl.StateID = sto.StateID
-		left outer join Contacts as con on co.ContactsID = con.ContactsID
+		left outer join Contacts as con on s.ContactsID = con.ContactsID
 	where s.[SalesID] = @SalesID;
 
 END TRY

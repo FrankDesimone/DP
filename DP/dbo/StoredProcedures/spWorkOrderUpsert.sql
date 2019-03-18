@@ -37,6 +37,9 @@ BEGIN TRY
 		 select @BillingCompanyID = cl.CompanyID FROM CompanyLocations as cl where cl.CompanyLocationsID = @CompanyLocationID;
 	END
 
+	update s set s.ContactsID = @ContactsID
+	from Sales as s
+	where s.SalesID = @SalesID;
 
 	UPDATE w
 	set 
