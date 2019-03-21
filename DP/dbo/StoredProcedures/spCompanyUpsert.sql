@@ -20,7 +20,7 @@ BEGIN TRY
 		,@False as bit = 0;
 
 	set @ErrorCode = 0;
-	set @ErrorMsg = ''
+	set @ErrorMsg = 'Record Saved'
 	set @NewCompanyID = NULL;
 	
 	UPDATE c
@@ -79,4 +79,8 @@ BEGIN CATCH
 			+  ' - ' + coalesce(@ErrorMessage , '') + ' Err #: ' + cast(ERROR_NUMBER() as varchar(8));
 
 	EXEC  [dbo].[spExceptionAdd]  @ReportingProcedure ,@ErrorNumber,@ErrorLine ,@ErrorMessage,@ErrorNote;
+
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Uable to update company';
+
 END CATCH

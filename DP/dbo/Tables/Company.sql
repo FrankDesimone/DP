@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Company] (
 	[CompanyID]       INT          NOT NULL IDENTITY,
-	[CompanyInitials] NVARCHAR(10) NULL ,
+	[CompanyInitials] NVARCHAR(10) NOT NULL ,
 	[CompanyName]     NVARCHAR (50) NOT NULL,
 	[BillingAddress1] NVARCHAR (50) NOT NULL,
 	[BillingCity]     NVARCHAR (50) NOT NULL,
@@ -18,3 +18,7 @@
 GO
 
 CREATE UNIQUE INDEX [IX_Company_CompanyName] ON [dbo].[Company] ([CompanyName])
+
+GO
+
+CREATE INDEX [IX_Company_CompanyInitials] ON [dbo].[Company] ([CompanyInitials])
