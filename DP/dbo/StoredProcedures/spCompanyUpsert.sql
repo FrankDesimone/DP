@@ -23,45 +23,45 @@ BEGIN TRY
 		,@Fail as bit = @False;
 
 	set @ErrorCode = 1;
-	set @ErrorMsg = 'Unable to update company'
+	set @ErrorMsg = 'Unable to update company';
 	set @NewCompanyID = NULL;
 	
 	if len(coalesce(@CompanyInitials, '')) = 0
 	begin
-		set @Fail = @True
-		set @Message = 'Company Initials must be entered'
+		set @Fail = @True;
+		set @Message = 'Company Initials must be entered';
 
 		goto ExitProc;
 	end
 
 	if len(coalesce(@BillingAddress1, '')) = 0
 	begin
-		set @Fail = @True
-		set @Message = 'Address must be entered'
+		set @Fail = @True;
+		set @Message = 'Address must be entered';
 
 		goto ExitProc;
 	end
 
 	if len(coalesce(@BillingCity, '')) = 0
 	begin
-		set @Fail = @True
-		set @Message = 'City must be entered'
+		set @Fail = @True;
+		set @Message = 'City must be entered';
 
 		goto ExitProc;
 	end
 
 	if @StateID is null
 	begin
-		set @Fail = @True
-		set @Message = 'State must be entered'
+		set @Fail = @True;
+		set @Message = 'State must be entered';
 
 		goto ExitProc;
 	end
 
 	if len(coalesce(@BillingZip, '')) = 0
 	begin
-		set @Fail = @True
-		set @Message = 'Zip must be entered'
+		set @Fail = @True;
+		set @Message = 'Zip must be entered';
 
 		goto ExitProc;
 	end
@@ -83,24 +83,24 @@ BEGIN TRY
 	begin
 		if len(coalesce(@CompanyName, '')) = 0
 		begin
-			set @Fail = @True
-			set @Message = 'Company must be entered'
+			set @Fail = @True;
+			set @Message = 'Company must be entered';
 
 			goto ExitProc;
 		end		
 		
 		if exists (select 1 from Company as c where c.CompanyName = @CompanyName)
 		begin
-			set @Fail = @True
-			set @Message = 'Company already exists'
+			set @Fail = @True;
+			set @Message = 'Company already exists';
 
 			goto ExitProc;
 		end
 
 		if exists (select 1 from Company as c where c.CompanyInitials = @CompanyInitials)
 		begin
-			set @Fail = @True
-			set @Message = 'Company Initials already exists'
+			set @Fail = @True;
+			set @Message = 'Company Initials already exists';
 
 			goto ExitProc;
 		end
