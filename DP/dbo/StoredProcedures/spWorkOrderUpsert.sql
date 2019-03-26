@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
-	@WorkOrderID      INT	
-	,@SalesID int
-	,@CompanyLocationID  INT
-	,@BillingCompanyID  INT =NULL
+	@WorkOrderID INT = null
+	,@SalesID int = null
+	,@CompanyLocationID INT = null
+	,@BillingCompanyID  INT = NULL
 	,@ContactsID INT = NULL
 	,@WorkOrderStatusID  INT 
 	,@VehicleID  INT = NULL 
 	,@EngineID  INT = NULL 
-	,@ECDID  INT 
+	,@ECDID INT  = null
 	,@PreventMaintAshCleanInter  bit 
 	,@HighSootCEL bit 
 	,@EngineFailureFluidsInExhaust  bit
@@ -18,7 +18,7 @@
 	,@DrivingTypeOther  INT = NULL
 	,@VehicleMileage  INT = NULL
 	,@VehicleHours  INT  = NULL	
-	,@NewWorkOrderID      INT          = NULL OUTPUT
+	,@NewWorkOrderID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -28,10 +28,22 @@ BEGIN TRY
 	declare  @True as bit = 1
 		,@False as bit = 0;
 
-	set @ErrorCode = 0;
-	set @ErrorMsg = ''
+	declare @Message as varchar(8000) = ''
+		,@Fail as bit = @False;
+
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Unable to update company';
 	set @NewWorkOrderID = NULL;
 
+	if @CompanyLocationID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Site Address must be entered';
+
+		goto ExitProc;
+	end
+
+	
 	IF @BillingCompanyID IS NULL
 	BEGIN
 		 select @BillingCompanyID = cl.CompanyID FROM CompanyLocations as cl where cl.CompanyLocationsID = @CompanyLocationID;
@@ -117,6 +129,10 @@ BEGIN TRY
 	END
 
 	set @NewWorkOrderID = @WorkOrderID;
+
+ExitProc:
+	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);
+	set @ErrorCode = @Fail;
 
 END TRY
 

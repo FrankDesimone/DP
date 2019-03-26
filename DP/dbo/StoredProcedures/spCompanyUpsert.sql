@@ -53,7 +53,7 @@ BEGIN TRY
 	if @StateID is null
 	begin
 		set @Fail = @True;
-		set @Message = 'State must be entered';
+		set @Message = 'State must be selected';
 
 		goto ExitProc;
 	end
