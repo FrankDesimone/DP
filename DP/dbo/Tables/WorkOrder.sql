@@ -2,7 +2,6 @@
 (
 	[WorkOrderID] INT NOT NULL IDENTITY, 
 	[SalesID] INT NOT NULL,
-	[WorkOrderStatusID] INT NOT NULL,
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
 	[ECDID] INT NOT NULL,	
@@ -18,7 +17,6 @@
 	[VehicleHours] INT  ,
 	[DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
 	CONSTRAINT [PK_WorkOrder] PRIMARY KEY ([WorkOrderID]), 
-	CONSTRAINT [FK_WorkOrder_WorkOrderState] FOREIGN KEY ([WorkOrderStatusID]) REFERENCES [WorkOrderStatus]([WorkOrderStatusID]), 
 	CONSTRAINT [FK_WorkOrder_Engine] FOREIGN KEY ([EngineID]) REFERENCES [Engine]([EngineID]), 
 	CONSTRAINT [FK_WorkOrder_Vehicle] FOREIGN KEY ([VehicleID]) REFERENCES [Vehicle]([VehicleID]), 
 	CONSTRAINT [FK_WorkOrder_ECD] FOREIGN KEY ([ECDID]) REFERENCES [ECD]([ECDID]), 

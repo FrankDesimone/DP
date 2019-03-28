@@ -79,7 +79,6 @@
     <Build Include="dbo\Tables\Company.sql" />
     <Build Include="dbo\Tables\CleaningReason.sql" />
     <Build Include="dbo\Tables\WorkOrder.sql" />
-    <Build Include="dbo\Tables\WorkOrderStatus.sql" />
     <Build Include="dbo\StoredProcedures\spSelectorGet.sql" />
     <Build Include="dbo\StoredProcedures\spCompanyUpsert.sql" />
     <Build Include="dbo\StoredProcedures\spCompanyGet.sql" />

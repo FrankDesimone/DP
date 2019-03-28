@@ -4,10 +4,9 @@
 	,@CompanyLocationID INT = null
 	,@BillingCompanyID  INT = NULL
 	,@ContactsID INT = NULL
-	,@WorkOrderStatusID  INT 
 	,@VehicleID  INT = NULL 
 	,@EngineID  INT = NULL 
-	,@ECDID INT  = null
+	,@ECDID INT = null
 	,@PreventMaintAshCleanInter  bit 
 	,@HighSootCEL bit 
 	,@EngineFailureFluidsInExhaust  bit
@@ -38,11 +37,21 @@ BEGIN TRY
 	if @CompanyLocationID is null
 	begin
 		set @Fail = @True;
-		set @Message = 'Site Address must be entered';
+		set @Message = 'Site Address must be selected';
 
 		goto ExitProc;
 	end
 
+	if @ECDID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'DPF Information must be selected';
+
+		goto ExitProc;
+	end
+
+
+	
 	
 	IF @BillingCompanyID IS NULL
 	BEGIN
@@ -55,20 +64,19 @@ BEGIN TRY
 
 	UPDATE w
 	set 
-		w.[WorkOrderStatusID]				  = @WorkOrderStatusID
-		,w.[VehicleID]						  = @VehicleID
-		,w.[EngineID]						  = @EngineID
-		,w.[ECDID]							  = @ECDID
-		,w.[PreventMaintAshCleanInter]		  = @PreventMaintAshCleanInter
-		,w.[HighSootCEL]					  = @HighSootCEL
-		,w.[EngineFailureFluidsInExhaust]	  = @EngineFailureFluidsInExhaust
-		,w.[CleaningReasonID]				  = @CleanReasonOther
-		,w.[RoadHighway]					  = @RoadHighway
-		,w.[StartStop]						  = @StartStop
-		,w.[HighIdle]						  = @HighIdle
-		,w.[DrivingTypeID]						= @DrivingTypeOther
-		,w.[VehicleMileage]						= @VehicleMileage
-		,w.[VehicleHours]						= @VehicleHours
+		w.[VehicleID] = @VehicleID
+		,w.[EngineID] = @EngineID
+		,w.[ECDID] = @ECDID
+		,w.[PreventMaintAshCleanInter] = @PreventMaintAshCleanInter
+		,w.[HighSootCEL] = @HighSootCEL
+		,w.[EngineFailureFluidsInExhaust] = @EngineFailureFluidsInExhaust
+		,w.[CleaningReasonID] = @CleanReasonOther
+		,w.[RoadHighway] = @RoadHighway
+		,w.[StartStop] = @StartStop
+		,w.[HighIdle] = @HighIdle
+		,w.[DrivingTypeID] = @DrivingTypeOther
+		,w.[VehicleMileage] = @VehicleMileage
+		,w.[VehicleHours] = @VehicleHours
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
@@ -94,7 +102,6 @@ BEGIN TRY
 
 		INSERT INTO [dbo].[WorkOrder]
 					([SalesID]
-				   ,[WorkOrderStatusID]
 				   ,[VehicleID]
 				   ,[EngineID]
 				   ,[ECDID]
@@ -110,7 +117,6 @@ BEGIN TRY
 				   ,[VehicleHours])
 			 VALUES
 				   ( @SalesID
-				   ,@WorkOrderStatusID
 				   ,@VehicleID
 				   ,@EngineID
 				   ,@ECDID
