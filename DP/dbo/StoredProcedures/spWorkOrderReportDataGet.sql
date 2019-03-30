@@ -16,7 +16,7 @@ BEGIN TRY
 		w.WorkOrderID
 		,s.SalesNo
 		,(con.FirstName + ' ' + con.LastName) as Contact
-		,ws.WorkOrderStatus
+		,0 as WorkOrderStatus
 		,w.PreventMaintAshCleanInter
 		,w.HighSootCEL
 		,w.EngineFailureFluidsInExhaust
@@ -110,7 +110,6 @@ BEGIN TRY
 		inner join Manufacturer as ecdm on ecd.ManfacturerID = ecdm.ManufacturerID
 		inner join SubstrateType as sut on ecd.SubstrateTypeID = sut.SubstrateTypeID
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
-		inner join WorkOrderStatus as ws on w.WorkOrderStatusID = ws.WorkOrderStatusID
 		left join Engine as e on w.EngineID = e.EngineID
 		left join Manufacturer as em on e.ManufacturerID = em.ManufacturerID
 		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID

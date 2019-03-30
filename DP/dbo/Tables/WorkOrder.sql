@@ -28,8 +28,5 @@
 GO
 
 
-CREATE INDEX [IX_WorkOrder_WorkOrderStatusID] ON [dbo].[WorkOrder] ([WorkOrderStatusID])
-
-GO
 
 CREATE INDEX [IX_WorkOrder_SalesID] ON [dbo].[WorkOrder] ([SalesID])

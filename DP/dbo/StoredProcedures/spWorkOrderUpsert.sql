@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
 	@WorkOrderID INT = null
 	,@SalesID int = null
+	,@CompanyID as int = null
 	,@CompanyLocationID INT = null
 	,@BillingCompanyID  INT = NULL
 	,@ContactsID INT = NULL
@@ -34,6 +35,22 @@ BEGIN TRY
 	set @ErrorMsg = 'Unable to update company';
 	set @NewWorkOrderID = NULL;
 
+	if @BillingCompanyID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Billing Company must be selected';
+
+		goto ExitProc;
+	end
+
+	if @CompanyID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Customer Information must be selected';
+
+		goto ExitProc;
+	end
+
 	if @CompanyLocationID is null
 	begin
 		set @Fail = @True;
@@ -50,13 +67,6 @@ BEGIN TRY
 		goto ExitProc;
 	end
 
-
-	
-	
-	IF @BillingCompanyID IS NULL
-	BEGIN
-		 select @BillingCompanyID = cl.CompanyID FROM CompanyLocations as cl where cl.CompanyLocationsID = @CompanyLocationID;
-	END
 
 	update s set s.ContactsID = @ContactsID
 	from Sales as s
