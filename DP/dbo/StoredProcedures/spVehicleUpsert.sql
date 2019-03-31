@@ -1,10 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[spVehicleUpsert]
 	@CompanyID INT		
 	,@VehicleID INT = NULL 	
-    ,@SerialNumber NVARCHAR (100) 
+	,@SerialNumber NVARCHAR (100) 
 	,@AssetNumber NVARCHAR (100)  = NULL
 	,@ManufacturerID INT          
-    ,@Model  NVARCHAR (100) 
+	,@Model  NVARCHAR (100) 
 	,@Year INT 
 	,@MileageInitialCleaning INT =NULL 
 	,@HoursInitialCleaning INT = NULL 
@@ -22,17 +22,39 @@ BEGIN TRY
 	set @ErrorMsg = ''
 	set @NewVehicleID = NULL;
 
+	declare @Message as varchar(8000) = ''
+		,@Fail as bit = @False;
+
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Unable to update vehicle';
+
+	if @CompanyID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Company must be selected';
+
+		goto ExitProc;
+	end
+
+	if @ManufacturerID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Make must be selected';
+
+		goto ExitProc;
+	end
+
 	UPDATE v
 	set 
 		v.[CompanyID]=@CompanyID
-      ,v.[SerialNumber]=@SerialNumber
-      ,v.[AssetNumber] = @AssetNumber
-      ,v.[ManufacturerID] = @ManufacturerID
-      ,v.[Model] = @Model
-      ,v.[Year]	= @Year
-	,v.[MileageInitialCleaning] =  @MileageInitialCleaning
-	,v.[HoursInitialCleaning] = @HoursInitialCleaning 
-from Vehicle  v
+		,v.[SerialNumber]=@SerialNumber
+		,v.[AssetNumber] = @AssetNumber
+		,v.[ManufacturerID] = @ManufacturerID
+		,v.[Model] = @Model
+		,v.[Year]	= @Year
+		,v.[MileageInitialCleaning] =  @MileageInitialCleaning
+		,v.[HoursInitialCleaning] = @HoursInitialCleaning 
+	from Vehicle  v
 	WHERE v.VehicleID = @VehicleID;
 
 	if @@ROWCOUNT = 0
@@ -40,28 +62,32 @@ from Vehicle  v
 
 
 	INSERT INTO [dbo].[Vehicle]
-           ([CompanyID]
+		   ([CompanyID]
 		   ,[SerialNumber]
-           ,[AssetNumber]
-           ,[ManufacturerID]
-           ,[Model]
-           ,[Year]
+		   ,[AssetNumber]
+		   ,[ManufacturerID]
+		   ,[Model]
+		   ,[Year]
 		   ,[MileageInitialCleaning] 
 		   ,[HoursInitialCleaning] )
-     VALUES
-           	(@CompanyID
+	 VALUES
+			(@CompanyID
 			,@SerialNumber
-           ,@AssetNumber
-           ,@ManufacturerID
-           ,@Model
-           ,@Year
-	       ,@MileageInitialCleaning
+		   ,@AssetNumber
+		   ,@ManufacturerID
+		   ,@Model
+		   ,@Year
+		   ,@MileageInitialCleaning
 		   ,@HoursInitialCleaning		   );
 	
 		SET @VehicleID	=  SCOPE_IDENTITY();
 	END
 
 	set @NewVehicleID = @VehicleID;
+
+ExitProc:
+	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);
+	set @ErrorCode = @Fail;
 
 END TRY
 

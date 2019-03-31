@@ -19,6 +19,7 @@
 	,@VehicleMileage  INT = NULL
 	,@VehicleHours  INT  = NULL	
 	,@NewWorkOrderID INT = NULL OUTPUT
+	,@NewSalesID int = null output
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -62,7 +63,7 @@ BEGIN TRY
 	if @ECDID is null
 	begin
 		set @Fail = @True;
-		set @Message = 'DPF Information must be selected';
+		set @Message = 'ECU Information must be selected';
 
 		goto ExitProc;
 	end
@@ -145,6 +146,7 @@ BEGIN TRY
 	END
 
 	set @NewWorkOrderID = @WorkOrderID;
+	set @NewSalesID = @SalesID;
 
 ExitProc:
 	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);

@@ -1,11 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[spEngineUpsert]
-	@CompanyID INT		
+	@CompanyID INT	= null	
 	,@EngineID INT = NULL 	
 	,@ManufacturerID INT
-	,@Engine as nvarchar(100)
-	,@SerialNumber NVARCHAR (100)       
-    ,@Model NVARCHAR (100) 
-	,@Year INT 
+	,@SerialNumber NVARCHAR (100) = null      
+	,@Model NVARCHAR (100) = null
+	,@Year INT = null
 	,@NewEngineID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -20,13 +19,35 @@ BEGIN TRY
 	set @ErrorMsg = ''
 	set @NewEngineID = NULL;
 
+	declare @Message as varchar(8000) = ''
+		,@Fail as bit = @False;
+
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Unable to update engine';
+
+	if @CompanyID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Company must be selected';
+
+		goto ExitProc;
+	end
+
+	if @ManufacturerID is null
+	begin
+		set @Fail = @True;
+		set @Message = 'Make must be selected';
+
+		goto ExitProc;
+	end
+
 	UPDATE e
 	set 
 		e.[CompanyID]=@CompanyID
-      ,e.[SerialNumber]=@SerialNumber
-      ,e.[ManufacturerID] = @ManufacturerID
-      ,e.[Model] = @Model
-      ,e.[Year]	= @Year
+	  ,e.[SerialNumber]=@SerialNumber
+	  ,e.[ManufacturerID] = @ManufacturerID
+	  ,e.[Model] = @Model
+	  ,e.[Year]	= @Year
 	from Engine  e
 	WHERE e.EngineID = @EngineID;
 
@@ -35,22 +56,26 @@ BEGIN TRY
 
 
 	INSERT INTO [dbo].[Engine]
-           ([CompanyID]
+		   ([CompanyID]
 		   ,[SerialNumber]
-           ,[ManufacturerID]
-           ,[Model]
-           ,[Year])
-     VALUES
-           	(@CompanyID
+		   ,[ManufacturerID]
+		   ,[Model]
+		   ,[Year])
+	 VALUES
+			(@CompanyID
 			,@SerialNumber
-           ,@ManufacturerID
-           ,@Model
-           ,@Year);
+		   ,@ManufacturerID
+		   ,@Model
+		   ,@Year);
 	
 		SET @EngineID	=  SCOPE_IDENTITY();
 	END
 
 	set @NewEngineID = @EngineID;
+
+ExitProc:
+	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);
+	set @ErrorCode = @Fail;
 
 END TRY
 

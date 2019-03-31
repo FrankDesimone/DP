@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spManufacturerUpsert]
-	@ManufacturerID      INT          = NULL 
-    ,@Manufacturer     NVARCHAR (50) 
-	,@NewManufacturerID      INT          = NULL OUTPUT
+	@ManufacturerID  INT          = NULL 
+	,@Manufacturer  NVARCHAR (50) = null
+	,@NewManufacturerID  INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -15,6 +15,21 @@ BEGIN TRY
 	set @ErrorMsg = ''
 	set @NewManufacturerID = NULL;
 
+	declare @Message as varchar(8000) = ''
+		,@Fail as bit = @False;
+
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Unable to update manufacturer';
+
+	if len(coalesce(@Manufacturer, '')) = 0
+	begin
+		set @Fail = @True;
+		set @Message = 'Manufacturer must be entered';
+
+		goto ExitProc;
+	end
+
+
 	UPDATE m
 	set m.Manufacturer =@Manufacturer
 	from Manufacturer m
@@ -23,14 +38,18 @@ BEGIN TRY
 	if @@ROWCOUNT = 0
 	begin
 		INSERT INTO [dbo].[Manufacturer]
-           ([Manufacturer])
-	    VALUES
-           (@Manufacturer);
+		   ([Manufacturer])
+		VALUES
+		   (@Manufacturer);
 	
 		SET @ManufacturerID	=  SCOPE_IDENTITY();
 	END
 
 	set @NewManufacturerID = @ManufacturerID;
+
+ExitProc:
+	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);
+	set @ErrorCode = @Fail;
 
 END TRY
 

@@ -13,6 +13,7 @@ BEGIN TRY
 
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
+	set @Filter = (case when len(coalesce(@Filter, '')) = 0 then null else @Filter end);
 
 	IF @Selector ='workorder'  
 	BEGIN

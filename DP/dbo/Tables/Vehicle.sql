@@ -3,10 +3,10 @@
 	[VehicleID] INT NOT NULL IDENTITY,
 	[CompanyID] INT NOT NULL,
 	[ManufacturerID] INT          NOT NULL,	
-    [SerialNumber]   NVARCHAR (50) NOT NULL,
+    [SerialNumber]   NVARCHAR (50) NULL,
 	[AssetNumber]	NVARCHAR (50) NULL,
-    [Model]          NVARCHAR (50) NOT NULL,
-	[Year] INT NOT NULL,
+    [Model]          NVARCHAR (50) NULL,
+	[Year] INT NULL,
 	[MileageInitialCleaning] INT ,
 	[HoursInitialCleaning] INT  ,
 
