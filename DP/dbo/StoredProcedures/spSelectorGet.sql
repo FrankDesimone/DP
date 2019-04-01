@@ -19,13 +19,14 @@ BEGIN TRY
 	BEGIN
 		select Null as WorkOrderID
 			,'Please Select' as WorkOrder
-			,1 as Sortkey
+			,0 as Sortkey
 		union all
 		select w.WorkOrderID
 			,convert(nvarchar(100),w.WorkOrderID) as WorkOrder
 			,1 as SortKey
 		from WorkOrder as w
-		where w.SalesID = try_cast(@Filter as int);
+		where w.SalesID = try_cast(@Filter as int)
+		order by Sortkey, WorkOrderID desc;
 		
 		goto ExitProc;
 	END
@@ -44,7 +45,7 @@ BEGIN TRY
 		from Sales as s
 		where s.BillingCompanyID = try_cast(@Filter as int)
 			or @Filter is null
-		order by Sortkey, DateAdded;
+		order by Sortkey, SalesID desc;
 		
 		goto ExitProc;
 	END
