@@ -42,18 +42,22 @@ SET NOCOUNT ON;
 
 BEGIN TRY
 BEGIN TRAN
+	declare @True as bit = 1
+		,@False as bit = 0;
+	
 	declare @QAID as int = null
 		,@QAProcessID as int = null
 		,@PSI as float
 		,@SpaceVelocity as float
-		,@TestLine as int = 0;
+		,@TestLine as int = 0
+		,@Fail as bit = @True;
 
 	declare @d as table (TestLine int
 		,PSI float
 		,SpaceVelocity float);
 
-	set @ErrorCode = 0;
-	set @ErrorMsg = '';
+	set @ErrorCode = 1;
+	set @ErrorMsg = 'Unable to update quality';
 
 	select @QAID = QA.QAID
 		,@QAProcessID = qap.QAProcessID
@@ -152,8 +156,13 @@ BEGIN TRAN
 
 	CLOSE d;
 	DEALLOCATE d;
+
+	set @Fail = @False;
 	
 ExitProc:
+	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @ErrorMsg end);
+	set @ErrorCode = @Fail;
+
 
 COMMIT TRAN
 END TRY
