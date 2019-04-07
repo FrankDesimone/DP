@@ -399,4 +399,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[HoursInitialCleaning]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c11cb680-15d2-43e7-b61d-b3a9868b8b1b" ChangeDateTime="04/07/2019 19:16:52">
+    <Property Name="ElementName" Value="[dbo].[ECD].[ManfacturerID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ECD]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ManufacturerID" />
+  </Operation>
 </Operations>

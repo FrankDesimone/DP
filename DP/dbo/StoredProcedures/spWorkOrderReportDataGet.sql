@@ -68,7 +68,7 @@ BEGIN TRY
 		, ecd.ECDID
 		,ecd.SubstrateTypeID
 		,sut.SubstrateType
-		,ecd.ManfacturerID
+		,ecd.ManufacturerID
 		,ecdm.Manufacturer
 		,ecd.DeviceTypeID
 		,dt.DeviceType
@@ -107,7 +107,7 @@ BEGIN TRY
 		inner join Vehicle as v on w.VehicleID = v.VehicleID
 		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
 		inner join ECD as ecd on w.ECDID = ecd.ECDID
-		inner join Manufacturer as ecdm on ecd.ManfacturerID = ecdm.ManufacturerID
+		inner join Manufacturer as ecdm on ecd.ManufacturerID = ecdm.ManufacturerID
 		inner join SubstrateType as sut on ecd.SubstrateTypeID = sut.SubstrateTypeID
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
 		left join Engine as e on w.EngineID = e.EngineID

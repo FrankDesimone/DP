@@ -29,7 +29,7 @@ BEGIN TRY
 	set 
 		ecd.[CompanyID]						 =@CompanyID 
       ,ecd.[SubstrateTypeID]					 =@SubstrateTypeID
-      ,ecd.[ManfacturerID]					 =@ManfacturerID
+      ,ecd.ManufacturerID					 =@ManfacturerID
       ,ecd.[DeviceTypeID]					 =@DeviceTypeID
       ,ecd.[PartNumber]						 =@PartNumber
       ,ecd.[SerialNumber]					 =@SerialNumber
@@ -49,7 +49,7 @@ BEGIN TRY
 	INSERT INTO [dbo].[ECD]
            ([CompanyID]
            ,[SubstrateTypeID]
-           ,[ManfacturerID]
+           ,ManufacturerID
            ,[DeviceTypeID]
            ,[PartNumber]
            ,[SerialNumber]

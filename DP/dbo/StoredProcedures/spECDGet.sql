@@ -1,5 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[spECDGet]
-	@ECDID     INT  
+	@ECDID INT  = null
+	,@CompanyID as int = null
+	,@PartNumber as nvarchar(100) = null
+	,@SerialNumber as NVARCHAR (100) = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -9,30 +12,55 @@ BEGIN TRY
 	declare  @True as bit = 1
 		,@False as bit = 0;
 
+	declare @SerialNull as bit = @False;
+
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
-SELECT  ecd.[ECDID]
-      ,ecd.[CompanyID]
-      ,ecd.[SubstrateTypeID]
-	  ,st.SubstrateType
-      ,ecd.[ManfacturerID]
-	  ,m.Manufacturer
-      ,ecd.[DeviceTypeID]
-	  ,dt.DeviceType
-      ,ecd.[TimesCleaned]
-      ,ecd.[PartNumber]
-      ,ecd.[SerialNumber]
-      ,ecd.[OtherNumber]
-      ,ecd.[OuterDiameter]
-      ,ecd.[SubstrateDiameter]
-      ,ecd.[OuterLength]
-      ,ecd.[SubstrateLength]
-  FROM [dbo].[ECD] as ecd
-  inner join [Manufacturer] as m on ecd.ManfacturerID = m.ManufacturerID
-  inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
-  inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
-  where ecd.ECDID = @ECDID;
+	if @ECDID is null
+	begin
+		select @ECDID = ecd.ECDID
+		FROM [dbo].[ECD] as ecd
+		where @CompanyID = ecd.CompanyID
+			and @SerialNumber = ecd.SerialNumber;
+	end
+
+	if @ECDID is null
+	begin
+		select top 1 @ECDID = ecd.ECDID
+			,@SerialNull = @True
+		FROM [dbo].[ECD] as ecd
+		where @PartNumber = ecd.PartNumber
+		order by ecd.DateAdded desc;
+	end
+
+	SELECT  ecd.[ECDID]
+		  ,ecd.[CompanyID]
+		  ,ecd.[SubstrateTypeID]
+		  ,st.SubstrateType
+		  ,ecd.ManufacturerID
+		  ,m.Manufacturer
+		  ,ecd.[DeviceTypeID]
+		  ,dt.DeviceType
+		  ,ecd.[TimesCleaned]
+		  ,ecd.[PartNumber]
+		  ,(case when @SerialNull = @False then ecd.[SerialNumber] else '' end) as [SerialNumber]
+		  ,(case when @SerialNull = @False then ecd.[OtherNumber] else '' end) as [OtherNumber]
+		  ,ecd.[OuterDiameter]
+		  ,ecd.[SubstrateDiameter]
+		  ,ecd.[OuterLength]
+		  ,ecd.[SubstrateLength]
+	  FROM [dbo].[ECD] as ecd
+	  inner join [Manufacturer] as m on ecd.ManufacturerID = m.ManufacturerID
+	  inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
+	  inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
+	  where ecd.ECDID = @ECDID;
+
+	  if @@ROWCOUNT = 0
+	  begin
+		set @ErrorCode = 1;
+		set @ErrorMsg = 'Part not found';
+	  end
 
 END TRY
 
