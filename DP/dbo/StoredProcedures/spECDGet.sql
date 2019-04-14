@@ -18,6 +18,7 @@ BEGIN TRY
 	set @ErrorMsg = '';
 
 	if @ECDID is null
+		and len(coalesce(@SerialNumber, '')) > 1
 	begin
 		select @ECDID = ecd.ECDID
 		FROM [dbo].[ECD] as ecd
@@ -26,11 +27,13 @@ BEGIN TRY
 	end
 
 	if @ECDID is null
+		and len(coalesce(@PartNumber, '')) > 1
 	begin
 		select top 1 @ECDID = ecd.ECDID
 			,@SerialNull = @True
 		FROM [dbo].[ECD] as ecd
-		where @PartNumber = ecd.PartNumber
+		where @CompanyID = ecd.CompanyID
+			and @PartNumber = ecd.PartNumber
 		order by ecd.DateAdded desc;
 	end
 

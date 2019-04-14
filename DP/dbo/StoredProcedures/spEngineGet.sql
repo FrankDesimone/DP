@@ -1,5 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spEngineGet]
-	@EngineID     INT  
+	@EngineID INT = null
+	,@CompanyID as int = null
+	,@SerialNumber as nvarchar(50) = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -12,20 +14,32 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
-SELECT  
+	if @EngineID is null
+		and len(coalesce(@SerialNumber, '')) > 1
+	begin
+		select @EngineID = e.EngineID
+		FROM Engine as e
+		where @CompanyID = e.CompanyID
+			and @SerialNumber = e.SerialNumber;
+	end	
 
-      e.[EngineID]
-      ,e.[CompanyID]
-      ,e.[ManufacturerID]
-      ,m.[Manufacturer]
+	SELECT e.[EngineID]
+	  ,e.[CompanyID]
+	  ,e.[ManufacturerID]
+	  ,m.[Manufacturer]
 	  ,e.[SerialNumber]
-      ,e.[Model]
-      ,e.[Year]
-  FROM [dbo].[Engine] as e
-  inner join [Manufacturer] as m on e.ManufacturerID = m.ManufacturerID
+	  ,e.[Model]
+	  ,e.[Year]
+	FROM [dbo].[Engine] as e
+		inner join [Manufacturer] as m on e.ManufacturerID = m.ManufacturerID
+	where e.EngineID = @EngineID;
 
-  where e.EngineID = @EngineID;
-
+	if @@ROWCOUNT = 0
+	begin
+		set @ErrorCode = 1;
+		set @ErrorMsg = 'Engine not found';
+	end
+	
 END TRY
 
 BEGIN CATCH

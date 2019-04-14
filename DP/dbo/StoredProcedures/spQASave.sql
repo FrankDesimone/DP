@@ -3,7 +3,9 @@
 	,@QASootOnFaceID as int = null
 	,@QAAshOnFaceID as int = null
 	,@QAAshColorID as int = null
+	,@QAOutletColorID as int = null
 	,@QASubstrateID as int = null
+	,@QASubstrateCrakingID as int = null
 	,@QASubstrateOveralConditionID as INT = NULL
 	,@Coolant as  BIT = 0
 	,@RedAsh as BIT = 0
@@ -40,7 +42,9 @@ BEGIN TRAN
 	update qa set qa.QASootOnFaceID = @QASootOnFaceID
 		,qa.QAAshOnFaceID = @QAAshOnFaceID
 		,qa.QAAshColorID = @QAAshColorID
+		,qa.QAOutletColorID = @QAOutletColorID
 		,qa.QASubstrateID = @QASubstrateID
+		,qa.QASubstrateCrakingID = @QASubstrateCrakingID
 		,qa.QASubstrateOveralConditionID =@QASubstrateOveralConditionID
 		,qa.Coolant = @Coolant
 		,qa.RedAsh = @RedAsh
@@ -58,8 +62,8 @@ BEGIN TRAN
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QASubstrateID,QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth,  EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QASubstrateID,@QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth,@EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QASubstrateID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth,  EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QASubstrateID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth,@EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
 	end																																			   
 	
 	select @QualityControlID = qc.QAID																												

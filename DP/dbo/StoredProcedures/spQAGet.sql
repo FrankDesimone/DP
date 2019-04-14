@@ -16,7 +16,9 @@ BEGIN TRY
 		,qa.QASootOnFaceID
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
+		,qa.QAOutletColorID
 		,qa.QASubstrateID
+		,qa.QASubstrateCrakingID
 		,qa.QASubstrateOveralConditionID
 		,qa.Coolant
 		,qa.RedAsh
@@ -28,7 +30,7 @@ BEGIN TRY
 		,coalesce(qa.ContaminantsOther, '') as ContaminantsOther
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
-        ,qa.MaxHertz
+		,qa.MaxHertz
 		,e.SubstrateDiameter
 		,e.SubstrateLength
 	from WorkOrder as w
