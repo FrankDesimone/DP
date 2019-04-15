@@ -37,7 +37,7 @@ BEGIN TRY
 		order by ecd.DateAdded desc;
 	end
 
-	SELECT  ecd.[ECDID]
+	SELECT (case when @SerialNull = @False then ecd.[ECDID] else null end) as ECDID
 		  ,ecd.[CompanyID]
 		  ,ecd.[SubstrateTypeID]
 		  ,st.SubstrateType
