@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spVehicleGet]
-	@CompanyID as int 
-	,@VehicleID as INT = null
+	@VehicleID as INT = null
+	,@CompanyID as int 
 	,@SerialNumber as NVARCHAR (50)  = null
 	,@AssetNumber as NVARCHAR (50) = NULL
 	,@ErrorCode as INT = 0 OUTPUT
@@ -15,15 +15,26 @@ BEGIN TRY
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
 
+	set @SerialNumber = ltrim(rtrim(coalesce(@SerialNumber, '')));
+	set @AssetNumber = ltrim(rtrim(coalesce(@AssetNumber, '')));
+
 	if @VehicleID is null
-		and (len(coalesce(@SerialNumber, '')) > 1
-			or (len(coalesce(@AssetNumber, '')) > 1))
+		and len(@SerialNumber) > 1
 	begin
 		select top 1 @VehicleID = v.VehicleID
 		FROM [dbo].[Vehicle] as v
 		where @CompanyID = v.CompanyID
-			and (@SerialNumber = v.SerialNumber
-				or @AssetNumber = v.AssetNumber)
+			and @SerialNumber = v.SerialNumber
+		order by v.DateAdded desc;
+	end
+
+	if @VehicleID is null
+		and len(@AssetNumber) > 1
+	begin
+		select top 1 @VehicleID = v.VehicleID
+		FROM [dbo].[Vehicle] as v
+		where @CompanyID = v.CompanyID
+			and @AssetNumber = v.AssetNumber
 		order by v.DateAdded desc;
 	end
 
