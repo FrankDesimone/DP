@@ -9,8 +9,8 @@
 	[Year] INT NULL,
 	[MileageInitialCleaning] INT ,
 	[HoursInitialCleaning] INT  ,
-
-    CONSTRAINT [PK_Vehicle] PRIMARY KEY ([VehicleID]), 
+	[DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
+	CONSTRAINT [PK_Vehicle] PRIMARY KEY ([VehicleID]), 
 	CONSTRAINT [FK_Vehicle_Company] FOREIGN KEY ([CompanyID]) REFERENCES [Company]([CompanyID]) ,
     CONSTRAINT [FK_Vehicle_Manufacturer] FOREIGN KEY ([ManufacturerID]) REFERENCES [Manufacturer]([ManufacturerID])
 );

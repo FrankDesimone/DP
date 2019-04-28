@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spECDGet]
 	@ECDID INT  = null
-	,@CompanyID as int = null
+	,@CompanyID as int 
 	,@PartNumber as nvarchar(100) = null
 	,@SerialNumber as NVARCHAR (100) = null
 	,@ErrorCode as INT = 0 OUTPUT
