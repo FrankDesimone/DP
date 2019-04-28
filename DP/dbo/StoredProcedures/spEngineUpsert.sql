@@ -41,6 +41,17 @@ BEGIN TRY
 		goto ExitProc;
 	end
 
+	if exists (Select 1 
+		from Engine as e
+		where e.EngineID = @EngineID
+			and e.SerialNumber <> @SerialNumber)
+	begin
+		set @Fail = @True;
+		set @Message = 'Serial Number cannot be changed';
+
+		goto ExitProc;
+	end
+
 	UPDATE e
 	set 
 		e.[CompanyID]=@CompanyID
