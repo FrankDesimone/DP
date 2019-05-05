@@ -29,11 +29,11 @@ BEGIN TRY
 	declare  @True as bit = 1
 		,@False as bit = 0;
 
-	declare @Message as varchar(8000) = ''
+	declare @Message as varchar(8000) = null
 		,@Fail as bit = @False;
 
 	set @ErrorCode = 1;
-	set @ErrorMsg = 'Unable to update company';
+	set @ErrorMsg = 'Unable to update work order';
 	set @NewWorkOrderID = NULL;
 
 	if @BillingCompanyID is null
@@ -62,12 +62,8 @@ BEGIN TRY
 
 	if @ECDID is null
 	begin
-		set @Fail = @True;
 		set @Message = 'ECU Information must be selected';
-
-		goto ExitProc;
 	end
-
 
 	update s set s.ContactsID = @ContactsID
 	from Sales as s
@@ -149,7 +145,7 @@ BEGIN TRY
 	set @NewSalesID = @SalesID;
 
 ExitProc:
-	set @ErrorMsg = (case when @Fail = @False then 'Record Saved' else @Message end);
+	set @ErrorMsg = coalesce(@Message, 'Record Saved');
 	set @ErrorCode = @Fail;
 
 END TRY

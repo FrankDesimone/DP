@@ -4,7 +4,7 @@
 	[SalesID] INT NOT NULL,
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
-	[ECDID] INT NOT NULL,	
+	[ECDID] INT NULL,	
 	[PreventMaintAshCleanInter] bit NOT NULL DEFAULT 0 ,
 	[HighSootCEL]bit NOT NULL DEFAULT 0,
 	[EngineFailureFluidsInExhaust] bit NOT NULL DEFAULT 0,
