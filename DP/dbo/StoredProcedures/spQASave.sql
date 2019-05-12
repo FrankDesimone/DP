@@ -39,6 +39,9 @@ BEGIN TRAN
 	set @USignalReceived = coalesce(@USignalReceived, @False);
 	set @ECDPinDropDepth = coalesce(@ECDPinDropDepth, @False);
 
+	set @TargetMaxSpaceVelocity = coalesce(@TargetMaxSpaceVelocity,110000);
+	set @MaxHertz = coalesce(@MaxHertz, 60);
+	
 	update qa set qa.QASootOnFaceID = @QASootOnFaceID
 		,qa.QAAshOnFaceID = @QAAshOnFaceID
 		,qa.QAAshColorID = @QAAshColorID
