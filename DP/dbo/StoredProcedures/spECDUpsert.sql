@@ -1,17 +1,17 @@
 ﻿CREATE PROCEDURE [dbo].[spECDUpsert]
-	@CompanyID      INT		
+	@CompanyID INT		
 	,@ECDID	INT	         
-    ,@SubstrateTypeID   INT         
+    ,@SubstrateTypeID INT         
     ,@ManfacturerID INT         
-    ,@DeviceTypeID      INT                  
-    ,@PartNumber	nvarchar(100)	
-    ,@SerialNumber  NVARCHAR (100)
-    ,@OtherNumber   NVARCHAR (100) 
-	,@OuterDiameter     FLOAT (53)  
+    ,@DeviceTypeID INT                  
+    ,@PartNumber nvarchar(100)	
+    ,@SerialNumber NVARCHAR (100)
+    ,@OtherNumber NVARCHAR (100) 
+	,@OuterDiameter FLOAT (53)  
     ,@SubstrateDiameter FLOAT (53)  
-    ,@OuterLength       FLOAT (53)  
-    ,@SubstrateLength   FLOAT (53)  
-	,@NewECDID      INT          = NULL OUTPUT
+    ,@OuterLength FLOAT (53)  
+    ,@SubstrateLength FLOAT (53)  
+	,@NewECDID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -29,49 +29,46 @@ BEGIN TRY
 	set 
 		ecd.[CompanyID]	= @CompanyID 
       ,ecd.[SubstrateTypeID] = @SubstrateTypeID
-      ,ecd.ManufacturerID =@ManfacturerID
-      ,ecd.[DeviceTypeID]					 =@DeviceTypeID
-      ,ecd.[PartNumber]						 =@PartNumber
-      ,ecd.[SerialNumber]					 =@SerialNumber
-      ,ecd.[OtherNumber]					 =@OtherNumber
-      ,ecd.[OuterDiameter]					 =@OuterDiameter
-      ,ecd.[SubstrateDiameter]				 =@SubstrateDiameter
-      ,ecd.[OuterLength]					 =@OuterLength
-      ,ecd.[SubstrateLength]				 =@SubstrateLength
-  FROM [dbo].[ECD] as ecd
-  where ecd.ECDID = @ECDID;
-
+      ,ecd.ManufacturerID = @ManfacturerID
+      ,ecd.[DeviceTypeID] = @DeviceTypeID
+      ,ecd.[PartNumber]	= @PartNumber
+      ,ecd.[SerialNumber] = @SerialNumber
+      ,ecd.[OtherNumber] = @OtherNumber
+      ,ecd.[OuterDiameter] = @OuterDiameter
+      ,ecd.[SubstrateDiameter] = @SubstrateDiameter
+      ,ecd.[OuterLength] = @OuterLength
+      ,ecd.[SubstrateLength] = @SubstrateLength
+	FROM [dbo].[ECD] as ecd
+	where ecd.ECDID = @ECDID;
 
 	if @@ROWCOUNT = 0
 	begin
-
-
-	INSERT INTO [dbo].[ECD]
-           ([CompanyID]
-           ,[SubstrateTypeID]
-           ,ManufacturerID
-           ,[DeviceTypeID]
-           ,[PartNumber]
-           ,[SerialNumber]
-           ,[OtherNumber]
-           ,[OuterDiameter]
-           ,[SubstrateDiameter]
-           ,[OuterLength]
-           ,[SubstrateLength])
-     VALUES
-           (@CompanyID
-           ,@SubstrateTypeID
-           ,@ManfacturerID
-           ,@DeviceTypeID
-           ,@PartNumber
-           ,@SerialNumber
-           ,@OtherNumber
-           ,@OuterDiameter
-           ,@SubstrateDiameter
-           ,@OuterLength
-           ,@SubstrateLength)
+		INSERT INTO [dbo].[ECD]
+			   ([CompanyID]
+			   ,[SubstrateTypeID]
+			   ,ManufacturerID
+			   ,[DeviceTypeID]
+			   ,[PartNumber]
+			   ,[SerialNumber]
+			   ,[OtherNumber]
+			   ,[OuterDiameter]
+			   ,[SubstrateDiameter]
+			   ,[OuterLength]
+			   ,[SubstrateLength])
+		 VALUES
+			   (@CompanyID
+			   ,@SubstrateTypeID
+			   ,@ManfacturerID
+			   ,@DeviceTypeID
+			   ,@PartNumber
+			   ,@SerialNumber
+			   ,@OtherNumber
+			   ,@OuterDiameter
+			   ,@SubstrateDiameter
+			   ,@OuterLength
+			   ,@SubstrateLength)
 	
-		SET @ECDID	=  SCOPE_IDENTITY();
+			SET @ECDID	=  SCOPE_IDENTITY();
 	END
 
 	set @NewECDID = @ECDID;
