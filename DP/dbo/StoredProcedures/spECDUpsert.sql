@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spECDUpsert]
 	@CompanyID INT		
-	,@ECDID	INT	         
+	,@ECDID	INT	    
+	,@WorkOrderID int = null
     ,@SubstrateTypeID INT         
     ,@ManfacturerID INT         
     ,@DeviceTypeID INT                  
@@ -21,9 +22,21 @@ BEGIN TRY
 	declare  @True as bit = 1
 		,@False as bit = 0;
 
+	declare @DupCheck as bit = @False
+		,@NewRec as bit = @False;
+
 	set @ErrorCode = 0;
 	set @ErrorMsg = ''
 	set @NewECDID = NULL;
+
+	select @DupCheck = @True
+	from WorkOrder as w
+		inner join ECD as e on w.ECDID = e.ECDID
+	where (w.ECDID = @ECDID
+			or @SerialNumber = e.SerialNumber)
+		and w.WorkOrderID <> @WorkOrderID
+	group by e.ECDID
+	having count(w.WorkOrderID) > 1;
 
 	UPDATE ecd
 	set 
@@ -39,7 +52,8 @@ BEGIN TRY
       ,ecd.[OuterLength] = @OuterLength
       ,ecd.[SubstrateLength] = @SubstrateLength
 	FROM [dbo].[ECD] as ecd
-	where ecd.ECDID = @ECDID;
+	where ecd.ECDID = @ECDID
+		and @DupCheck = @False;
 
 	if @@ROWCOUNT = 0
 	begin
@@ -69,9 +83,12 @@ BEGIN TRY
 			   ,@SubstrateLength)
 	
 			SET @ECDID	=  SCOPE_IDENTITY();
+			set @NewRec = @True;
 	END
 
 	set @NewECDID = @ECDID;
+
+	set @ErrorMsg = (case when @NewRec = @True then 'New ECD created' else 'ECD updated' end);
 
 END TRY
 

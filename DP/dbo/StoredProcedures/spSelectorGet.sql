@@ -71,7 +71,7 @@ BEGIN TRY
 			inner join Sales as s on w.SalesID = s.SalesID
 			inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
 			inner join Company as c on cl.CompanyID = c.CompanyID
-		where w.SalesID = try_cast(@Filter as int)
+		where w.WorkOrderID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
 
 		goto ExitProc;
