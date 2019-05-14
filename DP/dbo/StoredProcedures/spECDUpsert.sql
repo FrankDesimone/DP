@@ -27,9 +27,9 @@ BEGIN TRY
 
 	UPDATE ecd
 	set 
-		ecd.[CompanyID]						 =@CompanyID 
-      ,ecd.[SubstrateTypeID]					 =@SubstrateTypeID
-      ,ecd.ManufacturerID					 =@ManfacturerID
+		ecd.[CompanyID]	= @CompanyID 
+      ,ecd.[SubstrateTypeID] = @SubstrateTypeID
+      ,ecd.ManufacturerID =@ManfacturerID
       ,ecd.[DeviceTypeID]					 =@DeviceTypeID
       ,ecd.[PartNumber]						 =@PartNumber
       ,ecd.[SerialNumber]					 =@SerialNumber
