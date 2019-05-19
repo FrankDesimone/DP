@@ -73,7 +73,6 @@ BEGIN TRY
 	set 
 		w.[VehicleID] = @VehicleID
 		,w.[EngineID] = @EngineID
-		,w.[ECDID] = @ECDID
 		,w.[PreventMaintAshCleanInter] = @PreventMaintAshCleanInter
 		,w.[HighSootCEL] = @HighSootCEL
 		,w.[EngineFailureFluidsInExhaust] = @EngineFailureFluidsInExhaust
@@ -111,7 +110,6 @@ BEGIN TRY
 					([SalesID]
 				   ,[VehicleID]
 				   ,[EngineID]
-				   ,[ECDID]
 				   ,[PreventMaintAshCleanInter]
 				   ,[HighSootCEL]
 				   ,[EngineFailureFluidsInExhaust]
@@ -126,7 +124,6 @@ BEGIN TRY
 				   ( @SalesID
 				   ,@VehicleID
 				   ,@EngineID
-				   ,@ECDID
 				   ,@PreventMaintAshCleanInter
 				   ,@HighSootCEL
 				   ,@EngineFailureFluidsInExhaust 

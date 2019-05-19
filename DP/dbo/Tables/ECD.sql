@@ -26,3 +26,11 @@
 GO
 
 CREATE INDEX [IX_ECD_WorkOrderID] ON [dbo].[ECD] ([WorkOrderID])
+
+GO
+
+CREATE INDEX [IX_ECD_PartNumber] ON [dbo].[ECD] ([PartNumber])
+
+GO
+
+CREATE INDEX [IX_ECD_SerialNumber] ON [dbo].[ECD] ([SerialNumber])

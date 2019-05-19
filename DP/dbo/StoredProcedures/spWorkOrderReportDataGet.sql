@@ -106,7 +106,7 @@ BEGIN TRY
 		inner join [State] as bcs on bc.StateID = bcs.StateID
 		inner join Vehicle as v on w.VehicleID = v.VehicleID
 		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
-		inner join ECD as ecd on w.ECDID = ecd.ECDID
+		inner join ECD as ecd on w.WorkOrderID = ecd.WorkOrderID
 		inner join Manufacturer as ecdm on ecd.ManufacturerID = ecdm.ManufacturerID
 		inner join SubstrateType as sut on ecd.SubstrateTypeID = sut.SubstrateTypeID
 		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID

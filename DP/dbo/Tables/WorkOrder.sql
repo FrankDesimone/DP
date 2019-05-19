@@ -4,7 +4,6 @@
 	[SalesID] INT NOT NULL,
 	[VehicleID] INT NULL,
 	[EngineID] INT NULL,
-	[ECDID] INT NULL,	
 	[PreventMaintAshCleanInter] bit NOT NULL DEFAULT 0 ,
 	[HighSootCEL]bit NOT NULL DEFAULT 0,
 	[EngineFailureFluidsInExhaust] bit NOT NULL DEFAULT 0,
@@ -19,7 +18,6 @@
 	CONSTRAINT [PK_WorkOrder] PRIMARY KEY ([WorkOrderID]), 
 	CONSTRAINT [FK_WorkOrder_Engine] FOREIGN KEY ([EngineID]) REFERENCES [Engine]([EngineID]), 
 	CONSTRAINT [FK_WorkOrder_Vehicle] FOREIGN KEY ([VehicleID]) REFERENCES [Vehicle]([VehicleID]), 
-	CONSTRAINT [FK_WorkOrder_ECD] FOREIGN KEY ([ECDID]) REFERENCES [ECD]([ECDID]), 
 	CONSTRAINT [FK_WorkOrder_CleaningReason] FOREIGN KEY ([CleaningReasonID]) REFERENCES [CleaningReason]([CleaningReasonID]), 
 	CONSTRAINT [FK_WorkOrder_DrivingType] FOREIGN KEY ([DrivingTypeID]) REFERENCES [DrivingType]([DrivingTypeID]), 
 	CONSTRAINT [FK_WorkOrder_Sales] FOREIGN KEY ([SalesID]) REFERENCES [Sales]([SalesID])

@@ -201,12 +201,16 @@ BEGIN TRY
 		select Null as [ECDID]
 			,'Please Select' as ECD
 			,0 as Sortkey
+		from WorkOrder as w
+			left outer join ECD as e on w.WorkOrderID = e.WorkOrderID
+		where w.WorkOrderID = try_cast(@Filter as int)
+			and e.WorkOrderID is null
 		union all
 		SELECT  [ECDID]
 			,ecd.SerialNumber + ' / ' + ecd.[PartNumber] as ECD
 			,1 as SortKey
 		from [dbo].[ECD] as  ecd
-		where ecd.CompanyID = try_cast(@Filter as int)
+		where ecd.WorkOrderID = try_cast(@Filter as int)
 		order by SortKey;
 
 		goto ExitProc;

@@ -34,7 +34,7 @@ BEGIN TRY
 		,e.SubstrateDiameter
 		,e.SubstrateLength
 	from WorkOrder as w
-		inner join ECD as e on w.ECDID = e.ECDID
+		inner join ECD as e on w.WorkOrderID = e.WorkOrderID
 		left join QA as qa on  w.WorkOrderID = qa.WorkOrderID	
 	where w.WorkOrderID = @WorkOrderID;
 	

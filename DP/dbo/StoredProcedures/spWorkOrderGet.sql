@@ -21,7 +21,7 @@ SELECT  w.[WorkOrderID]
 		,s.ContactsID
 		,w.[VehicleID]
 		,w.[EngineID]
-		,w.[ECDID]
+		,e.[ECDID]
 		,w.[PreventMaintAshCleanInter]
 		,w.[HighSootCEL]
 		,w.[EngineFailureFluidsInExhaust]
@@ -36,6 +36,7 @@ SELECT  w.[WorkOrderID]
   FROM [dbo].[WorkOrder] as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join dbo.CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
+		left outer join ECD as e on w.WorkOrderID = e.WorkOrderID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY
