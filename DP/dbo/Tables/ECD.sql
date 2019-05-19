@@ -25,7 +25,7 @@
 
 GO
 
-CREATE INDEX [IX_ECD_WorkOrderID] ON [dbo].[ECD] ([WorkOrderID])
+CREATE UNIQUE INDEX [IX_ECD_WorkOrderID] ON [dbo].[ECD] ([WorkOrderID])
 
 GO
 
