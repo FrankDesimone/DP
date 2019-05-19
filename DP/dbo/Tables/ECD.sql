@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[ECD] (
 	[ECDID]	INT	NOT NULL IDENTITY,
+	[WorkOrderID] INT NOT NULL,
     [CompanyID]     INT          NOT NULL,
     [SubstrateTypeID]   INT          NOT NULL,
     [ManufacturerID] INT          NOT NULL,
@@ -17,6 +18,11 @@
     CONSTRAINT [FK_ECD_Company] FOREIGN KEY ([CompanyID]) REFERENCES [Company]([CompanyID]), 
     CONSTRAINT [FK_ECD_Substrate] FOREIGN KEY ([SubstrateTypeID]) REFERENCES [SubstrateType]([SubstrateTypeID]), 
     CONSTRAINT [FK_ECD_Manfacturer] FOREIGN KEY (ManufacturerID) REFERENCES [Manufacturer]([ManufacturerID]), 
-    CONSTRAINT [FK_ECD_DeviceType] FOREIGN KEY ([DeviceTypeID]) REFERENCES [DeviceType]([DeviceTypeID])
+    CONSTRAINT [FK_ECD_DeviceType] FOREIGN KEY ([DeviceTypeID]) REFERENCES [DeviceType]([DeviceTypeID]), 
+    CONSTRAINT [FK_ECD_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID])
 );
 
+
+GO
+
+CREATE INDEX [IX_ECD_WorkOrderID] ON [dbo].[ECD] ([WorkOrderID])
