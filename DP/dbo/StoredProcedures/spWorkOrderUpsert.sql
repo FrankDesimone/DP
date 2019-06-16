@@ -4,7 +4,7 @@
 	,@CompanyID as int = null
 	,@CompanyLocationID INT = null
 	,@BillingCompanyID  INT = NULL
-	,@ContactsID INT = NULL
+	,@Contact nvarchar(250) = NULL
 	,@VehicleID  INT = NULL 
 	,@EngineID  INT = NULL 
 	,@ECDID INT = null
@@ -18,6 +18,7 @@
 	,@DrivingTypeOther  INT = NULL
 	,@VehicleMileage  INT = NULL
 	,@VehicleHours  INT  = NULL	
+	,@TrackingNo as nvarchar(250) = null
 	,@NewWorkOrderID INT = NULL OUTPUT
 	,@NewSalesID int = null output
 	,@ErrorCode as INT = 0 OUTPUT
@@ -65,7 +66,8 @@ BEGIN TRY
 		set @Message = 'ECU Information must be selected';
 	end
 
-	update s set s.ContactsID = @ContactsID
+	update s set s.Contact = @Contact
+		,s.TrackingNo = @TrackingNo
 	from Sales as s
 	where s.SalesID = @SalesID;
 
@@ -86,16 +88,16 @@ BEGIN TRY
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
-
 	if @@ROWCOUNT = 0
 	begin
 		if @SalesID is null
 		begin
-			insert into Sales (SalesNo,BillingCompanyID,CompanyLocationID,ContactsID)
+			insert into Sales (SalesNo,BillingCompanyID,CompanyLocationID,Contact,TrackingNo)
 			select cast(getdate() as nvarchar)
 				,@BillingCompanyID
 				,@CompanyLocationID
-				,@ContactsID;
+				,@Contact
+				,@TrackingNo;
 
 			set @SalesID = SCOPE_IDENTITY();
 
@@ -104,7 +106,6 @@ BEGIN TRY
 				inner join Company as c on s.BillingCompanyID = c.CompanyID
 			where s.SalesID = @SalesID;
 		end
-
 
 		INSERT INTO [dbo].[WorkOrder]
 					([SalesID]

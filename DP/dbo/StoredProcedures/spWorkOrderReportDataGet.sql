@@ -15,7 +15,7 @@ BEGIN TRY
 	SELECT  
 		w.WorkOrderID
 		,s.SalesNo
-		,(con.FirstName + ' ' + con.LastName) as Contact
+		,s.Contact
 		,0 as WorkOrderStatus
 		,w.PreventMaintAshCleanInter
 		,w.HighSootCEL
@@ -113,7 +113,6 @@ BEGIN TRY
 		left join Engine as e on w.EngineID = e.EngineID
 		left join Manufacturer as em on e.ManufacturerID = em.ManufacturerID
 		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID
-		left outer join Contacts as con on s.ContactsID = Con.ContactsID
 		left outer join CleaningReason as clean on w.CleaningReasonID = clean.CleaningReasonID
 		left outer join DrivingType as drive on w.DrivingTypeID = drive.DrivingTypeID
   where w.WorkOrderID = @WorkOrderID;

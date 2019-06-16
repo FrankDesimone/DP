@@ -18,7 +18,7 @@ SELECT  w.[WorkOrderID]
 		,cl.[CompanyID]
 		,s.BillingCompanyID
 		,s.[CompanyLocationID]
-		,s.ContactsID
+		,s.Contact
 		,w.[VehicleID]
 		,w.[EngineID]
 		,e.[ECDID]
