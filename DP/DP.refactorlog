@@ -406,4 +406,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ManufacturerID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="303a99f6-cce2-4dc6-8c9f-f04d82186b1d" ChangeDateTime="05/26/2019 18:29:23">
+    <Property Name="ElementName" Value="[dbo].[WorkOrder].[TrackingN]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrder]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TrackingNo" />
+  </Operation>
 </Operations>
