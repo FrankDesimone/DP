@@ -52,6 +52,14 @@ BEGIN TRY
 		goto ExitProc;
 	end
 
+	if not (coalesce(@Year, year(getdate())) between 1900 and 2100)
+	begin
+		set @Fail = @True;
+		set @Message = 'Enter 4 digit year';
+
+		goto ExitProc;		
+	end
+
 	UPDATE e
 	set 
 		e.[CompanyID]=@CompanyID
