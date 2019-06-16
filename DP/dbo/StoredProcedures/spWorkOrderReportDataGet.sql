@@ -16,6 +16,7 @@ BEGIN TRY
 		w.WorkOrderID
 		,s.SalesNo
 		,s.Contact
+		,s.TrackingNo
 		,0 as WorkOrderStatus
 		,w.PreventMaintAshCleanInter
 		,w.HighSootCEL
@@ -49,10 +50,7 @@ BEGIN TRY
 		,cl.Address2
 		,cl.City
 		,cl.Zip
-		,cl.StateID
 		,st.[State]
-		, v.VehicleID
-		,v.CompanyID
 		,v.SerialNumber
 		,v.AssetNumber
 		,vm.Manufacturer
@@ -60,15 +58,11 @@ BEGIN TRY
 		,v.[Year]
 		,v.[MileageInitialCleaning] 
 		,v.[HoursInitialCleaning]
-		,e.CompanyID
 		,em.Manufacturer
 		,e.SerialNumber
 		,e.Model
 		,e.Year
-		, ecd.ECDID
-		,ecd.SubstrateTypeID
 		,sut.SubstrateType
-		,ecd.ManufacturerID
 		,ecdm.Manufacturer
 		,ecd.DeviceTypeID
 		,dt.DeviceType
@@ -80,11 +74,6 @@ BEGIN TRY
 		,ecd.SubstrateDiameter
 		,ecd.OuterLength
 		,ecd.SubstrateLength
-		,qa.QASootOnFaceID
-		,qa.QAAshOnFaceID
-		,qa.QAAshColorID
-		,qa.QASubstrateID
-		,qa.QASubstrateOveralConditionID
 		,qa.Coolant
 		,qa.RedAsh
 		,qa.USignalReceived
@@ -96,6 +85,12 @@ BEGIN TRY
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
+		,qaf.QAAshOnFace
+		,qas.QASootOnFace
+		,qaa.QAAshColor
+		,qaaf.QAAshColor as QAAshOnFace
+		,qaso.QASubstrateOveralCondition
+		,qac.QASubstrateCraking
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
@@ -115,7 +110,14 @@ BEGIN TRY
 		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID
 		left outer join CleaningReason as clean on w.CleaningReasonID = clean.CleaningReasonID
 		left outer join DrivingType as drive on w.DrivingTypeID = drive.DrivingTypeID
+		left join QAAshOnFace as qaf on qa.QAAshOnFaceID = qaf.QAAshOnFaceID
+		left join QASootOnFace as qas on qa.QASootOnFaceID = qas.QASootOnFaceID
+		left join QAAshColor as qaa on qa.QAAshColorID = qaa.QAAshColorID
+		left join QAAshColor as qaaf on qa.QAAshOnFaceID = qaaf.QAAshColorID
+		left join QASubstrateOveralCondition as qaso on qa.QASubstrateOveralConditionID = qaso.QASubstrateOveralConditionID
+		left join QASubstrateCraking as qac on qa.QASubstrateCrakingID = qac.QASubstrateCrakingID
   where w.WorkOrderID = @WorkOrderID;
+
 
 END TRY
 
