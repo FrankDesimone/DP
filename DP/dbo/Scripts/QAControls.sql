@@ -4,7 +4,7 @@ values (0,'None')
 	,(2,'Medium')
 	,(3,'Heavy');
 
-insert into QAAshColor (QAAshColorID, QAAshColor)
+insert into QAColor (QAColorID, QAColor)
 values (0, 'NA');
 
 insert into QACoolant (QACoolantID, QACoolant)
@@ -12,13 +12,13 @@ values (0, 'None')
 	,(1, 'Indication of Collant')
 	,(2, 'Red color ash');
 
-insert into QASootOnFace (QASootOnFaceID, QASootOnFace)
+insert into QAPresence (QAPresenceID, QAPresence)
 values (0, 'None')
 	,(1,'Light')
 	,(2, 'Medium')
 	,(3, 'Heavy');
 
-insert into QASubstrate (QASubstrateID, QASubstrate)
+insert into QABreachChannels (QABreachChannelsID, QABreachChannels)
 values (0, 'None')
 	,(1, '<15')
 	,(2, '15-25')

@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[QASubstrate]
+﻿CREATE TABLE [dbo].[QABreachChannels]
 (
-    [QASubstrateID] INT NOT NULL, 
-    [QASubstrate] NVARCHAR(250) NOT NULL, 
-    CONSTRAINT [PK_QASubstrate] PRIMARY KEY ([QASubstrateID])
+    [QABreachChannelsID] INT NOT NULL, 
+    [QABreachChannels] NVARCHAR(250) NOT NULL, 
+    CONSTRAINT [PK_QABreachChannels] PRIMARY KEY (QABreachChannelsID)
 )

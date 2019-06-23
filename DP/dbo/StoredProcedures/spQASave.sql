@@ -4,7 +4,7 @@
 	,@QAAshOnFaceID as int = null
 	,@QAAshColorID as int = null
 	,@QAOutletColorID as int = null
-	,@QASubstrateID as int = null
+	,@QABreachChannelsID as int = null
 	,@QASubstrateCrakingID as int = null
 	,@QASubstrateOveralConditionID as INT = NULL
 	,@Coolant as  BIT = 0
@@ -16,8 +16,6 @@
 	,@FuelOil as BIT = 0 
 	,@ContaminantsOther as NVARCHAR (255)  =NULL
 	,@CleanChannels as  FLOAT  = null
-	,@TargetMaxSpaceVelocity as FLOAT = null
-	,@MaxHertz as FLOAT = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -39,14 +37,14 @@ BEGIN TRAN
 	set @USignalReceived = coalesce(@USignalReceived, @False);
 	set @ECDPinDropDepth = coalesce(@ECDPinDropDepth, @False);
 
-	set @TargetMaxSpaceVelocity = coalesce(@TargetMaxSpaceVelocity,110000);
-	set @MaxHertz = coalesce(@MaxHertz, 60);
+	declare @TargetMaxSpaceVelocity as float = 110000
+		,@MaxHertz as float = 60;
 	
 	update qa set qa.QASootOnFaceID = @QASootOnFaceID
 		,qa.QAAshOnFaceID = @QAAshOnFaceID
 		,qa.QAAshColorID = @QAAshColorID
 		,qa.QAOutletColorID = @QAOutletColorID
-		,qa.QASubstrateID = @QASubstrateID
+		,qa.QABreachChannelsID = @QABreachChannelsID
 		,qa.QASubstrateCrakingID = @QASubstrateCrakingID
 		,qa.QASubstrateOveralConditionID =@QASubstrateOveralConditionID
 		,qa.Coolant = @Coolant
@@ -65,8 +63,8 @@ BEGIN TRAN
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QASubstrateID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth,  EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QASubstrateID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth,@EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QABreachChannelsID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, ECDPinDropDepth,  EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QABreachChannelsID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @ECDPinDropDepth,@EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
 	end																																			   
 	
 	select @QualityControlID = qc.QAID																												

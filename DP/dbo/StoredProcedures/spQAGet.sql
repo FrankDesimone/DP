@@ -17,7 +17,7 @@ BEGIN TRY
 		,qa.QAAshOnFaceID
 		,qa.QAAshColorID
 		,qa.QAOutletColorID
-		,qa.QASubstrateID
+		,qa.QABreachChannelsID
 		,qa.QASubstrateCrakingID
 		,qa.QASubstrateOveralConditionID
 		,qa.Coolant

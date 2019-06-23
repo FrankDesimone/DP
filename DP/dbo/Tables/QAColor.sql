@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[QAColor]
+(
+    [QAColorID] INT NOT NULL, 
+    [QAColor] NVARCHAR(250) NOT NULL, 
+    CONSTRAINT [PK_QAColor] PRIMARY KEY (QAColorID)
+)

@@ -278,32 +278,17 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
-	IF @Selector = 'qasootonface' 
+	IF @Selector in ('qasootonface', 'qaashonface')
 	BEGIN
-		select Null as QASootOnFaceID
-			,'Please Select' as QASootOnFace
+		select Null as QAPresenceID
+			,'Please Select' as QAPresence
 			,0 as Sortkey
 		union all
-		SELECT  qa.QASootOnFaceID
-			,qa.QASootOnFace
+		SELECT  qa.QAPresenceID
+			,qa.QAPresence
 			,1 as SortKey
-		from QASootOnFace as qa
-		order by SortKey, QASootOnFaceID;
-
-		goto ExitProc;
-	END
-
-	IF @Selector = 'qaashonface' 
-	BEGIN
-		select Null as QAAshOnFaceID
-			,'Please Select' as QAAshOnFace
-			,0 as Sortkey
-		union all
-		SELECT  qa.QAAshOnFaceID
-			,qa.QAAshOnFace
-			,1 as SortKey
-		from QAAshOnFace as qa
-		order by SortKey, QAAshOnFaceID;
+		from QAPresence as qa
+		order by SortKey, QAPresenceID;
 
 		goto ExitProc;
 	END
@@ -314,26 +299,26 @@ BEGIN TRY
 			,'Please Select' as QAAshColor
 			,0 as Sortkey
 		union all
-		SELECT  qa.QAAshColorID
-			,qa.QAAshColor
+		SELECT  qa.QAColorID
+			,qa.QAColor
 			,1 as SortKey
-		from QAAshColor as qa
+		from QAColor as qa
 		order by SortKey, QAAshColorID;
 
 		goto ExitProc;
 	END
 
-	IF @Selector = 'qasubstrate' 
+	IF @Selector = 'qabreachchannels' 
 	BEGIN
-		select Null as QASubstrateID
-			,'Please Select' as QASubstrate
+		select Null as QABreachChannelsID
+			,'Please Select' as QABreachChannels
 			,0 as Sortkey
 		union all
-		SELECT  qa.QASubstrateID
-			,qa.QASubstrate
+		SELECT  qa.QABreachChannelsID
+			,qa.QABreachChannels
 			,1 as SortKey
-		from QASubstrate as qa
-		order by SortKey, QASubstrateID;
+		from QABreachChannels as qa
+		order by SortKey, QABreachChannelsID;
 
 		goto ExitProc;
 	END

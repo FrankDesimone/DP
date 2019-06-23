@@ -413,4 +413,74 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TrackingNo" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="fe01bb73-21e3-47cb-9dff-71507a6b9f73" ChangeDateTime="06/23/2019 17:41:58">
+    <Property Name="ElementName" Value="[dbo].[QASubstrate]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="QABreachChannels" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4559ecc-7b8f-4483-9818-f3272e8f4754" ChangeDateTime="06/23/2019 17:42:30">
+    <Property Name="ElementName" Value="[dbo].[QABreachChannels].[QASubstrateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QABreachChannels]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QABreachChannelsID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0d14a87e-75f2-46f6-963a-8257c6f9d5f2" ChangeDateTime="06/23/2019 17:42:53">
+    <Property Name="ElementName" Value="[dbo].[QABreachChannels].[QASubstrate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QABreachChannels]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QABreachChannels" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="111eae5c-741b-46bd-a4f8-c6b54b0f7997" ChangeDateTime="06/23/2019 17:44:40">
+    <Property Name="ElementName" Value="[dbo].[QA].[QASubstrateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QABreachChannelsID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2b6dfd1a-5d24-4d32-8cf6-836bfc682bc4" ChangeDateTime="06/23/2019 18:30:30">
+    <Property Name="ElementName" Value="[dbo].[QASootOnFace]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="QAPresence" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b116a9d1-828c-4b92-af60-3c465e377e24" ChangeDateTime="06/23/2019 18:30:54">
+    <Property Name="ElementName" Value="[dbo].[QAPresence].[QASootOnFaceID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAPresence]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAPresenceID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7887095d-673c-4541-8f09-2fa3ddf6c8e0" ChangeDateTime="06/23/2019 18:31:11">
+    <Property Name="ElementName" Value="[dbo].[QAPresence].[QASootOnFace]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAPresence]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAPresence" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7081b441-5f74-47fd-9ee3-bcccff51beeb" ChangeDateTime="06/23/2019 18:40:42">
+    <Property Name="ElementName" Value="[dbo].[QAAshColor]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="QAColor" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0e4d57dc-5730-448a-b2e0-acea33cda0f2" ChangeDateTime="06/23/2019 18:40:59">
+    <Property Name="ElementName" Value="[dbo].[QAColor].[QAAshColorID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAColor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAColorID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1f938c18-b8d8-4e78-988f-f955412634a2" ChangeDateTime="06/23/2019 18:41:12">
+    <Property Name="ElementName" Value="[dbo].[QAColor].[QAAshColor]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QAColor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QAColor" />
+  </Operation>
 </Operations>

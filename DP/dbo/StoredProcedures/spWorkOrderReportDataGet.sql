@@ -29,42 +29,39 @@ BEGIN TRY
 		,w.VehicleMileage
 		,w.VehicleHours
 		,w.DateAdded as WODate
-		,bc.CompanyName as BillingCompanyName
+		,bc.CompanyName as Billing_CompanyName
 		,bc.CompanyInitials
 		,bc.BillingAddress1
 		,bc.BillingAddress2
 		,bc.BillingCity
 		,bc.BillingZip
-		,bc.StateID as BillingStateID
-		,bcs.[State] as BillingState
+		,bcs.[State] 
 		,c.CompanyName
 		,c.CompanyInitials
 		,c.BillingAddress1 as Address1
 		,c.BillingAddress2 as Address2
 		,c.BillingCity	as City
 		,c.BillingZip as Zip
-		,c.StateID
 		,cs.[State]
 		,cl.[Location]
-		,cl.Address1
+		,cl.Address1 
 		,cl.Address2
 		,cl.City
 		,cl.Zip
 		,st.[State]
-		,v.SerialNumber
-		,v.AssetNumber
-		,vm.Manufacturer
+		,v.SerialNumber as Vehicle_SerialNumber
+		,v.AssetNumber 
+		,vm.Manufacturer 
 		,v.Model
 		,v.[Year]
 		,v.[MileageInitialCleaning] 
 		,v.[HoursInitialCleaning]
-		,em.Manufacturer
+		,em.Manufacturer as Engine_Manufacturer
 		,e.SerialNumber
 		,e.Model
 		,e.Year
 		,sut.SubstrateType
-		,ecdm.Manufacturer
-		,ecd.DeviceTypeID
+		,ecdm.Manufacturer as ECD_Manufacturer
 		,dt.DeviceType
 		,ecd.TimesCleaned
 		,ecd.PartNumber
@@ -74,6 +71,13 @@ BEGIN TRY
 		,ecd.SubstrateDiameter
 		,ecd.OuterLength
 		,ecd.SubstrateLength
+		,qaf.QAPresence as AshOnFace
+		,qaa.QAColor as AshColor
+		,qas.QAPresence as SootOnFace
+		,qaaf.QAColor as OutletColor
+		,qaso.QASubstrateOveralCondition 
+		,qac.QASubstrateCraking
+		,qab.QABreachChannels
 		,qa.Coolant
 		,qa.RedAsh
 		,qa.USignalReceived
@@ -81,16 +85,10 @@ BEGIN TRY
 		,qa.EngineEGRCoolant
 		,qa.WearCorrosion
 		,qa.FuelOil
-		,qa.ContaminantsOther
+		,coalesce(qa.ContaminantsOther, '') as ContaminantsOther
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
-		,qaf.QAAshOnFace
-		,qas.QASootOnFace
-		,qaa.QAAshColor
-		,qaaf.QAAshColor as QAAshOnFace
-		,qaso.QASubstrateOveralCondition
-		,qac.QASubstrateCraking
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
@@ -99,25 +97,25 @@ BEGIN TRY
 		inner join [State] as cs on c.StateID = cs.StateID
 		inner join Company as bc on s.BillingCompanyID = bc.CompanyID
 		inner join [State] as bcs on bc.StateID = bcs.StateID
-		inner join Vehicle as v on w.VehicleID = v.VehicleID
-		inner join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
-		inner join ECD as ecd on w.WorkOrderID = ecd.WorkOrderID
-		inner join Manufacturer as ecdm on ecd.ManufacturerID = ecdm.ManufacturerID
-		inner join SubstrateType as sut on ecd.SubstrateTypeID = sut.SubstrateTypeID
-		inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
+		left join Vehicle as v on w.VehicleID = v.VehicleID
+		left join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
+		left join ECD as ecd on w.WorkOrderID = ecd.WorkOrderID
+		left join Manufacturer as ecdm on ecd.ManufacturerID = ecdm.ManufacturerID
+		left join SubstrateType as sut on ecd.SubstrateTypeID = sut.SubstrateTypeID
+		left join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
 		left join Engine as e on w.EngineID = e.EngineID
 		left join Manufacturer as em on e.ManufacturerID = em.ManufacturerID
 		left join QA as  qa on   w.WorkOrderID = qa.WorkOrderID
 		left outer join CleaningReason as clean on w.CleaningReasonID = clean.CleaningReasonID
 		left outer join DrivingType as drive on w.DrivingTypeID = drive.DrivingTypeID
-		left join QAAshOnFace as qaf on qa.QAAshOnFaceID = qaf.QAAshOnFaceID
-		left join QASootOnFace as qas on qa.QASootOnFaceID = qas.QASootOnFaceID
-		left join QAAshColor as qaa on qa.QAAshColorID = qaa.QAAshColorID
-		left join QAAshColor as qaaf on qa.QAAshOnFaceID = qaaf.QAAshColorID
+		left join QAPresence as qaf on qa.QAAshOnFaceID = qaf.QAPresenceID
+		left join QAPresence as qas on qa.QASootOnFaceID = qas.QAPresenceID
+		left join QAColor as qaa on qa.QAAshColorID = qaa.QAColorID
+		left join QAColor as qaaf on qa.QAOutletColorID = qaaf.QAColorID
 		left join QASubstrateOveralCondition as qaso on qa.QASubstrateOveralConditionID = qaso.QASubstrateOveralConditionID
 		left join QASubstrateCraking as qac on qa.QASubstrateCrakingID = qac.QASubstrateCrakingID
-  where w.WorkOrderID = @WorkOrderID;
-
+		left join QABreachChannels as qab on qa.QABreachChannelsID = qab.QABreachChannelsID
+	where w.WorkOrderID = @WorkOrderID;
 
 END TRY
 
