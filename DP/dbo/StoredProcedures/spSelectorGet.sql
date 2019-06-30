@@ -67,11 +67,10 @@ BEGIN TRY
 		select cl.CompanyID
 			,c.CompanyName
 			,3 as SortKey
-		from WorkOrder as w
-			inner join Sales as s on w.SalesID = s.SalesID
+		from Sales as s
 			inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
 			inner join Company as c on cl.CompanyID = c.CompanyID
-		where w.WorkOrderID = try_cast(@Filter as int)
+		where s.SalesID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
 
 		goto ExitProc;
@@ -94,10 +93,9 @@ BEGIN TRY
 		select c.CompanyID
 			,c.CompanyName
 			,3 as SortKey
-		from WorkOrder as w
-			inner join Sales as s on w.SalesID = s.SalesID
+		from Sales as s 
 			inner join Company as c on s.BillingCompanyID = c.CompanyID
-		where w.SalesID = try_cast(@Filter as int)
+		where s.SalesID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
 
 		goto ExitProc;
