@@ -68,7 +68,7 @@ BEGIN TRY
 			,c.CompanyName
 			,3 as SortKey
 		from Sales as s
-			inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
+			inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
 			inner join Company as c on cl.CompanyID = c.CompanyID
 		where s.SalesID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
@@ -335,6 +335,7 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
+
 	IF @Selector = 'qasubstrateoveralcondition' 
 	BEGIN
 		select Null as QASubstrateOveralConditionID
@@ -367,4 +368,4 @@ BEGIN CATCH
 			+  ' - ' + coalesce(@ErrorMessage , '') + ' Err #: ' + cast(ERROR_NUMBER() as varchar(8));
 
 	EXEC  [dbo].[spExceptionAdd]  @ReportingProcedure ,@ErrorNumber,@ErrorLine ,@ErrorMessage,@ErrorNote;
-END CATCH
+END CATCH	

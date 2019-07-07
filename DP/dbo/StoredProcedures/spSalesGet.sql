@@ -40,7 +40,7 @@ BEGIN TRY
 	FROM [dbo].[Sales] as s
 		inner join [Company] as cb on cb.CompanyID = s.[BillingCompanyID]
 		inner join [State] as st on cb.StateID = st.StateID
-		inner join CompanyLocations as cl on s.CompanyLocationID = cl.CompanyLocationsID
+		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
 		inner join Company as co on cl.CompanyID = co.CompanyID
 		inner join [State] as sto on cl.StateID = sto.StateID
 	where s.[SalesID] = @SalesID;
