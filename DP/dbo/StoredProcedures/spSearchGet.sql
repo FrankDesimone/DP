@@ -6,13 +6,11 @@ AS
 SET NOCOUNT ON;
 
 BEGIN TRY
-	declare  @True as bit = 1
-		,@False as bit = 0;
-
 	declare @RowCount as int = 0;
 
 	set @ErrorCode = 0;
 	set @ErrorMsg = '';
+	set @SearchItem = trim(coalesce(@SearchItem, ''));
 
 	select s.SalesID as 'Go To'
 		,s.SalesNo as 'Sales No'
@@ -26,7 +24,7 @@ BEGIN TRY
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
 		inner join Company as bill on s.BillingCompanyID = bill.CompanyID
 		inner join Company as client on cl.CompanyID = client.CompanyID
-	where len(trim(@SearchItem)) > 0
+	where len(@SearchItem) > 0
 		and (w.WorkOrderID = try_cast(@SearchItem as int)
 			or s.SalesNo = @SearchItem 
 			or s.TrackingNo = @SearchItem 
