@@ -20,9 +20,10 @@ BEGIN TRY
 	if @ECDID is null
 		and len(coalesce(@SerialNumber, '')) > 1
 	begin
-		select @ECDID = ecd.ECDID
+		select top 1  @ECDID = ecd.ECDID
 		FROM [dbo].[ECD] as ecd
-		where @SerialNumber = ecd.SerialNumber;
+		where @SerialNumber = ecd.SerialNumber
+		order by ecd.DateAdded desc;
 	end
 
 	if @ECDID is null
@@ -36,7 +37,7 @@ BEGIN TRY
 	end
 
 	SELECT (case when @SerialNull = @False then ecd.[ECDID] else null end) as ECDID
-		  ,ecd.[CompanyID]
+		  ,@CompanyID as CompanyID
 		  ,ecd.[SubstrateTypeID]
 		  ,st.SubstrateType
 		  ,ecd.ManufacturerID
@@ -52,9 +53,9 @@ BEGIN TRY
 		  ,ecd.[OuterLength]
 		  ,ecd.[SubstrateLength]
 	  FROM [dbo].[ECD] as ecd
-	  inner join [Manufacturer] as m on ecd.ManufacturerID = m.ManufacturerID
-	  inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
-	  inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
+		  inner join [Manufacturer] as m on ecd.ManufacturerID = m.ManufacturerID
+		  inner join SubstrateType st on ecd.SubstrateTypeID = st.SubstrateTypeID
+		  inner join DeviceType as dt on ecd.DeviceTypeID = dt.DeviceTypeID
 	  where ecd.ECDID = @ECDID;
 
 	  if @@ROWCOUNT = 0
