@@ -92,9 +92,10 @@ BEGIN TRY
 	begin
 		if @SalesID is null
 		begin
-			insert into Sales (SalesNo,BillingCompanyID,CompanyLocationsID,Contact,TrackingNo)
+			insert into Sales (SalesNo,BillingCompanyID,CompanyID,CompanyLocationsID,Contact,TrackingNo)
 			select cast(getdate() as nvarchar)
 				,@BillingCompanyID
+				,@CompanyID
 				,@CompanyLocationID
 				,@Contact
 				,@TrackingNo;

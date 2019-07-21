@@ -64,12 +64,11 @@ BEGIN TRY
 		where c.Active = @True
 			and @Filter is null
 		union
-		select cl.CompanyID
+		select s.CompanyID
 			,c.CompanyName
 			,3 as SortKey
 		from Sales as s
-			inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
-			inner join Company as c on cl.CompanyID = c.CompanyID
+			inner join Company as c on s.CompanyID = c.CompanyID
 		where s.SalesID = try_cast(@Filter as int)
 		order by SortKey, CompanyName;
 
