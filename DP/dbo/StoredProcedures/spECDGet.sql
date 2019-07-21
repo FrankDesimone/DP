@@ -22,8 +22,7 @@ BEGIN TRY
 	begin
 		select @ECDID = ecd.ECDID
 		FROM [dbo].[ECD] as ecd
-		where @CompanyID = ecd.CompanyID
-			and @SerialNumber = ecd.SerialNumber;
+		where @SerialNumber = ecd.SerialNumber;
 	end
 
 	if @ECDID is null
@@ -32,8 +31,7 @@ BEGIN TRY
 		select top 1 @ECDID = ecd.ECDID
 			,@SerialNull = @True
 		FROM [dbo].[ECD] as ecd
-		where @CompanyID = ecd.CompanyID
-			and @PartNumber = ecd.PartNumber
+		where @PartNumber = ecd.PartNumber
 		order by ecd.DateAdded desc;
 	end
 
