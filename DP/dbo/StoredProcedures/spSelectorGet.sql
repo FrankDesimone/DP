@@ -38,7 +38,7 @@ BEGIN TRY
 			,0 as Sortkey
 			,getdate() as DateAdded
 		union all
-		select s.SalesID
+		select top 10 s.SalesID
 			,s.SalesNo
 			,1 as SortKey
 			,s.DateAdded
