@@ -2,7 +2,7 @@
 	@QAProcessID as int
 	,@TestLine as int
     ,@PSI as float
-    ,@SpaceVelocity as float
+
 	,@ErrorCode as int = 0
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -14,15 +14,14 @@ BEGIN TRAN
 	set @ErrorMsg = '';
 
 	update qapd set qapd.PSI = @PSI
-		,qapd.SpaceVelocity = @SpaceVelocity
 	from QAProcessData as qapd
 	where qapd.QAProcessID = @QAProcessID
 		and qapd.TestLine = @TestLine;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QAProcessData (QAProcessID, TestLine, PSI,SpaceVelocity)
-		values (@QAProcessID, @TestLine, @PSI, @SpaceVelocity);
+		insert into QAProcessData (QAProcessID, TestLine, PSI)
+		values (@QAProcessID, @TestLine, @PSI);
 	end
 
 ExitProc:

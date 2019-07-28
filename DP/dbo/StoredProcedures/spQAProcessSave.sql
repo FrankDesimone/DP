@@ -18,17 +18,6 @@
 	,@PSI9 as FLOAT = null
 	,@PSI10 as FLOAT = null
 	,@PSI11 as FLOAT = null
-	,@SV1 as FLOAT = null
-	,@SV2 as FLOAT = null
-	,@SV3 as FLOAT = null
-	,@SV4 as FLOAT = null
-	,@SV5 as FLOAT = null
-	,@SV6 as FLOAT = null
-	,@SV7 as FLOAT = null
-	,@SV8 as FLOAT = null
-	,@SV9 as FLOAT = null
-	,@SV10 as FLOAT = null
-	,@SV11 as FLOAT = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -42,7 +31,6 @@ BEGIN TRAN
 	declare @QAID as int = null
 		,@QAProcessID as int = null
 		,@PSI as float
-		,@SpaceVelocity as float
 		,@TestLine as int = 0
 		,@Fail as bit = @True;
 
@@ -97,27 +85,26 @@ BEGIN TRAN
 		set @QAProcessID = SCOPE_IDENTITY();
 	end
 
-	insert into @d (TestLine, PSI, SpaceVelocity)
-	values (1, @PSI1, @SV1)
-		,(2, @PSI2, @SV2)
-		,(3, @PSI3, @SV3)
-		,(4, @PSI4, @SV4)
-		,(5, @PSI5, @SV5)
-		,(6, @PSI6, @SV6)
-		,(7, @PSI7, @SV7)
-		,(8, @PSI8, @SV8)
-		,(9, @PSI9, @SV9)
-		,(10, @PSI10, @SV10)
-		,(11, @PSI11, @SV11);
+	insert into @d (TestLine, PSI)
+	values (1, @PSI1)
+		,(2, @PSI2)
+		,(3, @PSI3)
+		,(4, @PSI4)
+		,(5, @PSI5)
+		,(6, @PSI6)
+		,(7, @PSI7)
+		,(8, @PSI8)
+		,(9, @PSI9)
+		,(10, @PSI10)
+		,(11, @PSI11);
 
 	Declare d Cursor FAST_FORWARD FOR 
 		select d.TestLine
 			,d.PSI
-			,d.SpaceVelocity
 		from @d as d;
 
 	Open d;
-	Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
+	Fetch next from d into @TestLine, @PSI;
 		
 	WHILE @@FETCH_STATUS = 0 
 	BEGIN
@@ -125,9 +112,8 @@ BEGIN TRAN
 			@QAProcessID = @QAProcessID
 			,@TestLine = @TestLine
 			,@PSI = @PSI
-			,@SpaceVelocity = @SpaceVelocity;
 
-		Fetch next from d into @TestLine, @PSI, @SpaceVelocity;
+		Fetch next from d into @TestLine, @PSI;
 	end
 
 	CLOSE d;

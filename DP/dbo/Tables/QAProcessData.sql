@@ -4,7 +4,6 @@
 	[QAProcessID] INT NOT NULL,
 	[TestLine] INT NOT NULL,
     [PSI] FLOAT NULL, 
-    [SpaceVelocity] FLOAT NULL, 
     [DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [PK_QAProcessData] PRIMARY KEY ([QAProcessDataID]), 
     CONSTRAINT [FK_QAProcessData_QAProcess] FOREIGN KEY ([QAProcessID]) REFERENCES [QAProcess]([QAProcessID])

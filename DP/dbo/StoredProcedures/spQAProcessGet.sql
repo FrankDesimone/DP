@@ -24,17 +24,7 @@ BEGIN TRY
 			,sum(case when qapd.TestLine = 9 then qapd.PSI else 0 end) as PSI9
 			,sum(case when qapd.TestLine = 10 then qapd.PSI else 0 end) as PSI10
 			,sum(case when qapd.TestLine = 11 then qapd.PSI else 0 end) as PSI11
-			,sum(case when qapd.TestLine = 1 then qapd.SpaceVelocity else 0 end) as SV1
-			,sum(case when qapd.TestLine = 2 then qapd.SpaceVelocity else 0 end) as SV2
-			,sum(case when qapd.TestLine = 3 then qapd.SpaceVelocity else 0 end) as SV3
-			,sum(case when qapd.TestLine = 4 then qapd.SpaceVelocity else 0 end) as SV4
-			,sum(case when qapd.TestLine = 5 then qapd.SpaceVelocity else 0 end) as SV5
-			,sum(case when qapd.TestLine = 6 then qapd.SpaceVelocity else 0 end) as SV6
-			,sum(case when qapd.TestLine = 7 then qapd.SpaceVelocity else 0 end) as SV7
-			,sum(case when qapd.TestLine = 8 then qapd.SpaceVelocity else 0 end) as SV8
-			,sum(case when qapd.TestLine = 9 then qapd.SpaceVelocity else 0 end) as SV9
-			,sum(case when qapd.TestLine = 10 then qapd.SpaceVelocity else 0 end) as SV10
-			,sum(case when qapd.TestLine = 11 then qapd.SpaceVelocity else 0 end) as SV11
+
 		from QAProcessData as qapd
 		group by qapd.QAProcessID
 	)
@@ -64,17 +54,6 @@ BEGIN TRY
 		,qapd.PSI9
 		,qapd.PSI10
 		,qapd.PSI11
-		,qapd.SV1
-		,qapd.SV2
-		,qapd.SV3
-		,qapd.SV4
-		,qapd.SV5
-		,qapd.SV6
-		,qapd.SV7
-		,qapd.SV8
-		,qapd.SV9
-		,qapd.SV10
-		,qapd.SV11
 	from WorkOrder as w
 		inner join QA as qa on w.WorkOrderID = qa.WorkOrderID
 		inner join QAProcess as qap on qa.QAID = qap.QAID
