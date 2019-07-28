@@ -15,6 +15,7 @@
 	,@FuelOil as BIT = 0 
 	,@ContaminantsOther as NVARCHAR (255)  =NULL
 	,@CleanChannels as  FLOAT  = null
+	,@Summary as nvarchar(4000) = null
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS
@@ -55,13 +56,14 @@ BEGIN TRAN
 		,qa.CleanChannels = @CleanChannels
 		,qa.TargetMaxSpaceVelocity = @TargetMaxSpaceVelocity
 		,qa.MaxHertz = @MaxHertz
+		,qa.Summary = @Summary
 	from QA as qa
 	where qa.WorkOrderID = @WorkOrderID;
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QABreachChannelsID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QABreachChannelsID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz);
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QABreachChannelsID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz, Summary)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QABreachChannelsID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz, @Summary);
 	end																																			   
 	
 	select @QualityControlID = qc.QAID																												

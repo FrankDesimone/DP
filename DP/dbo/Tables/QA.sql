@@ -16,10 +16,10 @@
 	[WearCorrosion] BIT NOT NULL DEFAULT 0, 
 	[FuelOil] BIT NOT NULL DEFAULT 0, 
  	[ContaminantsOther] NVARCHAR (255)  NULL,
-
     [CleanChannels] REAL NULL,
 	[TargetMaxSpaceVelocity] FLOAT,
 	[MaxHertz] FLOAT,
+	[Summary] NVARCHAR(4000),
 	[DateAdded] DATETIME NOT NULL DEFAULT getdate(), 
     CONSTRAINT [FK_QA_WorkOrder] FOREIGN KEY ([WorkOrderID]) REFERENCES [WorkOrder]([WorkOrderID]), 
     CONSTRAINT [FK_QAPresence_Ash] FOREIGN KEY ([QAAshOnFaceID]) REFERENCES [QAPresence]([QAPresenceID]),

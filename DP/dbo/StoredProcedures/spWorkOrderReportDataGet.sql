@@ -88,6 +88,7 @@ BEGIN TRY
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
+		,qa.Summary
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID

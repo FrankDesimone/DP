@@ -33,6 +33,7 @@ BEGIN TRY
 		,e.SubstrateDiameter
 		,e.SubstrateLength
 		,s.SalesNo
+		,qa.Summary
 	from WorkOrder as w
 		inner join ECD as e on w.WorkOrderID = e.WorkOrderID
 		inner join Sales as s on w.SalesID = s.SalesID
