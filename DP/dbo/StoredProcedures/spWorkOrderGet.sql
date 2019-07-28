@@ -15,7 +15,7 @@ BEGIN TRY
 SELECT  w.[WorkOrderID]
 		,w.[SalesID]
 		,s.[SalesNo]
-		,cl.[CompanyID]
+		,s.CompanyID
 		,s.BillingCompanyID
 		,s.CompanyLocationsID
 		,s.Contact
@@ -35,7 +35,6 @@ SELECT  w.[WorkOrderID]
 		,w.[DateAdded]
   FROM [dbo].[WorkOrder] as w
 		inner join Sales as s on w.SalesID = s.SalesID
-		inner join dbo.CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
 		left outer join ECD as e on w.WorkOrderID = e.WorkOrderID
   where w.WorkOrderID = @WorkOrderID;
 

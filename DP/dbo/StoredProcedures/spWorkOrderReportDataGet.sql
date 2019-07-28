@@ -93,7 +93,7 @@ BEGIN TRY
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
 		inner join [State] as st on cl.StateID = st.StateID
-		inner join Company as c on cl.CompanyID = c.CompanyID
+		inner join Company as c on s.CompanyID = c.CompanyID
 		inner join [State] as cs on c.StateID = cs.StateID
 		inner join Company as bc on s.BillingCompanyID = bc.CompanyID
 		inner join [State] as bcs on bc.StateID = bcs.StateID
