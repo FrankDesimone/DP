@@ -23,7 +23,6 @@ BEGIN TRY
 		,qa.Coolant
 		,qa.RedAsh
 		,qa.USignalReceived
-		,qa.ECDPinDropDepth
 		,qa.EngineEGRCoolant
 		,qa.WearCorrosion
 		,qa.FuelOil
@@ -33,8 +32,10 @@ BEGIN TRY
 		,qa.MaxHertz
 		,e.SubstrateDiameter
 		,e.SubstrateLength
+		,s.SalesNo
 	from WorkOrder as w
 		inner join ECD as e on w.WorkOrderID = e.WorkOrderID
+		inner join Sales as s on w.SalesID = s.SalesID
 		left join QA as qa on  w.WorkOrderID = qa.WorkOrderID	
 	where w.WorkOrderID = @WorkOrderID;
 	

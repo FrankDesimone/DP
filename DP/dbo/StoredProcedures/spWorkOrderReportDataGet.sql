@@ -81,7 +81,6 @@ BEGIN TRY
 		,qa.Coolant
 		,qa.RedAsh
 		,qa.USignalReceived
-		,qa.ECDPinDropDepth
 		,qa.EngineEGRCoolant
 		,qa.WearCorrosion
 		,qa.FuelOil

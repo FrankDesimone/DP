@@ -12,7 +12,6 @@
     [Coolant] BIT NOT NULL DEFAULT 0, 
     [RedAsh] BIT NOT NULL DEFAULT 0, 
     [USignalReceived] BIT NOT NULL DEFAULT 0, 
-    [ECDPinDropDepth] BIT NOT NULL DEFAULT 0, 
 	[EngineEGRCoolant] BIT NOT NULL DEFAULT 0, 
 	[WearCorrosion] BIT NOT NULL DEFAULT 0, 
 	[FuelOil] BIT NOT NULL DEFAULT 0, 
