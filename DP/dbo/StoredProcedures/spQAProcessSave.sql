@@ -1,12 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spQAProcessSave]
 	@WorkOrderID as int
 	,@ProcessID as int 
-	,@ECDMass as FLOAT = NULL
-	,@InletCell12 as FLOAT = NULL
-	,@InletCell03 as FLOAT = NULL
-	,@InletCell06 as FLOAT = NULL
-	,@InletCell09 as FLOAT = NULL
-	,@InletCellCenter as FLOAT = NULL
 	,@AirTemp as FLOAT = null
 	,@BarometricPressure as FLOAT = null
 	,@BackPressure as FLOAT = null
@@ -68,13 +62,7 @@ BEGIN TRAN
 
 	if @QAID is null or @ProcessID is null goto ExitProc;
 
-	update qap set qap.ECDMass = @ECDMass
-		,qap.InletCell12 = @InletCell12
-		,qap.InletCell03 = @InletCell03
-		,qap.InletCell06 = @InletCell06
-		,qap.InletCell09 = @InletCell09
-		,qap.InletCellCenter = @InletCellCenter
-		,qap.AirTemp = @AirTemp
+	update qap set qap.AirTemp = @AirTemp
 		,qap.BarometricPressure = @BarometricPressure
 		,qap.BackPressure = @BackPressure
 		,qap.Coefficient_a = @Coefficient_a
@@ -88,12 +76,6 @@ BEGIN TRAN
 		insert into QAProcess 
 			(QAID
 			,ProcessID
-			,ECDMass
-			,InletCell12
-			,InletCell03
-			,InletCell06
-			,InletCell09
-			,InletCellCenter
 			,AirTemp
 			,BarometricPressure
 			,BackPressure
@@ -104,12 +86,6 @@ BEGIN TRAN
 		values 
 			(@QAID
 			,@ProcessID
-			,@ECDMass
-			,@InletCell12
-			,@InletCell03
-			,@InletCell06
-			,@InletCell09
-			,@InletCellCenter
 			,@AirTemp
 			,@BarometricPressure
 			,@BackPressure
