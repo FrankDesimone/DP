@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[spVehicleUpsert]
 	@CompanyID INT		
 	,@VehicleID INT = NULL 	
+	,@VehicleTypeID INT
 	,@SerialNumber NVARCHAR (100) 
 	,@AssetNumber NVARCHAR (100)  = NULL
 	,@ManufacturerID INT          
 	,@Model  NVARCHAR (100) 
 	,@Year INT 
-	,@MileageInitialCleaning INT =NULL 
-	,@HoursInitialCleaning INT = NULL 
+	,@InitialCleaning FLOAT = NULL 
 	,@NewVehicleID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -44,6 +44,15 @@ BEGIN TRY
 		goto ExitProc;
 	end
 
+	if @VehicleTypeID = 1
+		and len(coalesce(@SerialNumber , '')) <> 17
+	begin
+		set @Fail = @True;
+		set @Message = 'Invalid VIN';
+
+		goto ExitProc;
+	end
+
 	if exists (Select 1 
 		from Vehicle as v
 		where v.VehicleID = @VehicleID
@@ -72,8 +81,8 @@ BEGIN TRY
 		,v.[ManufacturerID] = @ManufacturerID
 		,v.[Model] = @Model
 		,v.[Year]	= @Year
-		,v.[MileageInitialCleaning] =  @MileageInitialCleaning
-		,v.[HoursInitialCleaning] = @HoursInitialCleaning 
+		,v.VehicleTypeID =  @VehicleTypeID
+		,v.InitialCleaning = @InitialCleaning 
 	from Vehicle  v
 	WHERE v.VehicleID = @VehicleID;
 
@@ -88,8 +97,8 @@ BEGIN TRY
 		   ,[ManufacturerID]
 		   ,[Model]
 		   ,[Year]
-		   ,[MileageInitialCleaning] 
-		   ,[HoursInitialCleaning] )
+		   ,VehicleTypeID 
+		   ,InitialCleaning )
 	 VALUES
 			(@CompanyID
 			,@SerialNumber
@@ -97,8 +106,8 @@ BEGIN TRY
 		   ,@ManufacturerID
 		   ,@Model
 		   ,@Year
-		   ,@MileageInitialCleaning
-		   ,@HoursInitialCleaning		   );
+		   ,@VehicleTypeID
+		   ,@InitialCleaning		   );
 	
 		SET @VehicleID	=  SCOPE_IDENTITY();
 	END

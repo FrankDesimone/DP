@@ -26,8 +26,8 @@ BEGIN TRY
 		,w.StartStop
 		,w.HighIdle
 		,drive.DrivingType
-		,w.VehicleMileage
-		,w.VehicleHours
+		,w.FuelConsumption
+		,w.UsageTimeDistance
 		,w.DateAdded as WODate
 		,bc.CompanyName as Billing_CompanyName
 		,bc.CompanyInitials
@@ -54,8 +54,8 @@ BEGIN TRY
 		,vm.Manufacturer 
 		,v.Model
 		,v.[Year]
-		,v.[MileageInitialCleaning] 
-		,v.[HoursInitialCleaning]
+		,vt.VehicleType
+		,v.InitialCleaning
 		,em.Manufacturer as Engine_Manufacturer
 		,e.SerialNumber
 		,e.Model
@@ -89,6 +89,13 @@ BEGIN TRY
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
 		,qa.Summary
+		,s.LegacyJobID
+		,he.Location as CleaingLocation
+		,he.Address1 as CleaningAddress1
+		,he.Address2 as CleaningAddress2
+		,he.City as CleaningCity
+		,hes.State as CleaningState
+		,he.Zip as CleaningZip
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
@@ -98,6 +105,7 @@ BEGIN TRY
 		inner join Company as bc on s.BillingCompanyID = bc.CompanyID
 		inner join [State] as bcs on bc.StateID = bcs.StateID
 		left join Vehicle as v on w.VehicleID = v.VehicleID
+		left join VehicleType as vt on v.VehicleTypeID = vt.VehicleTypeID
 		left join Manufacturer as vm on v.ManufacturerID = vm.ManufacturerID
 		left join ECD as ecd on w.WorkOrderID = ecd.WorkOrderID
 		left join Manufacturer as ecdm on ecd.ManufacturerID = ecdm.ManufacturerID
@@ -115,6 +123,8 @@ BEGIN TRY
 		left join QASubstrateOveralCondition as qaso on qa.QASubstrateOveralConditionID = qaso.QASubstrateOveralConditionID
 		left join QASubstrateCraking as qac on qa.QASubstrateCrakingID = qac.QASubstrateCrakingID
 		left join QABreachChannels as qab on qa.QABreachChannelsID = qab.QABreachChannelsID
+		left join CompanyLocations as he on s.CleaningLocationID = he.CompanyLocationsID
+		left join State as hes on he.StateID = hes.StateID
 	where w.WorkOrderID = @WorkOrderID;
 
 END TRY

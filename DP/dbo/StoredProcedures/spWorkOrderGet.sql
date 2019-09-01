@@ -20,6 +20,7 @@ SELECT  w.[WorkOrderID]
 		,s.CompanyLocationsID
 		,s.Contact
 		,w.[VehicleID]
+		,vt.VehicleType	
 		,w.[EngineID]
 		,e.[ECDID]
 		,w.[PreventMaintAshCleanInter]
@@ -30,12 +31,16 @@ SELECT  w.[WorkOrderID]
 		,w.[StartStop]
 		,w.[HighIdle]
 		,w.[DrivingTypeID]
-		,w.[VehicleMileage] 
-		,w.VehicleHours
+		,w.FuelConsumption 
+		,w.UsageTimeDistance
 		,w.[DateAdded]
+		,s.CleaningLocationID
+		,s.LegacyJobID
   FROM [dbo].[WorkOrder] as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		left outer join ECD as e on w.WorkOrderID = e.WorkOrderID
+		left outer join Vehicle as v on w.VehicleID = v.VehicleID
+		left outer join VehicleType as vt on v.VehicleTypeID = vt.VehicleTypeID
   where w.WorkOrderID = @WorkOrderID;
 
 END TRY

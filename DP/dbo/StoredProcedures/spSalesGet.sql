@@ -37,6 +37,7 @@ BEGIN TRY
 		,cl.Zip
 		,s.Contact
 		,s.TrackingNo
+		,s.LegacyJobID
 	FROM [dbo].[Sales] as s
 		inner join [Company] as cb on cb.CompanyID = s.[BillingCompanyID]
 		inner join [State] as st on cb.StateID = st.StateID

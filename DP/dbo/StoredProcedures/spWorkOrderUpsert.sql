@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
 	@WorkOrderID INT = null
 	,@SalesID int = null
+	,@CleaningLocationID as int = null
 	,@CompanyID as int = null
 	,@CompanyLocationID INT = null
 	,@BillingCompanyID  INT = NULL
@@ -16,9 +17,10 @@
 	,@StartStop bit 
 	,@HighIdle bit
 	,@DrivingTypeOther  INT = NULL
-	,@VehicleMileage  INT = NULL
-	,@VehicleHours  INT  = NULL	
+	,@FuelConsumption  real = NULL
+	,@UsageTimeDistance  float  = NULL	
 	,@TrackingNo as nvarchar(250) = null
+	,@LegacyJobID  as nvarchar(250) = null
 	,@NewWorkOrderID INT = NULL OUTPUT
 	,@NewSalesID int = null output
 	,@ErrorCode as INT = 0 OUTPUT
@@ -83,8 +85,8 @@ BEGIN TRY
 		,w.[StartStop] = @StartStop
 		,w.[HighIdle] = @HighIdle
 		,w.[DrivingTypeID] = @DrivingTypeOther
-		,w.[VehicleMileage] = @VehicleMileage
-		,w.[VehicleHours] = @VehicleHours
+		,w.FuelConsumption = @FuelConsumption
+		,w.UsageTimeDistance = @UsageTimeDistance
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
@@ -92,13 +94,12 @@ BEGIN TRY
 	begin
 		if @SalesID is null
 		begin
-			insert into Sales (SalesNo,BillingCompanyID,CompanyID,CompanyLocationsID,Contact,TrackingNo)
+			insert into Sales (SalesNo,CleaningLocationID, BillingCompanyID,CompanyID,CompanyLocationsID)
 			select cast(getdate() as nvarchar)
+				,@CleaningLocationID
 				,@BillingCompanyID
 				,@CompanyID
-				,@CompanyLocationID
-				,@Contact
-				,@TrackingNo;
+				,@CompanyLocationID;
 
 			set @SalesID = SCOPE_IDENTITY();
 
@@ -107,6 +108,12 @@ BEGIN TRY
 				inner join Company as c on s.BillingCompanyID = c.CompanyID
 			where s.SalesID = @SalesID;
 		end
+
+		update s set s.LegacyJobID = @LegacyJobID
+			,s.TrackingNo = @TrackingNo
+			,s.Contact = @Contact
+		from Sales as s
+		where s.SalesID = @SalesID;
 
 		INSERT INTO [dbo].[WorkOrder]
 					([SalesID]
@@ -120,8 +127,8 @@ BEGIN TRY
 				   ,[StartStop]
 				   ,[HighIdle]
 				   ,[DrivingTypeID]
-				   ,[VehicleMileage]
-				   ,[VehicleHours])
+				   ,FuelConsumption
+				   ,UsageTimeDistance)
 			 VALUES
 				   ( @SalesID
 				   ,@VehicleID
@@ -134,8 +141,8 @@ BEGIN TRY
 				   ,@StartStop
 				   ,@HighIdle
 				   ,@DrivingTypeOther
-				   ,@VehicleMileage
-				   ,@VehicleHours)
+				   ,@FuelConsumption
+				   ,@UsageTimeDistance)
 	
 		SET @WorkOrderID	=  SCOPE_IDENTITY();
 	END

@@ -61,8 +61,12 @@ BEGIN TRY
 			,c.CompanyName
 			,2 as SortKey
 		from Company as c
-		where c.Active = @True
-			and @Filter is null
+		where (case
+			when @Filter = 'ALL' then @True
+			when @Filter is not null then @False
+			when c.CompanyID = 0 then @False
+			when c.Active = @False then @False
+			else @True end) = @True
 		union
 		select s.CompanyID
 			,c.CompanyName
@@ -105,6 +109,7 @@ BEGIN TRY
 		select Null as CompanyLocationsID
 			,'Please Select' as [Location]
 			,0 as Sortkey
+		where @Filter <> '0'
 		union all
 		select cl.CompanyLocationsID 
 			,cl.Location
@@ -349,6 +354,17 @@ BEGIN TRY
 
 		goto ExitProc;
 	END
+
+	IF @Selector = 'vehicletype' 
+	BEGIN
+		SELECT vt.VehicleTypeID
+			,vt.VehicleType
+		from VehicleType as vt
+		order by vt.VehicleTypeID;
+
+		goto ExitProc;
+	END
+
 
 ExitProc:
 

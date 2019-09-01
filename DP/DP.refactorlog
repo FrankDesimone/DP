@@ -490,4 +490,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CompanyLocationsID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="72d082fd-378b-49ff-b67d-deaf4296b16c" ChangeDateTime="09/01/2019 17:35:02">
+    <Property Name="ElementName" Value="[dbo].[WorkOrder].[VehicleMileage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrder]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FuelConsumption" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="84653d6b-75ed-4ea7-b1e7-2fb15ff13fe7" ChangeDateTime="09/01/2019 17:36:24">
+    <Property Name="ElementName" Value="[dbo].[WorkOrder].[VehicleHours]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkOrder]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UsageTimeDistance" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fcdf3a75-26ad-476a-94a6-10b682cc5292" ChangeDateTime="09/01/2019 17:42:25">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[HoursInitialCleaning]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InitialCleaning" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9ab8b227-aec5-4fa8-8e45-c9991fad3743" ChangeDateTime="09/01/2019 19:20:15">
+    <Property Name="ElementName" Value="[dbo].[Sales].[CleaningLocation]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Sales]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CleaningLocationID" />
+  </Operation>
 </Operations>

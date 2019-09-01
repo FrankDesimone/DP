@@ -39,16 +39,16 @@ BEGIN TRY
 	end
 
 	SELECT  
-		  v.[VehicleID]
+		v.[VehicleID]
 		,v.[CompanyID]
-		  ,v.[SerialNumber]
-		  ,v.[AssetNumber]
-		  ,v.[ManufacturerID]
-		  ,m.Manufacturer
-		  ,v.[Model]
-		  ,v.[Year]
-		  ,v.[MileageInitialCleaning]
-		  ,v.[HoursInitialCleaning]
+		,v.[SerialNumber]
+		,v.[AssetNumber]
+		,v.[ManufacturerID]
+		,m.Manufacturer
+		,v.[Model]
+		,v.[Year]
+		,v.InitialCleaning
+		,v.VehicleTypeID
 	  FROM [dbo].[Vehicle] as v
 		inner join [Manufacturer] as m on v.ManufacturerID = m.ManufacturerID
 	  where v.VehicleID = @VehicleID;
