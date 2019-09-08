@@ -10,6 +10,7 @@
 	,@Coolant as  BIT = 0
 	,@RedAsh as BIT = 0
 	,@USignalReceived as BIT = 0 
+	,@PinTest as BIT = 0 
 	,@EngineEGRCoolant as BIT = 0
 	,@WearCorrosion as BIT = 0 
 	,@FuelOil as BIT = 0 
@@ -35,6 +36,7 @@ BEGIN TRAN
 	set @Coolant = coalesce(@Coolant, @False);
 	set @RedAsh = coalesce(@RedAsh, @False);
 	set @USignalReceived = coalesce(@USignalReceived, @False);
+	set @PinTest = coalesce(@PinTest,@False);
 
 	declare @TargetMaxSpaceVelocity as float = 110000
 		,@MaxHertz as float = 60;
@@ -49,6 +51,7 @@ BEGIN TRAN
 		,qa.Coolant = @Coolant
 		,qa.RedAsh = @RedAsh
 		,qa.USignalReceived = @USignalReceived
+		,qa.PinTest=@PinTest
 		,qa.EngineEGRCoolant = @EngineEGRCoolant
 		,qa.WearCorrosion = @WearCorrosion 
 		,qa.FuelOil = @FuelOil 
@@ -62,8 +65,8 @@ BEGIN TRAN
 
 	if @@ROWCOUNT = 0
 	begin
-		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QABreachChannelsID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, EngineEGRCoolant ,  WearCorrosion ,  FuelOil ,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz, Summary)
-		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QABreachChannelsID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz, @Summary);
+		insert into QA (WorkOrderID, QASootOnFaceID, QAAshOnFaceID, QAAshColorID, QAOutletColorID, QABreachChannelsID, QASubstrateCrakingID, QASubstrateOveralConditionID, Coolant, RedAsh, USignalReceived, EngineEGRCoolant ,  WearCorrosion ,  FuelOil , PinTest,  ContaminantsOther,   CleanChannels,TargetMaxSpaceVelocity,MaxHertz, Summary)
+		values (@WorkOrderID, @QASootOnFaceID, @QAAshOnFaceID, @QAAshColorID, @QAOutletColorID, @QABreachChannelsID, @QASubstrateCrakingID,  @QASubstrateOveralConditionID, @Coolant, @RedAsh, @USignalReceived, @EngineEGRCoolant  ,@WearCorrosion  ,@FuelOil  ,@PinTest, @ContaminantsOther,  @CleanChannels,@TargetMaxSpaceVelocity,@MaxHertz, @Summary);
 	end																																			   
 	
 	select @QualityControlID = qc.QAID																												

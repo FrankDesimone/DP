@@ -26,6 +26,7 @@ BEGIN TRY
 		,qa.EngineEGRCoolant
 		,qa.WearCorrosion
 		,qa.FuelOil
+		,qa.PinTest
 		,coalesce(qa.ContaminantsOther, '') as ContaminantsOther
 		,qa.CleanChannels
 		,qa.TargetMaxSpaceVelocity
