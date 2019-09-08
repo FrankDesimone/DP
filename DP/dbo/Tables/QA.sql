@@ -15,6 +15,7 @@
 	[EngineEGRCoolant] BIT NOT NULL DEFAULT 0, 
 	[WearCorrosion] BIT NOT NULL DEFAULT 0, 
 	[FuelOil] BIT NOT NULL DEFAULT 0, 
+	[PinTest] BIT NOT NULL DEFAULT 0,
  	[ContaminantsOther] NVARCHAR (255)  NULL,
     [CleanChannels] REAL NULL,
 	[TargetMaxSpaceVelocity] FLOAT,

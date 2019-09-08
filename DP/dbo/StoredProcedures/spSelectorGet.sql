@@ -109,7 +109,6 @@ BEGIN TRY
 		select Null as CompanyLocationsID
 			,'Please Select' as [Location]
 			,0 as Sortkey
-		where @Filter <> '0'
 		union all
 		select cl.CompanyLocationsID 
 			,cl.Location

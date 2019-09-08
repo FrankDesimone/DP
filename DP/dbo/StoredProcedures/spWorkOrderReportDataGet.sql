@@ -89,6 +89,7 @@ BEGIN TRY
 		,qa.TargetMaxSpaceVelocity
 		,qa.MaxHertz
 		,qa.Summary
+		,qa.PinTest
 		,s.LegacyJobID
 		,he.Location as CleaingLocation
 		,he.Address1 as CleaningAddress1
