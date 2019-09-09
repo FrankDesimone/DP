@@ -116,7 +116,6 @@
     <Build Include="dbo\Tables\Sales.sql" />
     <Build Include="dbo\Tables\QASubstrateOveralCondition.sql" />
     <Build Include="dbo\StoredProcedures\spSalesGet.sql" />
-    <Build Include="dbo\Tables\Constant.sql" />
     <Build Include="dbo\StoredProcedures\spSearchGet.sql" />
     <Build Include="dbo\StoredProcedures\spQAArray.sql" />
     <Build Include="dbo\Tables\VehicleType.sql" />
