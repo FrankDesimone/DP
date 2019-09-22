@@ -55,7 +55,10 @@ BEGIN TRY
 		select Null as CompanyID
 			,'Please Select' as CompanyName
 			,1 as Sortkey
-		where @Filter is null
+		where (case
+			when @Filter = 'ALL' then @True
+			when @Filter is null then @True
+			else @False end) = @True
 		union
 		select c.CompanyID
 			,c.CompanyName
