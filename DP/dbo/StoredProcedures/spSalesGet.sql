@@ -16,6 +16,7 @@ BEGIN TRY
 		s.[SalesID]
 		,s.[SalesNo]
 		,s.[DateAdded]
+		,s.[SalesStatusID]
 		,s.[BillingCompanyID] 
 		,cb.[CompanyName]
 		,cb.[CompanyInitials]

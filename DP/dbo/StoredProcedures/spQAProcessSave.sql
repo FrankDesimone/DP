@@ -50,6 +50,19 @@ BEGIN TRAN
 
 	if @QAID is null or @ProcessID is null goto ExitProc;
 
+	if EXISTS (select s.SalesStatusID 
+	from Sales as s
+		inner join WorkOrder as w on s.SalesID = w.SalesID 
+		inner join [SalesStatus] as ss on s.SalesStatusID = ss.SalesStatusID 
+	where w.WorkOrderID = @WorkOrderID
+		and ss.Locked = 1)
+	BEGIN
+		set @Fail = @True;
+		set @ErrorMsg = 'WorkOrder is now Locked';
+
+		goto ExitProc;
+	END
+
 	update qap set qap.AirTemp = @AirTemp
 		,qap.BarometricPressure = @BarometricPressure
 		,qap.BackPressure = @BackPressure

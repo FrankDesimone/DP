@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spWorkOrderUpsert]
 	@WorkOrderID INT = null
 	,@SalesID int = null
+	,@SalesStatusID int = 1
 	,@CleaningLocationID as int = null
 	,@CompanyID as int = null
 	,@CompanyLocationID INT = null
@@ -39,6 +40,26 @@ BEGIN TRY
 	set @ErrorMsg = 'Unable to update work order';
 	set @NewWorkOrderID = NULL;
 
+	if EXISTS (select SalesStatusID from [SalesStatus] where @SalesStatusID = SalesStatusID  and Locked = 1)
+	BEGIN
+
+		update s set s.SalesStatusID =@SalesStatusID
+			from Sales as s
+			where s.SalesID = @SalesID
+		and s.SalesStatusID <> @SalesStatusID
+
+		if @SalesID is not NULL
+		begin
+			set @Fail = @True;
+			set @Message = 'WorkOrder is now Locked';
+
+			goto ExitProc;
+		END
+	end
+
+
+
+
 	if @BillingCompanyID is null
 	begin
 		set @Fail = @True;
@@ -70,6 +91,7 @@ BEGIN TRY
 
 	update s set s.Contact = @Contact
 		,s.TrackingNo = @TrackingNo
+		,s.SalesStatusID = @SalesStatusID
 	from Sales as s
 	where s.SalesID = @SalesID;
 

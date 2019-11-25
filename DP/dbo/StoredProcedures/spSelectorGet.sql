@@ -31,6 +31,22 @@ BEGIN TRY
 		goto ExitProc;
 	END
 
+
+	IF @Selector ='salesstatus'  
+	BEGIN
+		select Null as SalesStatusID
+			,'Please Select' as SalesStatus
+			,0 as Sortkey
+		union all
+		select top 10 s.SalesStatusID
+			,s.SalesStatus
+			,1 as SortKey
+		from SalesStatus as s		
+		order by Sortkey desc;
+		
+		goto ExitProc;
+	END
+
 	IF @Selector ='salesno'  
 	BEGIN
 		select Null as SalesID
@@ -55,7 +71,10 @@ BEGIN TRY
 		select Null as CompanyID
 			,'Please Select' as CompanyName
 			,1 as Sortkey
-		where @Filter is null
+		where (case
+			when @Filter = 'ALL' then @True
+			when @Filter is null then @True
+			else @False end) = @True
 		union
 		select c.CompanyID
 			,c.CompanyName
