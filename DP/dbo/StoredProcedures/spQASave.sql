@@ -40,6 +40,21 @@ BEGIN TRAN
 
 	declare @TargetMaxSpaceVelocity as float = 110000
 		,@MaxHertz as float = 60;
+
+	if EXISTS (select s.SalesStatusID 
+	from Sales as s
+		inner join WorkOrder as w on s.SalesID = w.SalesID 
+		inner join [SalesStatus] as ss on s.SalesStatusID = ss.SalesStatusID 
+	where w.WorkOrderID = @WorkOrderID
+		and ss.Locked = 1)
+	BEGIN
+		set @Fail = @True;
+		set @ErrorMsg = 'WorkOrder is now Locked';
+
+		goto ExitProc;
+	END
+
+
 	
 	update qa set qa.QASootOnFaceID = @QASootOnFaceID
 		,qa.QAAshOnFaceID = @QAAshOnFaceID
