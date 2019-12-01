@@ -26,8 +26,10 @@ BEGIN TRY
 		,w.StartStop
 		,w.HighIdle
 		,drive.DrivingType
-		,w.FuelConsumption
-		,w.UsageTimeDistance
+		,w.[Miles]
+		,w.[MPG]
+		,w.[Hours]
+		,w.[HPG]
 		,w.DateAdded as WODate
 		,bc.CompanyName as Billing_CompanyName
 		,bc.CompanyInitials

@@ -18,8 +18,10 @@
 	,@StartStop bit 
 	,@HighIdle bit
 	,@DrivingTypeOther  INT = NULL
-	,@FuelConsumption  real = NULL
-	,@UsageTimeDistance  float  = NULL	
+	,@Miles  real = NULL
+	,@MPG  real = NULL
+	,@Hours  real = NULL
+	,@HPG  real = NULL
 	,@TrackingNo as nvarchar(250) = null
 	,@LegacyJobID  as nvarchar(250) = null
 	,@NewWorkOrderID INT = NULL OUTPUT
@@ -107,8 +109,10 @@ BEGIN TRY
 		,w.[StartStop] = @StartStop
 		,w.[HighIdle] = @HighIdle
 		,w.[DrivingTypeID] = @DrivingTypeOther
-		,w.FuelConsumption = @FuelConsumption
-		,w.UsageTimeDistance = @UsageTimeDistance
+		,w.[Miles] = @Miles
+		,w.[MPG]= @MPG
+		,w.[Hours]=@Hours 
+		,w.[HPG]=@HPG
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
@@ -149,8 +153,11 @@ BEGIN TRY
 				   ,[StartStop]
 				   ,[HighIdle]
 				   ,[DrivingTypeID]
-				   ,FuelConsumption
-				   ,UsageTimeDistance)
+					,[Miles] 
+					,[MPG]
+					,[Hours] 
+					,[HPG]		   
+				   )
 			 VALUES
 				   ( @SalesID
 				   ,@VehicleID
@@ -163,8 +170,10 @@ BEGIN TRY
 				   ,@StartStop
 				   ,@HighIdle
 				   ,@DrivingTypeOther
-				   ,@FuelConsumption
-				   ,@UsageTimeDistance)
+					,@Miles
+					,@MPG
+					,@Hours 
+					,@HPG)
 	
 		SET @WorkOrderID	=  SCOPE_IDENTITY();
 	END
