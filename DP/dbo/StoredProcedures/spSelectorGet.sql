@@ -54,7 +54,7 @@ BEGIN TRY
 			,0 as Sortkey
 			,getdate() as DateAdded
 		union all
-		select top 10 s.SalesID
+		select top 100 s.SalesID
 			,s.SalesNo
 			,1 as SortKey
 			,s.DateAdded

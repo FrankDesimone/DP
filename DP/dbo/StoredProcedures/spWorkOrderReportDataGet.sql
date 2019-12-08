@@ -57,7 +57,8 @@ BEGIN TRY
 		,v.Model
 		,v.[Year]
 		,vt.VehicleType
-		,v.InitialCleaning
+		,v.InitialCleaningMiles
+		,v.InitialCleaningHours
 		,em.Manufacturer as Engine_Manufacturer
 		,e.SerialNumber
 		,e.Model
