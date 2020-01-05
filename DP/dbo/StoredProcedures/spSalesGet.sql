@@ -15,6 +15,7 @@ BEGIN TRY
 	SELECT
 		s.[SalesID]
 		,s.[SalesNo]
+		,s.[ServiceDate]
 		,s.[DateAdded]
 		,s.[SalesStatusID]
 		,s.[BillingCompanyID] 

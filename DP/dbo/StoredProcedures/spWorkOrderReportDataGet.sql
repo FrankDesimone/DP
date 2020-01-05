@@ -17,6 +17,7 @@ BEGIN TRY
 		,s.SalesNo
 		,s.Contact
 		,s.TrackingNo
+		,s.ServiceDate
 		,0 as WorkOrderStatus
 		,w.PreventMaintAshCleanInter
 		,w.HighSootCEL
