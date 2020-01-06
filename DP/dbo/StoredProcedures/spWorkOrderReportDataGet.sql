@@ -17,7 +17,6 @@ BEGIN TRY
 		,s.SalesNo
 		,s.Contact
 		,s.TrackingNo
-		,s.ServiceDate
 		,0 as WorkOrderStatus
 		,w.PreventMaintAshCleanInter
 		,w.HighSootCEL
@@ -101,6 +100,7 @@ BEGIN TRY
 		,he.City as CleaningCity
 		,hes.State as CleaningState
 		,he.Zip as CleaningZip
+		,s.ServiceDate
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
