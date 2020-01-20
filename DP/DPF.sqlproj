@@ -130,5 +130,6 @@
     <None Include="dbo\Scripts\spExceptionLogTransaction.sql" />
     <None Include="dbo\Scripts\QAControls.sql" />
     <None Include="Excel\Templates\Report.xlsm" />
+    <None Include="Excel\Templates\DPF Report v.3.xlsm" />
   </ItemGroup>
 </Project>

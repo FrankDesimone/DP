@@ -7,7 +7,8 @@
 	,@ManufacturerID INT          
 	,@Model  NVARCHAR (100) 
 	,@Year INT 
-	,@InitialCleaning FLOAT = NULL 
+	,@InitialCleaningMiles FLOAT = NULL 
+	,@InitialCleaningHours FLOAT = NULL 
 	,@NewVehicleID INT = NULL OUTPUT
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
@@ -82,7 +83,8 @@ BEGIN TRY
 		,v.[Model] = @Model
 		,v.[Year]	= @Year
 		,v.VehicleTypeID =  @VehicleTypeID
-		,v.InitialCleaning = @InitialCleaning 
+		,v.InitialCleaningMiles = @InitialCleaningMiles
+		,v.InitialCleaningHours = @InitialCleaningHours
 	from Vehicle  v
 	WHERE v.VehicleID = @VehicleID;
 
@@ -98,7 +100,8 @@ BEGIN TRY
 		   ,[Model]
 		   ,[Year]
 		   ,VehicleTypeID 
-		   ,InitialCleaning )
+		   ,InitialCleaningMiles
+		   ,InitialCleaningHours)
 	 VALUES
 			(@CompanyID
 			,@SerialNumber
@@ -107,7 +110,8 @@ BEGIN TRY
 		   ,@Model
 		   ,@Year
 		   ,@VehicleTypeID
-		   ,@InitialCleaning		   );
+		   ,@InitialCleaningMiles
+		   ,@InitialCleaningHours);
 	
 		SET @VehicleID	=  SCOPE_IDENTITY();
 	END

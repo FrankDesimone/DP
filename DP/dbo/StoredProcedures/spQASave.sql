@@ -1,22 +1,22 @@
 ﻿CREATE PROCEDURE [dbo].[spQASave]
 	@WorkOrderID as int
-	,@QASootOnFaceID as int = null
-	,@QAAshOnFaceID as int = null
-	,@QAAshColorID as int = null
-	,@QAOutletColorID as int = null
-	,@QABreachChannelsID as int = null
-	,@QASubstrateCrakingID as int = null
-	,@QASubstrateOveralConditionID as INT = NULL
-	,@Coolant as  BIT = 0
-	,@RedAsh as BIT = 0
-	,@USignalReceived as BIT = 0 
-	,@PinTest as BIT = 0 
-	,@EngineEGRCoolant as BIT = 0
-	,@WearCorrosion as BIT = 0 
-	,@FuelOil as BIT = 0 
-	,@ContaminantsOther as NVARCHAR (255)  =NULL
-	,@CleanChannels as  FLOAT  = null
-	,@Summary as nvarchar(4000) = null
+	,@QASootOnFaceID as int 
+	,@QAAshOnFaceID as int 
+	,@QAAshColorID as int 
+	,@QAOutletColorID as int 
+	,@QABreachChannelsID as int 
+	,@QASubstrateCrakingID as int 
+	,@QASubstrateOveralConditionID as INT 
+	,@Coolant as  BIT 
+	,@RedAsh as BIT 
+	,@USignalReceived as BIT 
+	,@PinTest as BIT 
+	,@EngineEGRCoolant as BIT 
+	,@WearCorrosion as BIT  
+	,@FuelOil as BIT
+	,@ContaminantsOther as NVARCHAR (255)  
+	,@CleanChannels as  FLOAT  =0.0
+	,@Summary as nvarchar(4000) 
 	,@ErrorCode as INT = 0 OUTPUT
 	,@ErrorMsg as VARCHAR(8000) = '' OUTPUT
 AS

@@ -157,6 +157,10 @@
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
+        <Name>IgnoreTablePartitionOptions</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
         <Name>IgnoreWithNocheckOnCheckConstraints</Name>
         <Value>False</Value>
       </PropertyElementName>

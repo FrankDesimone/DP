@@ -18,10 +18,13 @@
 	,@StartStop bit 
 	,@HighIdle bit
 	,@DrivingTypeOther  INT = NULL
-	,@FuelConsumption  real = NULL
-	,@UsageTimeDistance  float  = NULL	
+	,@Miles  real = NULL
+	,@MPG  real = NULL
+	,@Hours  real = NULL
+	,@HPG  real = NULL
 	,@TrackingNo as nvarchar(250) = null
 	,@LegacyJobID  as nvarchar(250) = null
+	,@ServiceDate as  nvarchar(250) = null
 	,@NewWorkOrderID INT = NULL OUTPUT
 	,@NewSalesID int = null output
 	,@ErrorCode as INT = 0 OUTPUT
@@ -35,6 +38,13 @@ BEGIN TRY
 
 	declare @Message as varchar(8000) = null
 		,@Fail as bit = @False;
+	Declare @SaleServiceDate as Datetime = NULL;
+
+	IF NOT @ServiceDate IS NULL 
+	BEGIN
+		SET @SaleServiceDate = 	CAST (@ServiceDate AS DATE) 
+	END
+
 
 	set @ErrorCode = 1;
 	set @ErrorMsg = 'Unable to update work order';
@@ -92,6 +102,7 @@ BEGIN TRY
 	update s set s.Contact = @Contact
 		,s.TrackingNo = @TrackingNo
 		,s.SalesStatusID = @SalesStatusID
+		,s.ServiceDate = COALESCE(@SaleServiceDate,s.ServiceDate) 
 	from Sales as s
 	where s.SalesID = @SalesID;
 
@@ -107,8 +118,10 @@ BEGIN TRY
 		,w.[StartStop] = @StartStop
 		,w.[HighIdle] = @HighIdle
 		,w.[DrivingTypeID] = @DrivingTypeOther
-		,w.FuelConsumption = @FuelConsumption
-		,w.UsageTimeDistance = @UsageTimeDistance
+		,w.[Miles] = @Miles
+		,w.[MPG]= @MPG
+		,w.[Hours]=@Hours 
+		,w.[HPG]=@HPG
 	FROM [dbo].[WorkOrder] as w
 	where w.WorkOrderID = @WorkOrderID;
 
@@ -126,6 +139,7 @@ BEGIN TRY
 			set @SalesID = SCOPE_IDENTITY();
 
 			update s set s.SalesNo = c.CompanyInitials + '-' + cast(s.SalesID as nvarchar)
+						,s.ServiceDate = COALESCE(@SaleServiceDate,s.ServiceDate) 
 			from Sales as s
 				inner join Company as c on s.BillingCompanyID = c.CompanyID
 			where s.SalesID = @SalesID;
@@ -149,8 +163,11 @@ BEGIN TRY
 				   ,[StartStop]
 				   ,[HighIdle]
 				   ,[DrivingTypeID]
-				   ,FuelConsumption
-				   ,UsageTimeDistance)
+					,[Miles] 
+					,[MPG]
+					,[Hours] 
+					,[HPG]		   
+				   )
 			 VALUES
 				   ( @SalesID
 				   ,@VehicleID
@@ -163,8 +180,10 @@ BEGIN TRY
 				   ,@StartStop
 				   ,@HighIdle
 				   ,@DrivingTypeOther
-				   ,@FuelConsumption
-				   ,@UsageTimeDistance)
+					,@Miles
+					,@MPG
+					,@Hours 
+					,@HPG)
 	
 		SET @WorkOrderID	=  SCOPE_IDENTITY();
 	END

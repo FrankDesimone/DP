@@ -47,7 +47,8 @@ BEGIN TRY
 		,m.Manufacturer
 		,v.[Model]
 		,v.[Year]
-		,v.InitialCleaning
+		,v.InitialCleaningMiles		
+		,v.InitialCleaningHours
 		,v.VehicleTypeID
 	  FROM [dbo].[Vehicle] as v
 		inner join [Manufacturer] as m on v.ManufacturerID = m.ManufacturerID

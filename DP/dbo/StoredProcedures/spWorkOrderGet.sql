@@ -31,8 +31,10 @@ SELECT  w.[WorkOrderID]
 		,w.[StartStop]
 		,w.[HighIdle]
 		,w.[DrivingTypeID]
-		,w.FuelConsumption 
-		,w.UsageTimeDistance
+		,w.[Miles]
+		,w.[MPG]
+		,w.[Hours]
+		,w.[HPG]
 		,w.[DateAdded]
 		,s.CleaningLocationID
 		,s.LegacyJobID

@@ -26,8 +26,10 @@ BEGIN TRY
 		,w.StartStop
 		,w.HighIdle
 		,drive.DrivingType
-		,w.FuelConsumption
-		,w.UsageTimeDistance
+		,w.[Miles]
+		,w.[MPG]
+		,w.[Hours]
+		,w.[HPG]
 		,w.DateAdded as WODate
 		,bc.CompanyName as Billing_CompanyName
 		,bc.CompanyInitials
@@ -55,7 +57,8 @@ BEGIN TRY
 		,v.Model
 		,v.[Year]
 		,vt.VehicleType
-		,v.InitialCleaning
+		,v.InitialCleaningMiles
+		,v.InitialCleaningHours
 		,em.Manufacturer as Engine_Manufacturer
 		,e.SerialNumber
 		,e.Model
@@ -97,6 +100,7 @@ BEGIN TRY
 		,he.City as CleaningCity
 		,hes.State as CleaningState
 		,he.Zip as CleaningZip
+		,s.ServiceDate
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
