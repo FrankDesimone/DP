@@ -101,6 +101,18 @@ BEGIN TRY
 		,hes.State as CleaningState
 		,he.Zip as CleaningZip
 		,s.ServiceDate
+		,(case	
+			when w.Miles is null then null
+			when whm.Miles is not null then (w.Miles - whm.Miles)
+			when InitialCleaningMiles is null then null
+			when w.Miles > v.InitialCleaningMiles then (w.Miles - v.InitialCleaningMiles)
+			else 0	end) as MilesDriven
+		,(case	
+			when w.[Hours] is null then null
+			when whh.[Hours] is not null then (w.[Hours] - whh.[Hours])
+			when v.InitialCleaningHours is null then null
+			when w.Hours > v.InitialCleaningHours then (w.Hours - v.InitialCleaningHours)
+			else 0	end) as HoursDriven
 	FROM WorkOrder as w
 		inner join Sales as s on w.SalesID = s.SalesID
 		inner join CompanyLocations as cl on s.CompanyLocationsID = cl.CompanyLocationsID
@@ -130,6 +142,36 @@ BEGIN TRY
 		left join QABreachChannels as qab on qa.QABreachChannelsID = qab.QABreachChannelsID
 		left join CompanyLocations as he on s.CleaningLocationID = he.CompanyLocationsID
 		left join State as hes on he.StateID = hes.StateID
+		outer apply 
+			(
+				select whf.Miles
+				from 
+				(
+					select w.Miles
+						,row_number () over (PARTITION  by w.VehicleID order by w.WorkOrderID desc) as VCnt
+					from WorkOrder as wh
+					where wh.VehicleID = w.VehicleID
+						and wh.DateAdded < w.DateAdded
+						and w.Miles is not null
+				) as whf
+				where whf.VCnt = 2
+					and w.Miles > whf.Miles
+			) as whm
+		outer apply 
+			(
+				select whf.Hours
+				from 
+				(
+					select w.Hours
+						,row_number () over (PARTITION  by w.VehicleID order by w.WorkOrderID desc) as VCnt
+					from WorkOrder as wh
+					where wh.VehicleID = w.VehicleID
+						and wh.DateAdded < w.DateAdded
+						and w.Hours is not null
+				) as whf
+				where whf.VCnt = 2
+					and w.Hours > whf.Hours
+			) as whh
 	where w.WorkOrderID = @WorkOrderID;
 
 END TRY
